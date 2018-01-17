@@ -19,13 +19,13 @@ namespace Cinema.DbLayer
 
         public int? ReplyCommentId { get; set; }
 
-        //public int MovieId { get; set; }
+        public int MovieId { get; set; }
 
         [Required]
         public ApplicationUser User { get; set; }
 
 
-        //public int? CinemaId { get; set; }
+        public int? CinemaId { get; set; }
 
         public int? CommentTypeId { get; set; }
 
@@ -33,14 +33,14 @@ namespace Cinema.DbLayer
         [StringLength(2500)]
         public string Text { get; set; }
 
-        //public virtual Cinema Cinema { get; set; }
+        public virtual Cinema Cinema { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment1 { get; set; }
 
         public virtual Comment Comment2 { get; set; }
 
-        //public virtual Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
 
         public virtual CommentType CommentType { get; set; }
     }
