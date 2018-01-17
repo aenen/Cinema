@@ -192,11 +192,26 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DbLayer\AgeRating.cs" />
+    <Compile Include="DbLayer\Cinema.cs" />
+    <Compile Include="DbLayer\CinemaHall.cs" />
+    <Compile Include="DbLayer\City.cs" />
+    <Compile Include="DbLayer\Comment.cs" />
+    <Compile Include="DbLayer\CommentType.cs" />
+    <Compile Include="DbLayer\Movie.cs" />
+    <Compile Include="DbLayer\Order.cs" />
+    <Compile Include="DbLayer\OrderItem.cs" />
+    <Compile Include="DbLayer\Seat.cs" />
+    <Compile Include="DbLayer\SeatType.cs" />
+    <Compile Include="DbLayer\Session.cs" />
+    <Compile Include="DbLayer\Ticket.cs" />
+    <Compile Include="DbLayer\TicketPrice.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="DbLayer\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
