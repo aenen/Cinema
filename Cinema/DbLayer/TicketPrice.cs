@@ -17,16 +17,16 @@
 
         public int Id { get; set; }
 
+        [Required]
         public int SeatId { get; set; }
 
+        [Required]
         public int SessionId { get; set; }
 
         public int Price { get; set; }
 
-        [Required]
         public virtual Seat Seat { get; set; }
 
-        [Required]
         public virtual Session Session { get; set; }
         
         public virtual Ticket Ticket { get; set; }

@@ -17,6 +17,8 @@ namespace Cinema.DbLayer
         
         public int Id { get; set; }
 
+        public int? OrderItemId { get; set; }
+
         public int TicketPriceId { get; set; }
 
         public bool IsUsed { get; set; }

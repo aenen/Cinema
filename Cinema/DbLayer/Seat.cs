@@ -22,14 +22,14 @@ namespace Cinema.DbLayer
 
         public int Number { get; set; }
 
+        [Required]
         public int CinemaHallId { get; set; }
         
+        [Required]
         public int SeatTypeId { get; set; }
 
-        [Required]
         public virtual CinemaHall CinemaHall { get; set; }
 
-        [Required]
         public virtual SeatType SeatType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

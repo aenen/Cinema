@@ -45,7 +45,7 @@ namespace Cinema.DbLayer
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() : base("DefaultConnection")
+        public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new DataBaseInitializer());
         }
@@ -54,7 +54,7 @@ namespace Cinema.DbLayer
         {
             return new ApplicationDbContext();
         }
-        
+
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentType> CommentTypes { get; set; }
         public virtual DbSet<City> Cities { get; set; }
@@ -71,7 +71,7 @@ namespace Cinema.DbLayer
         public virtual DbSet<AgeRating> AgeRatings { get; set; }
     }
 
-    public class DataBaseInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
@@ -130,7 +130,7 @@ namespace Cinema.DbLayer
             if (!userMgr.IsInRole(user.Id, roleName))
             {
                 userMgr.AddToRole(user.Id, roleName);
-            }            
+            }
         }
     }
 }

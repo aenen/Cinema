@@ -19,6 +19,7 @@ namespace Cinema.DbLayer
         
         public int Id { get; set; }
 
+        [Required]
         public int CityId { get; set; }
 
         [Required]
@@ -35,7 +36,6 @@ namespace Cinema.DbLayer
         [StringLength(1000)]
         public string Description { get; set; }
 
-        [Required]
         public virtual City City { get; set; }
 
         public virtual ICollection<CinemaHall> CinemaHalls { get; set; }

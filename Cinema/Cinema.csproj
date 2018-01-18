@@ -190,6 +190,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgeRatingsController.cs" />
+    <Compile Include="Controllers\CinemasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DbLayer\AgeRating.cs" />
@@ -273,6 +275,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\AgeRatings\Create.cshtml" />
+    <Content Include="Views\AgeRatings\Delete.cshtml" />
+    <Content Include="Views\AgeRatings\Details.cshtml" />
+    <Content Include="Views\AgeRatings\Edit.cshtml" />
+    <Content Include="Views\AgeRatings\Index.cshtml" />
+    <Content Include="Views\Cinemas\Create.cshtml" />
+    <Content Include="Views\Cinemas\Delete.cshtml" />
+    <Content Include="Views\Cinemas\Details.cshtml" />
+    <Content Include="Views\Cinemas\Edit.cshtml" />
+    <Content Include="Views\Cinemas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

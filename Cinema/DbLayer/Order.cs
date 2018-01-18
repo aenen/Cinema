@@ -18,6 +18,7 @@ namespace Cinema.DbLayer
 
         public int Id { get; set; }
 
+        [Required]
         public int UserId { get; set; }
 
         public DateTime PurchaseDate { get; set; }
@@ -27,7 +28,6 @@ namespace Cinema.DbLayer
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
 
-        [Required]
         public ApplicationUser User { get; set; }
     }
 }

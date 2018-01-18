@@ -20,14 +20,15 @@ namespace Cinema.DbLayer
 
         public DateTime DateTime { get; set; }
 
+        [Required]
         public int MovieId { get; set; }
 
+        //[Required]
         public int? CinemaHallId { get; set; }
-        
+
         [ForeignKey("CinemaHallId")]
         public virtual CinemaHall CinemaHall { get; set; }
 
-        [Required]
         public virtual Movie Movie { get; set; }
         
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

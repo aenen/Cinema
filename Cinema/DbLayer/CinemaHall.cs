@@ -18,6 +18,7 @@ namespace Cinema.DbLayer
         
         public int Id { get; set; }
 
+        [Required]
         public int CinemaId { get; set; }
 
         [Required]
@@ -27,7 +28,6 @@ namespace Cinema.DbLayer
         [StringLength(500)]
         public string StylesPath { get; set; }
 
-        [Required]
         public virtual Cinema Cinema { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
