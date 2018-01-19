@@ -191,7 +191,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgeRatingsController.cs" />
+    <Compile Include="Controllers\CinemaHallsController.cs" />
     <Compile Include="Controllers\CinemasController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DbLayer\AgeRating.cs" />
@@ -285,6 +288,21 @@
     <Content Include="Views\Cinemas\Details.cshtml" />
     <Content Include="Views\Cinemas\Edit.cshtml" />
     <Content Include="Views\Cinemas\Index.cshtml" />
+    <Content Include="Views\CinemaHalls\Create.cshtml" />
+    <Content Include="Views\CinemaHalls\Delete.cshtml" />
+    <Content Include="Views\CinemaHalls\Details.cshtml" />
+    <Content Include="Views\CinemaHalls\Edit.cshtml" />
+    <Content Include="Views\CinemaHalls\Index.cshtml" />
+    <Content Include="Views\Cities\Create.cshtml" />
+    <Content Include="Views\Cities\Delete.cshtml" />
+    <Content Include="Views\Cities\Details.cshtml" />
+    <Content Include="Views\Cities\Edit.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

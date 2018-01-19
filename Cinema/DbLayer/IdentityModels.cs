@@ -83,6 +83,7 @@ namespace Cinema.DbLayer
         {
             // додаю деякі початкові дані
 
+            context.CommentTypes.Add(new CommentType { Name = "Не вибрано" });
             context.CommentTypes.Add(new CommentType { Name = "Відгук" });
             context.CommentTypes.Add(new CommentType { Name = "Скарга" });
             context.CommentTypes.Add(new CommentType { Name = "Пропозиція" });
