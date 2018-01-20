@@ -36,79 +36,79 @@ namespace Cinema.Controllers
             return View(comment);
         }
 
-        // GET: Comments/Create
-        public ActionResult Create()
-        {
-            ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name");
-            ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name");
-            ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name");
-            ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId");
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
-            return View();
-        }
+        //// GET: Comments/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name");
+        //    ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name");
+        //    ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name");
+        //    ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId");
+        //    ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+        //    return View();
+        //}
 
-        // POST: Comments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ReplyToCommentId,UserId,MovieId,CinemaId,CommentTypeId,Text")] Comment comment)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Comments.Add(comment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Comments/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,ReplyToCommentId,UserId,MovieId,CinemaId,CommentTypeId,Text")] Comment comment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Comments.Add(comment);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
-            ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
-            ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
-            ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
-            return View(comment);
-        }
+        //    ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
+        //    ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
+        //    ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
+        //    ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
+        //    ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
+        //    return View(comment);
+        //}
 
-        // GET: Comments/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
-            ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
-            ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
-            ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
-            return View(comment);
-        }
+        //// GET: Comments/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Comment comment = db.Comments.Find(id);
+        //    if (comment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
+        //    ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
+        //    ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
+        //    ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
+        //    ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
+        //    return View(comment);
+        //}
 
-        // POST: Comments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ReplyToCommentId,UserId,MovieId,CinemaId,CommentTypeId,Text")] Comment comment)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(comment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
-            ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
-            ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
-            ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
-            return View(comment);
-        }
+        //// POST: Comments/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,ReplyToCommentId,UserId,MovieId,CinemaId,CommentTypeId,Text")] Comment comment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(comment).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.CinemaId = new SelectList(db.Cinemas, "Id", "Name", comment.CinemaId);
+        //    ViewBag.CommentTypeId = new SelectList(db.CommentTypes, "Id", "Name", comment.CommentTypeId);
+        //    ViewBag.MovieId = new SelectList(db.Movies, "Id", "Name", comment.MovieId);
+        //    ViewBag.ReplyToCommentId = new SelectList(db.Comments, "Id", "UserId", comment.ReplyToCommentId);
+        //    ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.UserId);
+        //    return View(comment);
+        //}
 
         // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
