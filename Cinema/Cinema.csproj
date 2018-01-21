@@ -357,6 +357,7 @@
     <Content Include="Views\TicketPrices\Details.cshtml" />
     <Content Include="Views\TicketPrices\Edit.cshtml" />
     <Content Include="Views\TicketPrices\Index.cshtml" />
+    <Content Include="Views\Shared\_HallEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

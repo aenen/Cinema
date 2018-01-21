@@ -2,7 +2,18 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
+@*@Html.Partial("_HallEditor")*@
+<h2>Seat Editor</h2>
+<div class="he-container">
+    <div class="he-seats-selector">
+        <div class="he-seat-type seat-common"></div>
+        <div class="he-seat-type seat-lux"></div>
+    </div>
+
+</div>
+
+<div>
+    <h2>Controllers</h2>
     <ul class="list-group">
         <li class="list-group-item">@Html.ActionLink("Age Rating", "Index", "AgeRatings")</li>
         <li class="list-group-item">@Html.ActionLink("Cinema", "Index", "Cinemas")</li>

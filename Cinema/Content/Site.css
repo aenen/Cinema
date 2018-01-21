@@ -22,3 +22,35 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.he-container {
+    width: 100%;
+    height: 250px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.he-seats-selector {
+    width: 100%;
+    border-bottom: 1px solid grey;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.he-seat-type {
+    /*display: inline-block;*/
+    margin: 0 5px;
+    cursor:pointer;
+    border-radius:3px;
+}
+.seat-common{
+    width: 30px;
+    height: 40px;
+    background-color: blue;
+}
+.seat-lux {
+    width: 35px;
+    height: 40px;
+    background-color: orange;
+}
