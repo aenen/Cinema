@@ -6,7 +6,6 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Cinema.Models;
-using Cinema.DbLayer;
 
 namespace Cinema
 {

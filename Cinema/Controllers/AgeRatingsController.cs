@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Cinema.DbLayer;
+using Cinema.Data.Database;
 
 namespace Cinema.Controllers
 {
     public class AgeRatingsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private CinemaContext db = new CinemaContext();
 
         // GET: AgeRatings
         public ActionResult Index()

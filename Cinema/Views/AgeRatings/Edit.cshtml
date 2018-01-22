@@ -1,11 +1,10 @@
-﻿@model Cinema.DbLayer.AgeRating
+﻿@model Cinema.Data.Database.AgeRating
 
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -44,7 +43,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
