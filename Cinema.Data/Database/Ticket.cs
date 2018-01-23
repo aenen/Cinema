@@ -17,12 +17,14 @@ namespace Cinema.Data.Database
         
         public int Id { get; set; }
 
-        public int? OrderItemId { get; set; }
-
+        public int StatusId { get; set; }
+        
         public int TicketPriceId { get; set; }
 
         public bool IsUsed { get; set; }
-
+        
+        public virtual TicketStatus Status { get; set; }
+        
         public virtual OrderItem OrderItem { get; set; }
 
         [Required]

@@ -57,9 +57,11 @@
     <Compile Include="Database\Movie.cs" />
     <Compile Include="Database\Order.cs" />
     <Compile Include="Database\OrderItem.cs" />
+    <Compile Include="Database\OrderStatus.cs" />
     <Compile Include="Database\Seat.cs" />
     <Compile Include="Database\SeatType.cs" />
     <Compile Include="Database\Session.cs" />
+    <Compile Include="Database\TicketStatus.cs" />
     <Compile Include="Database\Ticket.cs" />
     <Compile Include="Database\TicketPrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
