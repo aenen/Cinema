@@ -25,8 +25,8 @@ namespace Cinema.Data.Database
         [StringLength(100)]
         public string Name { get; set; }
 
-        [StringLength(500)]
-        public string StylesPath { get; set; }
+        //[StringLength(500)]
+        //public string StylesPath { get; set; }
 
         public virtual Cinema Cinema { get; set; }
 

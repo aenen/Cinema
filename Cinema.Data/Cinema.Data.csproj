@@ -51,6 +51,7 @@
     <Compile Include="Database\Cinema.cs" />
     <Compile Include="Database\CinemaContext.cs" />
     <Compile Include="Database\CinemaHall.cs" />
+    <Compile Include="Database\CinemaUser.cs" />
     <Compile Include="Database\City.cs" />
     <Compile Include="Database\Comment.cs" />
     <Compile Include="Database\CommentType.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Database\OrderItem.cs" />
     <Compile Include="Database\OrderStatus.cs" />
     <Compile Include="Database\Seat.cs" />
+    <Compile Include="Database\SeatStyle.cs" />
     <Compile Include="Database\SeatType.cs" />
     <Compile Include="Database\Session.cs" />
     <Compile Include="Database\TicketStatus.cs" />

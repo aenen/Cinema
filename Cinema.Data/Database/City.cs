@@ -13,7 +13,7 @@ namespace Cinema.Data.Database
         public City()
         {
             Cinemas = new HashSet<Cinema>();
-            UserNames = new HashSet<string>();
+            CinemaUsers = new HashSet<CinemaUser>();
         }
         
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace Cinema.Data.Database
         public string Name { get; set; }
 
         public virtual ICollection<Cinema> Cinemas { get; set; }
-        public virtual ICollection<string> UserNames { get; set; }
+        public virtual ICollection<CinemaUser> CinemaUsers { get; set; }
     }
 }

@@ -16,11 +16,11 @@ namespace Cinema.Data.Database
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<OrderItem>()
                .HasOptional(x => x.Ticket)
                .WithOptionalPrincipal(x => x.OrderItem)
                .Map(a => a.MapKey("OrderItemId"));
+            base.OnModelCreating(modelBuilder);
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
@@ -39,9 +39,11 @@ namespace Cinema.Data.Database
         public virtual DbSet<AgeRating> AgeRatings { get; set; }
         public virtual DbSet<TicketStatus> TicketStatus { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<SeatStyle> SeatStyles { get; set; }
+        public virtual DbSet<CinemaUser> CinemaUser { get; set; }
     }
 
-    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
