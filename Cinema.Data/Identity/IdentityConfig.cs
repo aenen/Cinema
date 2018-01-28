@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Cinema.Models;
+using Cinema.Data.Database;
 
-namespace Cinema
+namespace Cinema.Data.Identity
 {
     public class EmailService : IIdentityMessageService
     {
@@ -42,7 +42,7 @@ namespace Cinema
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<CinemaContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -99,7 +99,7 @@ namespace Cinema
             IOwinContext context)
         {
             return new ApplicationRoleManager(new
-                RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
+                RoleStore<ApplicationRole>(context.Get<CinemaContext>()));
         }
     }
 

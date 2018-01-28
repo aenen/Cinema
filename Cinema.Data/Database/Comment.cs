@@ -18,13 +18,12 @@ namespace Cinema.Data.Database
         public int Id { get; set; }
 
         public int? ReplyToCommentId { get; set; }
-
-        [Required]
-        public string UserName { get; set; }
-
+        
         [Required]
         public int MovieId { get; set; }
-        
+
+        public int UserId { get; set; }
+
         public int? CinemaId { get; set; }
 
         public int? CommentTypeId { get; set; }
@@ -33,16 +32,19 @@ namespace Cinema.Data.Database
         [StringLength(2500)]
         public string Text { get; set; }
 
+        [Required]
+        public virtual ApplicationUser User { get; set; }
+
         public virtual Cinema Cinema { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Answers { get; set; }
         
-        [ForeignKey("ReplyToCommentId")]
-        public virtual Comment ReplyToComment { get; set; }
-
         public virtual Movie Movie { get; set; }
 
         public virtual CommentType CommentType { get; set; }
+
+        [ForeignKey("ReplyToCommentId")]
+        public virtual Comment ReplyToComment { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Answers { get; set; }
     }
 }

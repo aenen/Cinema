@@ -9,12 +9,6 @@ namespace Cinema.Data.Database
     [Table("Ticket")]
     public partial class Ticket
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ticket()
-        {
-
-        }
-        
         public int Id { get; set; }
 
         public int StatusId { get; set; }

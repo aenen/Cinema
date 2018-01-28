@@ -9,11 +9,12 @@ namespace Cinema.Data.Database
     [Table("Cinema")]
     public partial class Cinema
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cinema()
         {
             CinemaHalls = new HashSet<CinemaHall>();
             Comments = new HashSet<Comment>();
-            CinemaUsers = new HashSet<CinemaUser>();
+            UsersLiked = new HashSet<ApplicationUser>();
         }
         
         public int Id { get; set; }
@@ -37,10 +38,14 @@ namespace Cinema.Data.Database
 
         public virtual City City { get; set; }
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CinemaHall> CinemaHalls { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public virtual ICollection<CinemaUser> CinemaUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationUser> UsersLiked { get; set; }
     }
 }

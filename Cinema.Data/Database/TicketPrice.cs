@@ -10,11 +10,6 @@
     [Table("TicketPrice")]
     public partial class TicketPrice
     {
-        public TicketPrice()
-        {
-
-        }
-
         public int Id { get; set; }
 
         [Required]

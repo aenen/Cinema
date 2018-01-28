@@ -13,7 +13,7 @@ namespace Cinema.Data.Database
         public City()
         {
             Cinemas = new HashSet<Cinema>();
-            CinemaUsers = new HashSet<CinemaUser>();
+            Users = new HashSet<ApplicationUser>();
         }
         
         public int Id { get; set; }
@@ -22,7 +22,10 @@ namespace Cinema.Data.Database
         [StringLength(100)]
         public string Name { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cinema> Cinemas { get; set; }
-        public virtual ICollection<CinemaUser> CinemaUsers { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

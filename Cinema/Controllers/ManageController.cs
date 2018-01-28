@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Cinema.Models;
+using Cinema.Data.Identity;
 
 namespace Cinema.Controllers
 {
