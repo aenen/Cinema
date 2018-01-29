@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\AgeRating.cs" />
-    <Compile Include="Database\Cinema.cs" />
+    <Compile Include="Database\CinemaEntity.cs" />
     <Compile Include="Database\CinemaContext.cs" />
     <Compile Include="Database\CinemaHall.cs" />
     <Compile Include="Database\City.cs" />

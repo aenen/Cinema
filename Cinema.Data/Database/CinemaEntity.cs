@@ -7,10 +7,10 @@ namespace Cinema.Data.Database
     using System.Data.Entity.Spatial;
 
     [Table("Cinema")]
-    public partial class Cinema
+    public partial class CinemaEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cinema()
+        public CinemaEntity()
         {
             CinemaHalls = new HashSet<CinemaHall>();
             Comments = new HashSet<Comment>();
@@ -25,6 +25,10 @@ namespace Cinema.Data.Database
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Keyword { get; set; }
 
         [Required]
         [StringLength(200)]

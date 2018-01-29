@@ -33,7 +33,7 @@ namespace Cinema.Data.Database
 
         public virtual City City { get; set; }
 
-        public virtual Cinema FavotiteCinema { get; set; }
+        public virtual CinemaEntity FavotiteCinema { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 
@@ -71,7 +71,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentType> CommentTypes { get; set; }
         public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<Cinema> Cinemas { get; set; }
+        public virtual DbSet<CinemaEntity> Cinemas { get; set; }
         public virtual DbSet<CinemaHall> CinemaHalls { get; set; }
         public virtual DbSet<SeatType> SeatTypes { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
@@ -157,8 +157,8 @@ namespace Cinema.Data.Database
 
         public void PerformAdditionalSetup(CinemaContext context)
         {
-            context.Cinemas.Add(new Cinema { Name = "Супер панорама", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10" });
-            context.Cinemas.Add(new Cinema { Name = "Night Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword="Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword="Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134" });
 
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 1, Name = "1" });
 

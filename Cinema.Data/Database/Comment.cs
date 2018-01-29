@@ -22,7 +22,8 @@ namespace Cinema.Data.Database
         [Required]
         public int MovieId { get; set; }
 
-        public int UserId { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
         public int? CinemaId { get; set; }
 
@@ -32,10 +33,9 @@ namespace Cinema.Data.Database
         [StringLength(2500)]
         public string Text { get; set; }
 
-        [Required]
         public virtual ApplicationUser User { get; set; }
 
-        public virtual Cinema Cinema { get; set; }
+        public virtual CinemaEntity Cinema { get; set; }
         
         public virtual Movie Movie { get; set; }
 

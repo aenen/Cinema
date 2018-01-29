@@ -12,7 +12,7 @@ namespace Cinema.Data.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public City()
         {
-            Cinemas = new HashSet<Cinema>();
+            Cinemas = new HashSet<CinemaEntity>();
             Users = new HashSet<ApplicationUser>();
         }
         
@@ -23,7 +23,7 @@ namespace Cinema.Data.Database
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cinema> Cinemas { get; set; }
+        public virtual ICollection<CinemaEntity> Cinemas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicationUser> Users { get; set; }

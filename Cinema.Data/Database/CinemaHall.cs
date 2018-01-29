@@ -28,7 +28,7 @@ namespace Cinema.Data.Database
         //[StringLength(500)]
         //public string StylesPath { get; set; }
 
-        public virtual Cinema Cinema { get; set; }
+        public virtual CinemaEntity Cinema { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Seat> Seats { get; set; }

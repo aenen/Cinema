@@ -21,12 +21,12 @@ namespace Cinema.Data.Database
         public int OrderStatusId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public DateTime PurchaseDate { get; set; }
 
         public int TotalPrice => OrderItems.Sum(x => x.Price);
-
+        
         public virtual ApplicationUser User { get; set; }
 
         public virtual OrderStatus OrderStatus { get; set; }
