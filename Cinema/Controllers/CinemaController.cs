@@ -1,6 +1,8 @@
 ﻿using Cinema.Data.Database;
+using Cinema.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,11 +13,16 @@ namespace Cinema.Controllers
     [RoutePrefix("Cinema")]
     public class CinemaController : Controller
     {
-        CinemaContext db = new CinemaContext();
+        IRepository<CinemaEntity> repository;
+
+        public CinemaController(IRepository<CinemaEntity> repository)
+        {
+            this.repository = repository;
+        }
 
         public ActionResult Index()
         {
-            return View();
+            return View(repository.GetAll().ToList());
         }
 
         [Route("{name}")]
@@ -26,7 +33,7 @@ namespace Cinema.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var cinema = db.Cinemas.FirstOrDefault(x => x.Name == name);
+            var cinema = repository.GetAll().FirstOrDefault(x => x.Name == name);
             if (cinema == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
