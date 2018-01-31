@@ -330,10 +330,10 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Cinema\Index.cshtml" />
     <Content Include="Views\Cinema\Details.cshtml" />
+    <Content Include="Views\Movie\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Movie\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

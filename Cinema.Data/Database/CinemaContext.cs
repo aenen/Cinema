@@ -157,15 +157,127 @@ namespace Cinema.Data.Database
 
         public void PerformAdditionalSetup(CinemaContext context)
         {
-            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword="Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10" });
-            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword="Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword = "Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword = "Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134" });
 
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 1, Name = "1" });
 
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 2, Name = "Light" });
-            context.CinemaHalls.Add(new CinemaHall { CinemaId = 2, Name = "Dark" });
+            //context.CinemaHalls.Add(new CinemaHall { CinemaId = 2, Name = "Dark" });
 
-            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = 0, SizeHeight = 50, SizeWidth = 40 } });
+
+            #region cinema #1 --- cinema hall #1
+            // row #1
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0.5, PositionY = 0.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 3.5, PositionY = 0.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.5, PositionY = 0.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 20.5, PositionY = 0.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 23.5, PositionY = 0.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 6, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.5, PositionY = 0.5 } });
+            // row #2
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 3.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 10.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 13.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 6, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 16.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 7, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 20.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 8, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 23.5, PositionY = 4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 2, Number = 9, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.5, PositionY = 4 } });
+            // row #3
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 3, Number = 1, SeatTypeId = 4, SeatStyle = new SeatStyle { PositionX = 4, PositionY = 9 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 3, Number = 2, SeatTypeId = 4, SeatStyle = new SeatStyle { PositionX = 10, PositionY = 9 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 3, Number = 3, SeatTypeId = 4, SeatStyle = new SeatStyle { PositionX = 15, PositionY = 9 } });
+            context.Seats.Add(new Seat { CinemaHallId = 1, Row = 3, Number = 4, SeatTypeId = 4, SeatStyle = new SeatStyle { PositionX = 21, PositionY = 9 } });
+            #endregion
+
+            #region cinema #2 --- cinema hall #1
+            // row #1
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 8.8, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 11, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 13.2, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 6, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 15.4, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 7, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 17.6, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 8, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 19.8, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 9, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 22, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 10, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 24.2, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 11, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.4, PositionY = 0.4 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 12, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 28.6, PositionY = 0.4 } });
+            // row #2
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 8.8, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 11, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 6, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 13.2, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 7, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 15.4, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 8, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 17.6, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 9, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 19.8, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 10, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 22, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 11, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 24.2, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 12, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.4, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 13, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 28.6, PositionY = 3.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 2, Number = 14, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 33, PositionY = 3.5 } });
+            // row #3
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 8.8, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 6, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 12, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 7, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 14.2, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 8, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 16.4, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 9, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 18.6, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 10, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 20.8, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 12, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 24.2, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 13, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.4, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 14, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 28.6, PositionY = 6.6 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 3, Number = 15, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 33, PositionY = 6.6 } });
+            // row #4
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 8.8, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 6, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 12, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 7, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 14.2, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 8, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 16.4, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 9, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 18.6, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 10, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 20.8, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 12, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 24.2, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 13, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.4, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 14, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 28.6, PositionY = 9.7 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 4, Number = 15, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 33, PositionY = 9.7 } });
+            // row #5
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 3, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 4, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 5, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 8.8, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 6, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 11, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 7, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 13.2, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 8, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 15.4, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 9, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 17.6, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 10, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 19.8, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 11, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 22, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 12, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 24.2, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 13, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 26.4, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 14, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 28.6, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 15, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 30.8, PositionY = 12.8 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 5, Number = 16, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 33, PositionY = 12.8 } });
+            // row #6
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 1, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 1, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 2, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 4, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 3, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 9.8, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 4, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 12.8, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 5, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 19.6, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 6, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 22.6, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 7, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 28.4, PositionY = 16.5 } });
+            context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 8, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 31.4, PositionY = 16.5 } });
+#endregion
+
 
             context.SaveChanges();
         }
