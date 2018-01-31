@@ -92,6 +92,7 @@ namespace Cinema.Data.Database
         protected override void Seed(CinemaContext context)
         {
             base.Seed(context);
+
             PerformInitialSetup(context);
             PerformAdditionalSetup(context);
         }
@@ -101,27 +102,17 @@ namespace Cinema.Data.Database
             ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             ApplicationRoleManager roleMgr = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
 
-            string roleName = "Administrators";
+            // додаю ролі
+            roleMgr.Create(new ApplicationRole("Administrator"));
+            roleMgr.Create(new ApplicationRole("Moderator"));
+            roleMgr.Create(new ApplicationRole("User"));
+
+            // додаю адміністратора
             string userName = "admin@gmail.com";
             string password = "12345Admin.";
             string email = "admin@gmail.com";
-
-            if (!roleMgr.RoleExists(roleName))
-            {
-                roleMgr.Create(new ApplicationRole(roleName));
-            }
-
-            ApplicationUser user = userMgr.FindByName(userName);
-            if (user == null)
-            {
-                userMgr.Create(new ApplicationUser { UserName = userName, Email = email }, password);
-                user = userMgr.FindByName(userName);
-            }
-
-            if (!userMgr.IsInRole(user.Id, roleName))
-            {
-                userMgr.AddToRole(user.Id, roleName);
-            }
+            userMgr.Create(new ApplicationUser { UserName = userName, Email = email, Birthday = new DateTime(1997, 1, 23) }, password);
+            userMgr.AddToRole(userMgr.FindByName(userName).Id, "Administrator");
 
             //...
 
@@ -165,8 +156,7 @@ namespace Cinema.Data.Database
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 2, Name = "Light" });
             //context.CinemaHalls.Add(new CinemaHall { CinemaId = 2, Name = "Dark" });
 
-
-            #region cinema #1 --- cinema hall #1
+            #region кінотеатр #1 --- зал #1
             // row #1
             context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0.5, PositionY = 0.5 } });
             context.Seats.Add(new Seat { CinemaHallId = 1, Row = 1, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 3.5, PositionY = 0.5 } });
@@ -191,7 +181,7 @@ namespace Cinema.Data.Database
             context.Seats.Add(new Seat { CinemaHallId = 1, Row = 3, Number = 4, SeatTypeId = 4, SeatStyle = new SeatStyle { PositionX = 21, PositionY = 9 } });
             #endregion
 
-            #region cinema #2 --- cinema hall #1
+            #region кінотеатр #2 --- зал #1
             // row #1
             context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 4.4, PositionY = 0.4 } });
             context.Seats.Add(new Seat { CinemaHallId = 2, Row = 1, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 6.6, PositionY = 0.4 } });
@@ -276,8 +266,62 @@ namespace Cinema.Data.Database
             context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 6, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 22.6, PositionY = 16.5 } });
             context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 7, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 28.4, PositionY = 16.5 } });
             context.Seats.Add(new Seat { CinemaHallId = 2, Row = 6, Number = 8, SeatTypeId = 3, SeatStyle = new SeatStyle { PositionX = 31.4, PositionY = 16.5 } });
-#endregion
+            #endregion
 
+            #region фільми
+            context.Movies.Add(new Movie
+            {
+                Name = "Частка Бога",
+                OriginalName = "God Particle",
+                AgeRatingId = 3,
+                Country = "США",
+                Description = "Після неочікованого результату експеременту з прискоренням заряджених часток група астронавтів опиняється в повній ізоляції. Після їх жахливого відкриття екіпаж космічної станції повинен боротись за виживання.",
+                Director = "Джуліус Онах",
+                Script = "Орен Візель, Дуг Юнг",
+                Duration = new TimeSpan(1, 30, 0),
+                Genres = "Жахи, детектив, фантастика, триллер",
+                Language = "Українська",
+                ShowStart = new DateTime(2018, 4, 20),
+                ShowEnd = new DateTime(2018, 5, 17),
+                Starring = "Гугу Мбата‑Роу, Девід Оєлоуо, Елізабет Дебікі, Чжан Цзи",
+                PosterPath = "/Content/Poster/4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg"
+            });
+
+            context.Movies.Add(new Movie
+            {
+                Name = "Месники: Війна нескінченності",
+                OriginalName = "Avengers: Infinity War",
+                AgeRatingId = 2,
+                Country = "США",
+                Description = "Всесвіт MARVEL ще не бачив битви такого розмаху. Усі супергерої об’єднаються, щоб протистояти наймогутнішому ворогу. Люди тут безсилі, залишається тільки спостерігати.",
+                Director = "Ентоні Русо, Джо Русо",
+                Script = "Крістофер Маркус, Стівен Мак-Філі",
+                Duration = new TimeSpan(2, 18, 0),
+                Genres = "Бойовик, пригоди, фантастика",
+                Language = "Українська",
+                ShowStart = new DateTime(2018, 5, 3),
+                ShowEnd = new DateTime(2018, 6, 30),
+                Starring = "Роберт Дауні-молодший, Кріс Претт, Кріс Еванс, Кріс Хемсворт",
+                PosterPath = "/Content/Poster/tgQV4jyb9BgcV6db8uKPjTgSfpD.jpg"
+            });
+
+            context.Movies.Add(new Movie
+            {
+                Name = "Суперсімейка 2",
+                OriginalName = "Incredibles 2",
+                AgeRatingId = 1,
+                Country = "США",
+                Description = @"Повернення Суперсімейки від Disney\Pixar! Які карколомні пригоди чекають родину супершпигунів цього разу?",
+                Director = "Бред Бйорд",
+                Duration = new TimeSpan(1, 32, 0),
+                Genres = "Мультфільм, сімейний, пригоди, бойовик, фантастика",
+                Language = "Українська",
+                ShowStart = new DateTime(2018, 6, 14),
+                ShowEnd = new DateTime(2018, 8, 5),
+                Starring = "Бред Бйорд, Сем'юель Лерой Джексон, Холлі Хантер, Сара Воуел",
+                PosterPath = "/Content/Poster/bLBsSGIHzkFR3we2JjFzggnOAUO.jpg"
+            });
+            #endregion
 
             context.SaveChanges();
         }
