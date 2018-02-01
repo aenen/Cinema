@@ -138,10 +138,10 @@ namespace Cinema.Data.Database
             context.Cities.Add(new City { Name = "Одеса" });
             context.Cities.Add(new City { Name = "Львів" });
 
-            context.SeatTypes.Add(new SeatType { Name = "Звичайне", Keyword = "seat-common" });
-            context.SeatTypes.Add(new SeatType { Name = "Люкс", Keyword = "seat-lux", Description = "М'ягкі крісла з високою спинкою та фіксованим сидінням." });
-            context.SeatTypes.Add(new SeatType { Name = "Супер Люкс", Keyword = "seat-super-lux", Description = "Крісла-реклайнери, що забезпечують підвищений комфорт перегляду, для гурманів кіно." });
-            context.SeatTypes.Add(new SeatType { Name = "Диван для двох", Keyword = "seat-sofa", Description = "Комфортний диван для двох." });
+            context.SeatTypes.Add(new SeatType { Name = "Звичайне", Keyword = "seat-common", DefaultPrice=5000 });
+            context.SeatTypes.Add(new SeatType { Name = "Люкс", Keyword = "seat-lux", DefaultPrice=6000, Description = "М'ягкі крісла з високою спинкою та фіксованим сидінням." });
+            context.SeatTypes.Add(new SeatType { Name = "Супер Люкс", Keyword = "seat-super-lux", DefaultPrice=10000, Description = "Крісла-реклайнери, що забезпечують підвищений комфорт перегляду, для гурманів кіно." });
+            context.SeatTypes.Add(new SeatType { Name = "Диван для двох", Keyword = "seat-sofa", DefaultPrice=20000, Description = "Комфортний диван для двох." });
 
             context.SaveChanges();
         }
@@ -322,6 +322,38 @@ namespace Cinema.Data.Database
                 PosterPath = "/Content/Poster/bLBsSGIHzkFR3we2JjFzggnOAUO.jpg"
             });
             #endregion
+
+            context.SaveChanges();
+
+            #region сеанси
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 24, 12, 45, 0), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 24, 14, 30, 0), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 25, 10, 15, 0), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 3, 19, 0, 0), CinemaHallId = 1 });
+            foreach (var item in context.CinemaHalls.Find(1).Seats)
+            {
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 1 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 2 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 3 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 4 });
+            }
+
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 20, 11, 50, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 3, 20, 30, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 4, 10, 0, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 4, 12, 10, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 6, 13, 10, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 8, 15, 5, 0), CinemaHallId = 2 });
+            foreach (var item in context.CinemaHalls.Find(2).Seats)
+            {
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 5 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 6 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 7 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 8 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 9 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 10 });
+            }
+#endregion
 
             context.SaveChanges();
         }

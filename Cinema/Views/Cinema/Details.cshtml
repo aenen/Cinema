@@ -4,5 +4,41 @@
     ViewBag.Title = Model.Name;
 }
 
-<h2>/Cinema/{name}/</h2>
+<div class="container text-center">
+    <h1 class="display-1">@Model.Name</h1>
+</div>
 
+<dl class="row">
+    <dt class="col-sm-3">Місто</dt>
+    <dd class="col-sm-9">@Model.City.Name</dd>
+
+    <dt class="col-sm-3">Адреса</dt>
+    <dd class="col-sm-9">@Model.Address</dd>
+
+    <dt class="col-sm-3">Номер телефону</dt>
+    <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+    <dt class="col-sm-3">Опис</dt>
+    <dd class="col-sm-9">@Model.Description</dd>
+</dl>
+
+<h2>Розклад</h2>
+@{
+    foreach (var hall in Model.CinemaHalls)
+    {
+        foreach (var session in hall.Sessions)
+        {
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@session.Movie.Name</h5>
+                        <small>@session.DateTime.ToString()</small>
+                    </div>
+                    @*<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>*@
+                </a>
+            </div>
+
+        }
+    }
+}

@@ -33,7 +33,7 @@ namespace Cinema.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var cinema = repository.GetAll().FirstOrDefault(x => x.Name == name);
+            var cinema = repository.GetAll().FirstOrDefault(x => x.Keyword == name);
             if (cinema == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
