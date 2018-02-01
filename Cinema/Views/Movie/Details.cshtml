@@ -4,4 +4,35 @@
     ViewBag.Title = Model.Name;
 }
 
-<h2>/Movie/{movie_id}</h2>
+<h1>@Model.Name</h1>
+<img src="@Model.PosterPath" style="max-height: 400px; width:auto;" class="rounded" />
+
+<dl class="row">
+    <dt class="col-sm-3">Оригінальна назва</dt>
+    <dd class="col-sm-9">@Model.OriginalName</dd>
+
+    <dt class="col-sm-3">Тривалість</dt>
+    <dd class="col-sm-9">@Model.Duration</dd>
+
+    <dt class="col-sm-3">Жанри</dt>
+    <dd class="col-sm-9">@Model.Genres</dd>
+
+    <dt class="col-sm-3">Опис</dt>
+    <dd class="col-sm-9">@Model.Description</dd>
+</dl>
+
+
+<h2>Сеанси</h2>
+@{
+    foreach (var session in Model.Sessions)
+    {
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@session.CinemaHall.Cinema.Name</h5>
+                    <small>@session.DateTime.ToString()</small>
+                </div>
+            </a>
+        </div>
+    }
+}

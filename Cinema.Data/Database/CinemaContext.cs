@@ -105,7 +105,7 @@ namespace Cinema.Data.Database
             // додаю ролі
             roleMgr.Create(new ApplicationRole("Administrator"));
             roleMgr.Create(new ApplicationRole("Moderator"));
-            roleMgr.Create(new ApplicationRole("User"));
+            //roleMgr.Create(new ApplicationRole("User"));
 
             // додаю адміністратора
             string userName = "admin@gmail.com";

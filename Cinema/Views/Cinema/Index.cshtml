@@ -5,4 +5,11 @@
     ViewBag.Title = "Кінотеатри";
 }
 
-<h2>/Cinema/</h2>
+<ul class="list-group">
+    @{
+        foreach (var item in Model)
+        {
+            @Html.ActionLink(item.Name, "Details", "Cinema", new { name = item.Keyword }, new { @class = "list-group-item" })
+        }
+    }
+</ul>
