@@ -231,10 +231,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\full_logo.png" />
-    <Content Include="Content\full_logo.svg" />
-    <Content Include="Content\logo.svg" />
-    <Content Include="Content\logo.png" />
+    <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
+    <Content Include="Content\WebsiteImage\Logo\full_logo.png" />
+    <Content Include="Content\WebsiteImage\Logo\full_logo.svg" />
+    <Content Include="Content\WebsiteImage\Logo\logo.svg" />
+    <Content Include="Content\WebsiteImage\Logo\logo.png" />
     <Content Include="Content\Poster\4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg" />
     <Content Include="Content\Poster\bLBsSGIHzkFR3we2JjFzggnOAUO.jpg" />
     <Content Include="Content\Poster\tgQV4jyb9BgcV6db8uKPjTgSfpD.jpg" />
@@ -337,6 +338,7 @@
     <Content Include="Views\Cinema\Details.cshtml" />
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Session\Details.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

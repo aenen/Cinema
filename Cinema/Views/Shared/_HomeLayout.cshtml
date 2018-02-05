@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="height:100%">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAEKTORIA - Мережа кінотеатрів України</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="home-body">
+    <nav class="home-navbar">
+        <a href="/" class="nav-logo-center"></a>
+        <div class="nav-home-item float-left"></div>
+        <div class="nav-home-item float-right"></div>
+    </nav>
+    <div class="home-container">
+        <div>
+            <div class="home-logo"></div>
+            <div class="home-main-menu"></div>
+            <div class="home-additional-menu"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

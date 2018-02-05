@@ -14,7 +14,7 @@ namespace Cinema.Controllers
         
         public ActionResult Index()
         {
-            return View(db);
+            return View("~/Views/Shared/_HomeLayout.cshtml");
         }
     }
 }

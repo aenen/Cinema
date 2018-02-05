@@ -1,5 +1,4 @@
 ﻿body {
-
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,9 +21,38 @@ textarea {
     max-width: 280px;
 }
 
+.home-body {
+    height: 100%;
+    background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.home-navbar {
+    position: relative;
+    background: linear-gradient(#020107, #0F0D14);
+    text-align: center;
+    height: 100px;
+    padding: 20px;
+}
+
+.nav-logo-center {
+    display: inline-block;
+    height: 100%;
+    width: 400px;
+    background: url(WebsiteImage/Logo/full_logo.svg) no-repeat center;
+    background-size: auto 75%;
+}
+
+.nav-home-item {
+    height: 100%;
+    width: 60px;
+    border: 3px dashed white;
+    cursor: pointer;
+}
+
 .navbar {
     background-color: #0F0D14;
-    padding:0 0.25rem;
+    padding: 0 0.25rem;
 }
 
 .sum-seat-container {
