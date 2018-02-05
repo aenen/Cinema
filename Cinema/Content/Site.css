@@ -22,34 +22,51 @@ textarea {
     max-width: 280px;
 }
 
-.he-container {
-    width: 100%;
-    height: 250px;
-    border: 1px solid grey;
-    border-radius: 5px;
+.sum-seat-container {
+    padding: 10px;
+    border: 1px solid black;
+    min-width: 35em;
+    font-size: 2vw;
 }
-.he-seats-selector {
-    width: 100%;
-    border-bottom: 1px solid grey;
-    height: 50px;
-    display: inline-flex;
+
+.seat-screen {
+    height: 1.5em;
+    background-color: azure;
+    color: cadetblue;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.he-seat-type {
-    /*display: inline-block;*/
-    margin: 0 5px;
-    cursor:pointer;
-    border-radius:3px;
+.seat-container {
+    /*border: 1px dashed black;*/
+    margin: 0 auto;
+    border-radius: .5em;
+    position: relative;
+    height: calc(22em - 1.5em);
+    width: 35em;
 }
-.seat-common{
-    width: 30px;
-    height: 40px;
-    background-color: blue;
+
+.seat {
+    border-radius: .3em;
+    background-color: royalblue;
+    width: 2em;
+    height: 3em;
+    position: absolute;
+    cursor: pointer;
 }
+
+.seat-sofa {
+    background-color: limegreen;
+    width: 4em;
+    height: 2.5em
+}
+
 .seat-lux {
-    width: 35px;
-    height: 40px;
     background-color: orange;
+}
+
+.seat-super-lux {
+    background-color: darkblue;
+    width: 2.5em
 }

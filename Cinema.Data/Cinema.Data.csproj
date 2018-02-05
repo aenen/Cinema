@@ -99,6 +99,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\MovieRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\SessionRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

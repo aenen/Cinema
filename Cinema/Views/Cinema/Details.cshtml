@@ -29,7 +29,7 @@
         foreach (var session in hall.Sessions)
         {
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="@Url.Action("Details", "Session", new { id = session.Id })" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">@session.Movie.Name</h5>
                         <small>@session.DateTime.ToString()</small>

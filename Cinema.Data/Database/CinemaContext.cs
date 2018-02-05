@@ -87,7 +87,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {

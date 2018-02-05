@@ -59,6 +59,7 @@ namespace Cinema.App_Start
             kernel.Bind<DbContext>().To<CinemaContext>().InRequestScope();
             kernel.Bind<IRepository<Movie>>().To<MovieRepository>().InRequestScope();
             kernel.Bind<IRepository<CinemaEntity>>().To<CinemaRepository>().InRequestScope();
+            kernel.Bind<IRepository<Session>>().To<SessionRepository>().InRequestScope();
         }
     }
 }
