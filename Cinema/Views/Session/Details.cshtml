@@ -8,10 +8,10 @@
     var seatContainerHeight = (seatList.Max(x => x.PositionY) - seatList.Min(x => x.PositionY) + 4).ToString(System.Globalization.CultureInfo.InvariantCulture) + "em";
 }
 
-<h2>
-    <span>@Model.Movie.Name</span>
-    <span class="float-right">@Model.DateTime.ToShortTimeString() @Model.DateTime.ToShortDateString()</span>
-</h2>
+    <h2>
+        <span class="float-right">@Model.DateTime.ToShortTimeString() @Model.DateTime.ToShortDateString()</span>
+        <span>@Model.Movie.Name</span>
+    </h2>
 
 <div class="sum-seat-container">
     <div class="seat-screen">Е К Р А Н</div>

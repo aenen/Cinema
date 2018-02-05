@@ -231,6 +231,9 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\full_logo.png" />
+    <Content Include="Content\full_logo.svg" />
+    <Content Include="Content\logo.svg" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\Poster\4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg" />
     <Content Include="Content\Poster\bLBsSGIHzkFR3we2JjFzggnOAUO.jpg" />

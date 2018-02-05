@@ -22,6 +22,11 @@ textarea {
     max-width: 280px;
 }
 
+.navbar {
+    background-color: #0F0D14;
+    padding:0 0.25rem;
+}
+
 .sum-seat-container {
     padding: 10px;
     border: 1px solid black;
