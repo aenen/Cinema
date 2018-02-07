@@ -10,6 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRAEKTORIA - Мережа кінотеатрів України</title>
+    <link href="~/Content/WebsiteImage/Logo/logo.png" rel="shortcut icon" type="image/x-icon" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -21,13 +22,14 @@
     </nav>
     <div class="home-container">
         <div class="home-logo">
-            <img class="home-logo-img" src="~/Content/WebsiteImage/Logo/logo.svg" height="125" />
+            @*<img class="home-logo-img" src="~/Content/WebsiteImage/Logo/logo.svg" />*@
         </div>
         <div class="home-main-menu">
             <a href="#" class="home-btn">Обрати кінотеатр</a>
             <a href="#" class="home-btn">Обрати фільм</a>
-        </div>
+        </div>        
         <div class="home-additional-menu">
+            @*<hr />*@
             <div class="nav-home-item"></div>
             <div class="nav-home-item"></div>
             <div class="nav-home-item"></div>
