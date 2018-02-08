@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 
-<html style="height:100%">
+<html class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,25 +14,22 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="home-body">
-    <nav class="home-navbar">
-        <a href="/" class="nav-logo-center"></a>
-        <div class="nav-home-item float-left"></div>
-        <div class="nav-home-item float-right"></div>
+<body class="home-body h-100">
+    <nav class="home-navbar d-flex flex-row justify-content-between align-items-center text-center p-3 ">
+        <a href="#" class="home-nav-item"></a>
+        <a href="/" class="logo-full d-block"></a>
+        <a href="#" class="home-nav-item"></a>
     </nav>
-    <div class="home-container">
-        <div class="home-logo">
-            @*<img class="home-logo-img" src="~/Content/WebsiteImage/Logo/logo.svg" />*@
-        </div>
+    <div class="home-container d-flex flex-column justify-content-between text-center mx-auto">
+        <div class="logo-small"></div>
         <div class="home-main-menu">
-            <a href="#" class="home-btn">Обрати кінотеатр</a>
-            <a href="#" class="home-btn">Обрати фільм</a>
+            <a href="#" class="home-btn d-block p-2">Обрати кінотеатр</a>
+            <a href="#" class="home-btn d-block p-2">Обрати фільм</a>
         </div>        
-        <div class="home-additional-menu">
-            @*<hr />*@
-            <div class="nav-home-item"></div>
-            <div class="nav-home-item"></div>
-            <div class="nav-home-item"></div>
+        <div class="home-additional-menu d-flex justify-content-center m-3">
+            <a class="home-nav-item d-inline-block"></a>
+            <a class="home-nav-item d-inline-block"></a>
+            <a class="home-nav-item d-inline-block"></a>
         </div>
     </div>
 

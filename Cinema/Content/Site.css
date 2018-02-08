@@ -1,7 +1,4 @@
-﻿body {
-}
-
-/* Set padding to keep content from hitting the edges */
+﻿/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -21,90 +18,146 @@ textarea {
     max-width: 280px;
 }
 
+/* --- головні класи ---*/
+.logo-small {
+    background: url(WebsiteImage/Logo/logo.svg) no-repeat center;
+    background-size: auto 100%;
+}
+
+.logo-full {
+    background: url(WebsiteImage/Logo/full_logo.svg) no-repeat center;
+    background-size: auto 100%;
+}
+
+
+/* --- /home/index/ main ---*/
+/* --- /home/index/ main ---*/
+/* --- /home/index/ main ---*/
+
+.home-body {
+    background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* - /home/index/ menu -*/
+.home-nav-item {
+    min-width: 50px;
+    min-height: 50px;
+    border: 3px dashed white;
+    cursor: pointer;
+}
+
+.home-navbar {
+    background: linear-gradient(#020107, #0F0D14);
+    height: 100px;
+}
+
+    .home-navbar .logo-full {
+        max-width: 500px;
+        height: 75%;
+        flex: 1;
+    }
+
+
+/* - /home/index/ content -*/
 .home-container {
-    justify-content: space-between;
-    display: flex;
-    flex-direction:column;
-    margin: 0 auto;
     min-width: 30rem;
     width: 50%;
     min-height: calc(100% - 100px);
     background-color: rgba(8, 6, 14, 0.85);
-    text-align: center;
-}
-.home-main-menu  {
-    /*margin: 0 1rem 1rem 1rem;*/
 }
 
-.home-container div {
-}
-.home-logo {
-    background: url(WebsiteImage/Logo/logo.svg) no-repeat center;
-    background-size: auto 100%;
-    min-height: 10rem;
-    /*height: 10rem;*/
-    margin: 2rem 0 1rem 0;
-}
-
-.home-btn {
-    font-family: Arial Regular;
-    font-size: 1.7rem;
-    display: block;
-    color: #AFADAF;
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: .6rem;
-    border-radius: .3rem;
-    margin: 1rem 15%;
-    max-width: 55.5rem;
-    background-color: rgba(56,56,56,.50);
-}
-
-a.home-btn:hover {
-    color: #FFF324;
-    text-decoration: none;
-}
-
-.home-additional-menu {
-    text-align: center;
-    margin:1rem;
-}
-
-    .home-additional-menu .nav-home-item {
-        height: 60px;
-        display: inline-block;    
-        margin:0 2%;
+    .home-container .logo-small {
+        min-height: 10rem;
+        margin: 2rem 0 1rem 0;
     }
 
-.home-body {
-    height: 100%;
-    background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
+    .home-container .home-btn {
+        font-family: Arial Regular;
+        font-size: 1.6rem;
+        color: #AFADAF;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: .5rem;
+        margin: 1rem 15%;
+        max-width: 55.5rem;
+        background-color: rgba(56,56,56,.50);
+    }
+
+        .home-container .home-btn:hover {
+            color: #FFF324;
+        }
+
+.home-additional-menu .home-nav-item {
+    margin: 0 2%;
 }
 
-.home-navbar {
-    position: relative;
-    background: linear-gradient(#020107, #0F0D14);
-    text-align: center;
-    height: 100px;
-    padding: 20px;
+
+@media only screen and (max-width:600px) {
+    html, body {
+        font-size: 12.5px;
+    }
+
+    .home-navbar .logo-full {
+        max-width: 100px;
+        height: 100%;
+        background-image: url(WebsiteImage/Logo/logo.svg);
+    }
+
+    .home-container {
+        min-width: initial;
+        width: 100%;
+    }
+
+        .home-container .logo-small {
+            background-image: url(WebsiteImage/Logo/full_logo.svg);
+            min-height: 2.5rem;
+        }
+
+        .home-container .home-btn {
+            margin: 1rem 10%;
+        }
 }
 
-.nav-logo-center {
-    display: inline-block;
-    height: 100%;
-    width: 400px;
-    background: url(WebsiteImage/Logo/full_logo.svg) no-repeat center;
-    background-size: auto 75%;
+@media only screen and (min-width:1600px) {
+    html, body {
+        font-size: 25px;
+    }
+
+    .home-container {
+        min-height: calc(100% - 200px);
+    }
+
+    .home-navbar {
+        height: 200px;
+    }
+
+        .home-navbar .logo-full {
+            max-width: 750px;
+            height: 50%;
+        }
+
+    .home-nav-item {
+        min-width: 100px;
+        min-height: 100px;
+    }
+
+    .home-container .home-btn {
+        margin: 1rem 10%;
+    }
 }
 
-.nav-home-item {
-    height: 100%;
-    width: 60px;
-    border: 3px dashed white;
-    cursor: pointer;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 .navbar {
     background-color: #0F0D14;
