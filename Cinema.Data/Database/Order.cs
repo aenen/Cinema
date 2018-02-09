@@ -18,6 +18,8 @@ namespace Cinema.Data.Database
 
         public int Id { get; set; }
 
+        public string TestIdForLiqpay { get; set; }
+
         public int OrderStatusId { get; set; }
 
         [Required]

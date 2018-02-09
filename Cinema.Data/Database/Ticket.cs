@@ -12,8 +12,6 @@ namespace Cinema.Data.Database
         public int Id { get; set; }
 
         public int StatusId { get; set; }
-        
-        public int TicketPriceId { get; set; }
 
         public bool IsUsed { get; set; }
         
@@ -21,7 +19,6 @@ namespace Cinema.Data.Database
         
         public virtual OrderItem OrderItem { get; set; }
 
-        [Required]
         public virtual TicketPrice TicketPrice { get; set; }
     }
 }

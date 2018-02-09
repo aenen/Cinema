@@ -19,6 +19,8 @@ namespace Cinema.Data.Database
         
         public virtual Order Order { get; set; }
         
+        //public virtual TicketPrice TicketPrice { get; set; }
+
         public virtual Ticket Ticket { get; set; }
 
         public virtual Movie Movie { get; set; }

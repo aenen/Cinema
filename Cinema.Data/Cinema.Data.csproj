@@ -98,6 +98,7 @@
     <Compile Include="Repository\CinemaRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\MovieRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\SessionRepository.cs" />
   </ItemGroup>

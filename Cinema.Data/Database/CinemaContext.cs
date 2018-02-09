@@ -65,6 +65,11 @@ namespace Cinema.Data.Database
                .HasOptional(x => x.Ticket)
                .WithOptionalPrincipal(x => x.OrderItem)
                .Map(a => a.MapKey("OrderItemId"));
+
+            modelBuilder.Entity<TicketPrice>()
+               .HasOptional(x => x.Ticket)
+               .WithOptionalPrincipal(x => x.TicketPrice)
+               .Map(a => a.MapKey("TicketPriceId"));
             base.OnModelCreating(modelBuilder);
         }
 
@@ -87,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -118,9 +123,10 @@ namespace Cinema.Data.Database
 
             context.TicketStatus.Add(new TicketStatus { Name = "Сплачено" });
             context.TicketStatus.Add(new TicketStatus { Name = "Заброньовано", Description = "За 30 хвилин до початку сеансу підійдіть до каси кінотеатру та назвіть номер квитка або номер замовлення." });
+            context.TicketStatus.Add(new TicketStatus { Name = "Зарезервовано", Description = "Квиток зарезервовано на 10 хвилин." });
 
             context.OrderStatus.Add(new OrderStatus { Name = "Сплачено" });
-            context.OrderStatus.Add(new OrderStatus { Name = "Не сплачено", Description = "Викупіть квитки через сайт, або на касі кінотеатру за 30 хвилин до початку сеансу." });
+            context.OrderStatus.Add(new OrderStatus { Name = "Заброньовано", Description = "Викупіть квитки через сайт, або на касі кінотеатру за 30 хвилин до початку сеансу." });
             context.OrderStatus.Add(new OrderStatus { Name = "Відхилено" });
 
             context.CommentTypes.Add(new CommentType { Name = "Не вибрано" });
@@ -138,10 +144,10 @@ namespace Cinema.Data.Database
             context.Cities.Add(new City { Name = "Одеса" });
             context.Cities.Add(new City { Name = "Львів" });
 
-            context.SeatTypes.Add(new SeatType { Name = "Звичайне", Keyword = "seat-common", DefaultPrice=5000 });
-            context.SeatTypes.Add(new SeatType { Name = "Люкс", Keyword = "seat-lux", DefaultPrice=6000, Description = "М'ягкі крісла з високою спинкою та фіксованим сидінням." });
-            context.SeatTypes.Add(new SeatType { Name = "Супер Люкс", Keyword = "seat-super-lux", DefaultPrice=10000, Description = "Крісла-реклайнери, що забезпечують підвищений комфорт перегляду, для гурманів кіно." });
-            context.SeatTypes.Add(new SeatType { Name = "Диван для двох", Keyword = "seat-sofa", DefaultPrice=20000, Description = "Комфортний диван для двох." });
+            context.SeatTypes.Add(new SeatType { Name = "Звичайне", Keyword = "seat-common", DefaultPrice = 5000 });
+            context.SeatTypes.Add(new SeatType { Name = "Люкс", Keyword = "seat-lux", DefaultPrice = 6000, Description = "М'ягкі крісла з високою спинкою та фіксованим сидінням." });
+            context.SeatTypes.Add(new SeatType { Name = "Супер Люкс", Keyword = "seat-super-lux", DefaultPrice = 10000, Description = "Крісла-реклайнери, що забезпечують підвищений комфорт перегляду, для гурманів кіно." });
+            context.SeatTypes.Add(new SeatType { Name = "Диван для двох", Keyword = "seat-sofa", DefaultPrice = 20000, Description = "Комфортний диван для двох." });
 
             context.SaveChanges();
         }
@@ -353,7 +359,7 @@ namespace Cinema.Data.Database
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 9 });
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 10 });
             }
-#endregion
+            #endregion
 
             context.SaveChanges();
         }
