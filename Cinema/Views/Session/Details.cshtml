@@ -8,17 +8,105 @@
     var seatContainerHeight = (seatList.Max(x => x.PositionY) - seatList.Min(x => x.PositionY) + 4).ToString(System.Globalization.CultureInfo.InvariantCulture) + "em";
 }
 
-    <h2>
-        <span class="float-right">@Model.DateTime.ToShortTimeString() @Model.DateTime.ToShortDateString()</span>
-        <span>@Model.Movie.Name</span>
-    </h2>
+<h2>
+    <span class="float-right">@Model.DateTime.ToShortTimeString() @Model.DateTime.ToShortDateString()</span>
+    <span>@Model.Movie.Name</span>
+</h2>
 
-<div class="sum-seat-container">
+<div id="session" class="sum-seat-container" data-session-id="@Model.Id">
     <div class="seat-screen">Е К Р А Н</div>
     <div class="seat-container" style="width: @(seatContainerWidth); height: @(seatContainerHeight)">
-        @foreach (var ticketPrice in Model.TicketPrices)
+        @{
+            foreach (var ticketPrice in Model.TicketPrices)
             {
-            <div class="seat @ticketPrice.Seat.SeatType.Keyword" style="left: @(ticketPrice.Seat.SeatStyle.PositionX.ToString(System.Globalization.CultureInfo.InvariantCulture))em; top: @(ticketPrice.Seat.SeatStyle.PositionY.ToString(System.Globalization.CultureInfo.InvariantCulture))em"></div>
+                string seatLeft = ticketPrice.Seat.SeatStyle.PositionX.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string seatTop = ticketPrice.Seat.SeatStyle.PositionY.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string isFree = (ticketPrice.Ticket == null) ? "place-free" : "place-taken";
+
+                <div class="seat @ticketPrice.Seat.SeatType.Keyword @isFree"
+                     data-row="@ticketPrice.Seat.Row"
+                     data-number="@ticketPrice.Seat.Number"
+                     data-price="@ticketPrice.Price"
+                     style="left: @(seatLeft)em; top: @(seatTop)em"></div>
+            }
         }
     </div>
 </div>
+
+<form id="form-buy" class="container" method="post" action="@Url.Action("BuyTickets","Order")">
+    <div id="cart">
+        <div>Обрані місця</div>
+        <div id="tickets-cart" class="container">
+            @*<div class="ticket-item" data-row="1" data-number="1" style="border-bottom:1px solid black">
+                <div class="ti-row">Ряд:     1</div>
+                <input type="hidden" name="selected_seats[].row" value="1"/>
+                <div class="ti-number">Місце:   1</div>
+                <input type="hidden" name="selected_seats[].number" value="1"/>
+            </div>
+            <div class="ticket-item" data-row="2" data-number="4" style="border-bottom:1px solid black">
+                <div class="ti-row">Ряд:     2</div>
+                <input type="hidden" name="selected_seats[].row" value="2"/>
+                <div class="ti-number">Місце:   4</div>
+                <input type="hidden" name="selected_seats[].number" value="4"/>
+            </div>*@
+        </div>
+        @*<div id="cart-count"></div>*@
+    </div>
+    <input type="hidden" name="session_id" value="@Model.Id" />
+    <div id="cart-price"></div>
+    <button type="button" id="buy" class="btn">Далі</button>
+</form>
+
+@section scripts
+{
+    <script>
+        var tickets = [];
+        $(".seat").click(function (e) {
+            if ($(this).hasClass("place-taken")) {
+                return false;
+            }
+
+            var seatRow = $(this).attr("data-row");
+            var seatNumber = $(this).attr("data-number");
+            var seatPrice = $(this).attr("data-price");
+            
+            if ($(this).hasClass("place-choosen")) {
+                tickets = tickets.filter(function (el) {
+                    return el.row !== seatRow || el.number !== seatNumber;
+                });
+                $(".ticket-item[data-row='" + seatRow + "'][data-number='" + seatNumber + "']").remove();
+                $(this).removeClass("place-choosen").addClass("place-free");
+            } else {
+                // ticket container:
+                $("<div/>", { class: "ticket-item", 'data-row': seatRow, 'data-number': seatNumber, style:"border-bottom:1px solid black" })
+                    .append($("<div/>", { class: "ti-row", text: "Ряд:\t" + seatRow }))
+                    .append($("<input/>", { type: "hidden", name: "selected_seats[].row", value: seatRow }))
+                    .append($("<div/>", { class: "ti-number", text: "Місце:\t" + seatNumber }))
+                    .append($("<input/>", { type: "hidden", name: "selected_seats[].number", value: seatNumber }))
+                    .appendTo("#tickets-cart");
+
+                tickets.push({ row: seatRow, number: seatNumber, price: seatPrice });
+                $(this).removeClass("place-free").addClass("place-choosen");
+            }
+
+            $("#cart-count").text(tickets.length);
+            var cartPrice = 0;
+            $.each(tickets, function () {
+                cartPrice += parseInt(this.price);
+            });
+            $("#cart-price").text(cartPrice / 100);
+        });
+
+        $("#buy").click(function (e) {
+            var itemIterator=0;
+            $("#tickets-cart").children(".ticket-item").each(function () {
+                $(this).children("input[type='hidden']").each(function () {
+                    $(this).attr("name",$(this).attr("name").replace("[]", "[" + itemIterator + "]"));
+                });
+                itemIterator++;
+            });
+            $("#form-buy").submit();
+            //window.location.href = "Url.Action("BuyTickets","Order")/?" + $.param({ selected_seats: tickets, session_id: $("#session").attr("data-session-id") });
+        })
+    </script>
+}

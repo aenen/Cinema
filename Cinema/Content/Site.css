@@ -212,3 +212,10 @@ textarea {
     background-color: darkblue;
     width: 2.5em
 }
+
+.place-taken {
+    background-color: lightgrey;
+}
+.place-choosen {
+    background-color:yellow;
+}
