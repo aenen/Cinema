@@ -1,6 +1,21 @@
-﻿@{
+﻿@using Cinema.Payment.LiqPay
+@model LiqPayCheckoutFormModel
+
+@{
     ViewBag.Title = "Придбати квитки";
 }
 
-<h2>Придбати квитки ♥</h2>
+<h2>Будь ласка, зачекайте...</h2>
 
+<form id="liqpayForm" method="POST" accept-charset="utf-8" action="https://www.liqpay.ua/api/3/checkout">
+    <input type="hidden" name="data" value="@Model.Data" />
+    <input type="hidden" name="signature" value="@Model.Signature" />
+</form>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#liqpayForm").submit();
+        })
+    </script>
+}

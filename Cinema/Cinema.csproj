@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderProcessedViewModel.cs" />
     <Compile Include="Models\SelectedSeatsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -342,6 +343,7 @@
     <Content Include="Views\Session\Details.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Order\BuyTickets.cshtml" />
+    <Content Include="Views\Order\Processed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +357,10 @@
     <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
       <Project>{68cec8bc-054f-400a-bfe6-7372ea237ed9}</Project>
       <Name>Cinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Payment\Cinema.Payment.csproj">
+      <Project>{2da45b7a-0062-4e5a-9fec-55f3c9e1af65}</Project>
+      <Name>Cinema.Payment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

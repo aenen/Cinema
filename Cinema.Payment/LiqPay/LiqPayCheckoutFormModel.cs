@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LiqPay.Models
+namespace Cinema.Payment.LiqPay
 {
     /// <summary>
     /// Данні, які передаються у в'ю для формування кнопки оплати LiqPay

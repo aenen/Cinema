@@ -215,6 +215,7 @@ textarea {
 
 .place-taken {
     background-color: lightgrey;
+    cursor: default;
 }
 .place-choosen {
     background-color:yellow;

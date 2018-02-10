@@ -1,0 +1,82 @@
+﻿@using Cinema.Models
+@model OrderProcessedViewModel
+
+@{
+    ViewBag.Title = $"Оформлення замовлення.";
+}
+
+<h2>@Model.MovieName в @Model.SessionDate</h2>
+
+<form id="form-buy" action="***" method="post" class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Ряд</th>
+                <th>Місце</th>
+                <th>Ціна</th>
+            </tr>
+        </thead>
+        <tbody id="tickets-cart">
+            @{
+                int count = 1;
+                foreach (var item in Model.OrderItems)
+                {
+                    <tr class="ticket-item">
+                        <th scope="row">@count</th>
+                        <td>
+                            <div>@item.SeatRow</div>
+                            <input type="hidden" name="selected_seats[].row" value="@item.SeatRow" />
+                        </td>
+                        <td>
+                            <div class="col-md-4">@item.SeatNumber</div>
+                            <input type="hidden" name="selected_seats[].number" value="@item.SeatNumber" />
+                        </td>
+                        <td>@(item.Price/100)</td>
+                    </tr>
+                    count++;
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>@(Model.SumPrice / 100) грн</th>
+            </tr>
+        </tfoot>
+    </table>
+    <input type="hidden" name="session_id" value="@Model.SessionId" />
+</form>
+<div class="container">
+    <div class="row">
+        <button id="buy" class="btn">Оплатити</button>
+        <button id="reserve" class="btn">Забронювати</button>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function indexingFormData() {
+            var itemIterator = 0;
+            $("#tickets-cart").children(".ticket-item").each(function () {
+                $(this).children("td").each(function () {
+                    $(this).children("input[type='hidden']").each(function () {
+                        $(this).attr("name", $(this).attr("name").replace("[]", "[" + itemIterator + "]"));
+                    });
+                });
+                itemIterator++;
+            });
+        }
+
+        $("#buy").click(function (e) {
+            indexingFormData();
+            $("#form-buy").attr("action","@Url.Action("BuyTickets", "Order")").submit();
+        })
+        $("#reserve").click(function (e) {
+            indexingFormData();
+            $("#form-buy").attr("action","@Url.Action("ReserveTicket", "Order")").submit();
+        })
+    </script>
+}

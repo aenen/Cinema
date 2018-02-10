@@ -47,5 +47,11 @@
     <Compile Include="LiqPay\LiqPayHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
+      <Project>{68cec8bc-054f-400a-bfe6-7372ea237ed9}</Project>
+      <Name>Cinema.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

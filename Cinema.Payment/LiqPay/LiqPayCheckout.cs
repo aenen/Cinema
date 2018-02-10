@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace LiqPay.Models
+namespace Cinema.Payment.LiqPay
 {
     /// <summary>
     /// Data параметри LiqPay (більше параметрів тут: https://www.liqpay.ua/documentation/api/aquiring/checkout/doc)
