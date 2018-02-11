@@ -86,6 +86,7 @@ namespace Cinema.Controllers
                     Price = ticketPrice.Price,
                     Ticket = new Ticket
                     {
+                        CreationDateTime=DateTime.Now,
                         TicketPrice = ticketPrice,
                         StatusId = 3, // зарезервовано на 15хв
                     }
@@ -134,6 +135,7 @@ namespace Cinema.Controllers
                     Price = ticketPrice.Price,
                     Ticket = new Ticket
                     {
+                        CreationDateTime = DateTime.Now,
                         TicketPrice = ticketPrice,
                         StatusId = 2, // заброньовано (видалиться за 30хв до початку сеансу)
                     }

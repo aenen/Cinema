@@ -12,7 +12,7 @@ namespace Cinema.Data.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Session()
         {
-            Tickets = new HashSet<Ticket>();
+            //Tickets = new HashSet<Ticket>();
             TicketPrices = new HashSet<TicketPrice>();
         }
         
@@ -31,8 +31,8 @@ namespace Cinema.Data.Database
 
         public virtual Movie Movie { get; set; }
         
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Ticket> Tickets { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TicketPrice> TicketPrices { get; set; }

@@ -14,7 +14,9 @@ namespace Cinema.Data.Database
         public int StatusId { get; set; }
 
         public bool IsUsed { get; set; }
-        
+
+        public DateTime CreationDateTime { get; set; }
+
         public virtual TicketStatus Status { get; set; }
         
         public virtual OrderItem OrderItem { get; set; }
