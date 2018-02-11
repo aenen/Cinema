@@ -87,7 +87,7 @@ namespace Cinema.Controllers
                     Ticket = new Ticket
                     {
                         TicketPrice = ticketPrice,
-                        StatusId = 3,
+                        StatusId = 3, // зарезервовано на 15хв
                     }
                 });
             }
@@ -98,7 +98,7 @@ namespace Cinema.Controllers
             {
                 TestIdForLiqpay = Guid.NewGuid().ToString(), // ця властивість необхідна для тестування "лікпею"
                 OrderItems = orderItems,
-                OrderStatusId = 3,
+                OrderStatusId = 3, // статус "відхилено" поки користувач не заплатить
                 User = userMgr.FindByName(User.Identity.Name),
                 PurchaseDate = DateTime.Now
             };
@@ -109,8 +109,50 @@ namespace Cinema.Controllers
             LiqPayHelper liqPayHelper = new LiqPayHelper(ConfigurationManager.AppSettings["LiqPayPrivateKey"], ConfigurationManager.AppSettings["LiqPayPublicKey"]);
             string redirect_url = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
                 (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/Order/LiqPayCallback";
-            var model =liqPayHelper.GetLiqPayModel(order, redirect_url);
+            var model = liqPayHelper.GetLiqPayModel(order, redirect_url);
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult ReserveTickets(List<SelectedSeatsViewModel> selected_seats, int? session_id)
+        {
+            if (!IsValidSelectedSeats(selected_seats, session_id) || !ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // створюю список позицій замовлення (квитків)
+            Session session = sessionRepository.FindBy(x => x.Id == session_id).FirstOrDefault();
+            List<OrderItem> orderItems = new List<OrderItem>();
+            foreach (var item in selected_seats)
+            {
+                TicketPrice ticketPrice = session.TicketPrices.FirstOrDefault(x => x.Seat.Row == item.Row && x.Seat.Number == item.Number);
+                orderItems.Add(new OrderItem
+                {
+                    Movie = session.Movie,
+                    Price = ticketPrice.Price,
+                    Ticket = new Ticket
+                    {
+                        TicketPrice = ticketPrice,
+                        StatusId = 2, // заброньовано (видалиться за 30хв до початку сеансу)
+                    }
+                });
+            }
+
+            // створюю замовлення та зберігаю його в бд
+            ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            Order order = new Order
+            {
+                OrderItems = orderItems,
+                OrderStatusId = 2, // не сплачено (заброньовано)
+                User = userMgr.FindByName(User.Identity.Name),
+                PurchaseDate = DateTime.Now
+            };
+            orderRepository.AddOrUpdate(order);
+            orderRepository.Save();
+
+            return View();
         }
 
         [HttpPost]
@@ -145,6 +187,7 @@ namespace Cinema.Controllers
                     item.Ticket.StatusId = 1;
                 }
                 order.OrderStatusId = 1;
+                order.PurchaseDate = DateTime.Now;
                 orderRepository.AddOrUpdate(order);
                 orderRepository.Save();
 
@@ -154,8 +197,8 @@ namespace Cinema.Controllers
             // delete tickets
             foreach (var item in order.OrderItems)
             {
-                if(item.Ticket!=null)
-                ticketRepository.Delete(item.Ticket);
+                if (item.Ticket != null)
+                    ticketRepository.Delete(item.Ticket);
             }
             ticketRepository.Save();
 
