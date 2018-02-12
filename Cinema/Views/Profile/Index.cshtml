@@ -1,0 +1,40 @@
+﻿@using Cinema.Data.Database
+@model ApplicationUser
+
+@{
+    ViewBag.Title = "Особистий кабінет";
+}
+
+<h2>Особистий кабінет</h2>
+<div class="row">
+    <a class="p-4" href="@Url.Action("Settings", "Profile")">Налаштування</a>
+    @*<a class="p-4" href="@Url.Action("Settings", "Profile")">Квитки</a>*@
+</div>
+<div>
+    <h3>Замовлення:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Фільм</th>
+                <th>Квитки</th>
+                <th>Статус</th>
+                <th>Дата</th>
+                <th>Ціна</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Orders.OrderByDescending(x=>x.PurchaseDate))
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.OrderItems.FirstOrDefault().Movie.Name</td>
+                    <td>@item.OrderItems.Count</td>
+                    <td>@item.OrderStatus.Name </td>
+                    <td>@item.PurchaseDate</td>
+                    <td>@(item.TotalPrice / 100)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
