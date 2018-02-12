@@ -367,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\UserData\Avatar\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

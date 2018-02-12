@@ -6,6 +6,12 @@
 }
 
 <h2>Особистий кабінет</h2>
+@{ 
+    if (Model.PicturePath != null)
+    {
+        <img class="img-thumbnail d-block" src="/@Model.PicturePath" style="max-height:100px"/>
+    }
+}
 <div class="row">
     <a class="p-4" href="@Url.Action("Settings", "Profile")">Налаштування</a>
     @*<a class="p-4" href="@Url.Action("Settings", "Profile")">Квитки</a>*@
