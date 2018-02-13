@@ -17,6 +17,11 @@ namespace Cinema.Controllers
         {
             this.repository = repository;
         }
+        
+        public ActionResult Index()
+        {
+            return View(repository.GetAll());
+        }
 
         [Route("{id:int}")]
         public ActionResult Details(int? id)

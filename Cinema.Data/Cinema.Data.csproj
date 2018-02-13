@@ -97,6 +97,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CinemaRepository.cs" />
     <Compile Include="Repository\CityRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\CommentTypeRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\MovieRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />

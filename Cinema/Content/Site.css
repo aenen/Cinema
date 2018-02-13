@@ -94,9 +94,9 @@ textarea {
 
 
 @media only screen and (max-width:600px) {
-    html, body {
+    /*html, body {
         font-size: 12.5px;
-    }
+    }*/
 
     .home-navbar .logo-full {
         max-width: 100px;
@@ -120,9 +120,9 @@ textarea {
 }
 
 @media only screen and (min-width:1600px) {
-    html, body {
+    /*html, body {
         font-size: 25px;
-    }
+    }*/
 
     .home-container {
         min-height: calc(100% - 200px);

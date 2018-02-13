@@ -92,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -129,7 +129,6 @@ namespace Cinema.Data.Database
             context.OrderStatus.Add(new OrderStatus { Name = "Заброньовано", Description = "Викупіть квитки через сайт, або на касі кінотеатру за 30 хвилин до початку сеансу." });
             context.OrderStatus.Add(new OrderStatus { Name = "Відхилено" });
 
-            context.CommentTypes.Add(new CommentType { Name = "Не вибрано" });
             context.CommentTypes.Add(new CommentType { Name = "Відгук" });
             context.CommentTypes.Add(new CommentType { Name = "Скарга" });
             context.CommentTypes.Add(new CommentType { Name = "Пропозиція" });

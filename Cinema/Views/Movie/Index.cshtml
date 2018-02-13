@@ -1,0 +1,17 @@
+﻿@using Cinema.Data.Database
+@model IEnumerable<Movie>
+
+@{
+    ViewBag.Title = "Фільми";
+}
+
+<h1>Фільми</h1>
+
+<ul class="list-group">
+    @{
+        foreach (var item in Model)
+        {
+            @Html.ActionLink(item.Name, "Details", "Movie", new { id = item.Id }, new { @class = "list-group-item" })
+        }
+    }
+</ul>

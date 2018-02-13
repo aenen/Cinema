@@ -36,3 +36,99 @@
         </div>
     }
 }
+
+<h2>Коментарі</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
+        <input type="hidden" name="MovieId" value="@Model.Id" />
+        <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
+        <select class="form-control" name="CommentTypeId">
+            <option value="0">Не вибрано</option>
+            <option value="1">Відгук</option>
+            <option value="2">Скарга</option>
+            <option value="3">Пропозиція</option>
+        </select>
+        <select class="form-control" name="CinemaId">
+            <option value="0">Не вибрано</option>
+            <option value="1">Панорама</option>
+            <option value="2">Vision</option>
+        </select>
+        <button id="addComment" type="button" class="btn">Відправити</button>
+    </form>
+}
+else
+{
+    <div class="p-2 m-2 text-muted border">Увійдіть для відправки коментарів</div>
+}
+<div>
+    @foreach (var item in Model.Comments)
+    {
+        <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
+            <div class="col-2">@item.User.FirstName @item.User.LastName</div>
+            <div class="col-9">
+                <div>@item.Text</div>
+                @if (item.CommentType != null)
+                {
+                    <div class="text-muted">@item.CommentType.Name</div>
+                }
+                @if (item.Cinema != null)
+                {
+                    <div class="text-muted">@item.Cinema.Name</div>
+                }
+                @if (item.User.UserName == User.Identity.Name)
+                {
+                    <button type="button" class="btn deleteComment">Видалити</button>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $("#addComment").click(function (e) {
+            var frm = $("#formComment");
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                success: function (data) {
+                    alert("Коментар відправлений")
+                    console.log('Submission was successful.');
+                    console.log(data);
+                },
+                error: function (data) {
+                    alert("Помилка")
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });
+        });
+        $(".deleteComment").click(function (e) {
+            var commentId = $(this).closest(".comment-container").attr("data-id");
+            @*$.ajax({
+                type: "POST",
+                url: "@(Url.Action("UserCommentDelete", "Comment"))",
+                data: {
+                    commentId: commentId
+                },
+                success: function (data) {
+                    alert("Коментар відправлений")
+                    console.log('Submission was successful.');
+                    console.log(data);
+                },
+                error: function (data) {
+                    alert("Помилка")
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });*@
+            $.post("@(Url.Action("UserCommentDelete","Comment"))", {
+                id: commentId
+            }, function () {
+                alert("Коментар видалений");
+            })
+    });
+    </script>
+}
