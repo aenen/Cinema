@@ -45,12 +45,12 @@ namespace Cinema.Controllers
             user.Comments.Add(new Comment
             {
                 Text = model.Text,
-                CommentType=commentTypeRepository.Get(model.CommentTypeId),
+                CommentType = commentTypeRepository.Get(model.CommentTypeId),
                 Cinema = cinemaRepository.Get(model.CinemaId),
                 Movie = movieRepository.Get(model.MovieId)
             });
             var result = await userMgr.UpdateAsync(user);
-            if(result.Succeeded)
+            if (result.Succeeded)
                 return Json("ok");
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,6 +68,12 @@ namespace Cinema.Controllers
             commentRepository.Delete(comment);
             commentRepository.Save();
             return Json("ok");
+        }
+
+        [HttpPost]
+        public JsonResult GetCommentTypeJson()
+        {
+            return Json(commentTypeRepository.GetAll().Select(x => new { x.Id, x.Name, x.Description }));
         }
     }
 }

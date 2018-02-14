@@ -1,9 +1,7 @@
 ﻿@model Cinema.Data.Database.Movie
-
 @{
     ViewBag.Title = Model.Name;
 }
-
 <h1>@Model.Name</h1>
 <img src="@Model.PosterPath" style="max-height: 400px; width:auto;" class="rounded" />
 
@@ -40,33 +38,36 @@
 <h2>Коментарі</h2>
 @if (User.Identity.IsAuthenticated)
 {
-    <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
-        <input type="hidden" name="MovieId" value="@Model.Id" />
-        <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
-        <select class="form-control" name="CommentTypeId">
-            <option value="0">Не вибрано</option>
-            <option value="1">Відгук</option>
-            <option value="2">Скарга</option>
-            <option value="3">Пропозиція</option>
-        </select>
-        <select class="form-control" name="CinemaId">
-            <option value="0">Не вибрано</option>
-            <option value="1">Панорама</option>
-            <option value="2">Vision</option>
-        </select>
+    <div>
+        <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
+            <input type="hidden" name="MovieId" value="@Model.Id" />
+            <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
+        </form>
         <button id="addComment" type="button" class="btn">Відправити</button>
-    </form>
+    </div>
 }
 else
 {
     <div class="p-2 m-2 text-muted border">Увійдіть для відправки коментарів</div>
 }
 <div>
-    @foreach (var item in Model.Comments)
+    @foreach (var item in Model.Comments.OrderByDescending(x=>x.Id))
     {
         <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
-            <div class="col-2">@item.User.FirstName @item.User.LastName</div>
-            <div class="col-9">
+            @{ 
+                string username="";
+
+                if (item.User.FirstName == null && item.User.LastName == null)
+                {
+                    username = "Глядач";
+                }
+                else
+                {
+                    username = $"{item.User.LastName} {item.User.FirstName}";
+                }
+            }
+            <b class="col-2">@username</b>
+            <div class="col-10">
                 <div>@item.Text</div>
                 @if (item.CommentType != null)
                 {
@@ -87,48 +88,53 @@ else
 
 @section scripts{
     <script>
-        $("#addComment").click(function (e) {
-            var frm = $("#formComment");
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                data: frm.serialize(),
-                success: function (data) {
-                    alert("Коментар відправлений")
-                    console.log('Submission was successful.');
-                    console.log(data);
-                },
-                error: function (data) {
-                    alert("Помилка")
-                    console.log('An error occurred.');
-                    console.log(data);
-                },
+        $(function () {
+
+            if ($("#formComment").length) {
+                $.post("@Url.Action("GetCommentTypeJson", "Comment")", function (data) {
+                    var selectItem = $("<select/>", { class: "form-control", name: "CommentTypeId" })
+                        .append($("<option/>", { value: 0, text: "Не вибрано" }));
+                    for (var key in data) {
+                        selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
+                    }
+                    selectItem.appendTo("#formComment");
+                });
+                $.post("@Url.Action("GetCinemaJson", "Cinema")", function (data) {
+                    var selectItem = $("<select/>", { class: "form-control", name: "CinemaId" })
+                        .append($("<option/>", { value: 0, text: "Не вибрано" }));
+                    for (var key in data) {
+                        selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
+                    }
+                    selectItem.appendTo("#formComment");
+                });
+            }
+
+            $("#addComment").click(function (e) {
+                var frm = $("#formComment");
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        alert("Коментар відправлений")
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        alert("Помилка")
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+            });
+            $(".deleteComment").click(function (e) {
+                var commentId = $(this).closest(".comment-container").attr("data-id");
+                $.post("@(Url.Action("UserCommentDelete","Comment"))", {
+                    id: commentId
+                }, function () {
+                    alert("Коментар видалений");
+                })
             });
         });
-        $(".deleteComment").click(function (e) {
-            var commentId = $(this).closest(".comment-container").attr("data-id");
-            @*$.ajax({
-                type: "POST",
-                url: "@(Url.Action("UserCommentDelete", "Comment"))",
-                data: {
-                    commentId: commentId
-                },
-                success: function (data) {
-                    alert("Коментар відправлений")
-                    console.log('Submission was successful.');
-                    console.log(data);
-                },
-                error: function (data) {
-                    alert("Помилка")
-                    console.log('An error occurred.');
-                    console.log(data);
-                },
-            });*@
-            $.post("@(Url.Action("UserCommentDelete","Comment"))", {
-                id: commentId
-            }, function () {
-                alert("Коментар видалений");
-            })
-    });
     </script>
 }

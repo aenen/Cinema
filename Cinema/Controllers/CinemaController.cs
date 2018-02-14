@@ -10,22 +10,21 @@ using System.Web.Mvc;
 
 namespace Cinema.Controllers
 {
-    [RoutePrefix("Cinema")]
     public class CinemaController : Controller
     {
-        IRepository<CinemaEntity> repository;
+        IRepository<CinemaEntity> cinemaRepository;
 
-        public CinemaController(IRepository<CinemaEntity> repository)
+        public CinemaController(IRepository<CinemaEntity> cinemaRepository)
         {
-            this.repository = repository;
+            this.cinemaRepository = cinemaRepository;
         }
 
         public ActionResult Index()
         {
-            return View(repository.GetAll().ToList());
+            return View(cinemaRepository.GetAll().ToList());
         }
 
-        [Route("{name}")]
+        [Route("Cinema/{name}")]
         public ActionResult Details(string name)
         {
             if (name == null)
@@ -33,13 +32,20 @@ namespace Cinema.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var cinema = repository.GetAll().FirstOrDefault(x => x.Keyword == name);
+            var cinema = cinemaRepository.GetAll().FirstOrDefault(x => x.Keyword == name);
             if (cinema == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             return View(cinema);
+        }
+
+        [HttpPost]
+        [Route("Cinema/GetCinemaJson")]
+        public JsonResult GetCinemaJson()
+        {
+            return Json(cinemaRepository.GetAll().Select(x => new { x.Id, x.Name, x.Address, CityName = x.City.Name, x.PhoneNumber }));
         }
     }
 }

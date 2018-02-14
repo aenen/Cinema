@@ -65,6 +65,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -94,6 +95,7 @@
     <Compile Include="Database\TicketPrice.cs" />
     <Compile Include="Identity\ApplicationRole.cs" />
     <Compile Include="Identity\IdentityConfig.cs" />
+    <Compile Include="Infrastructure\GmailEmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CinemaRepository.cs" />
     <Compile Include="Repository\CityRepository.cs" />
