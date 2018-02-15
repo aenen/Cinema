@@ -92,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -118,6 +118,9 @@ namespace Cinema.Data.Database
             string email = "admin@gmail.com";
             userMgr.Create(new ApplicationUser { UserName = userName, Email = email, Birthday = new DateTime(1997, 1, 23) }, password);
             userMgr.AddToRole(userMgr.FindByName(userName).Id, "Administrator");
+            var userAdmin = userMgr.FindByName(userName);
+            userAdmin.EmailConfirmed = true;
+            userMgr.Update(userAdmin);
 
             //...
 
@@ -349,6 +352,7 @@ namespace Cinema.Data.Database
             context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 4, 12, 10, 0), CinemaHallId = 2 });
             context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 6, 13, 10, 0), CinemaHallId = 2 });
             context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 8, 15, 5, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddMinutes(60), CinemaHallId = 2 });
             foreach (var item in context.CinemaHalls.Find(2).Seats)
             {
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 5 });
@@ -357,6 +361,7 @@ namespace Cinema.Data.Database
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 8 });
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 9 });
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 10 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 11 });
             }
             #endregion
 

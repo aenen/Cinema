@@ -17,6 +17,8 @@ namespace Cinema.Data.Database
 
         public DateTime CreationDateTime { get; set; }
 
+        public Seat Seat { get; set; }
+
         public virtual TicketStatus Status { get; set; }
         
         public virtual OrderItem OrderItem { get; set; }

@@ -88,6 +88,7 @@ namespace Cinema.Controllers
                     {
                         CreationDateTime=DateTime.Now,
                         TicketPrice = ticketPrice,
+                        Seat=ticketPrice.Seat,
                         StatusId = 3, // зарезервовано на 15хв
                     }
                 });
@@ -123,8 +124,21 @@ namespace Cinema.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // створюю список позицій замовлення (квитків)
+            ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var user = userMgr.FindByName(User.Identity.Name);
+            // якщо в юзера вже заброньовано більше 10 квитків - не дозволю йому бронювати більше, поки він не сплатить заброньовані замовлення
+            if (user.Orders.Where(x => x.OrderStatusId == 2).Sum(x => x.OrderItems.Count) +selected_seats.Count> 10)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Session session = sessionRepository.FindBy(x => x.Id == session_id).FirstOrDefault();
+            if(session.DateTime < DateTime.Now.AddMinutes(35))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // створюю список позицій замовлення (квитків)
             List<OrderItem> orderItems = new List<OrderItem>();
             foreach (var item in selected_seats)
             {
@@ -137,13 +151,13 @@ namespace Cinema.Controllers
                     {
                         CreationDateTime = DateTime.Now,
                         TicketPrice = ticketPrice,
+                        Seat = ticketPrice.Seat,
                         StatusId = 2, // заброньовано (видалиться за 30хв до початку сеансу)
                     }
                 });
             }
 
             // створюю замовлення та зберігаю його в бд
-            ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             Order order = new Order
             {
                 OrderItems = orderItems,
@@ -208,7 +222,7 @@ namespace Cinema.Controllers
         }
 
         /// <summary>
-        /// Метод перевіряє правильність отриманих даних
+        /// Метод перевіряє правильність отриманих даних з обраними місцями
         /// </summary>
         /// <param name="selected_seats"></param>
         /// <param name="session_id"></param>
@@ -217,11 +231,12 @@ namespace Cinema.Controllers
         {
             if (selected_seats == null) return false;
             if (selected_seats.Count == 0) return false;
+            if (selected_seats.Count > 10) return false;
             if (session_id == null) return false;
 
             Session session = sessionRepository.FindBy(x => x.Id == session_id).FirstOrDefault();
             if (session == null) return false;
-            if (session.DateTime < DateTime.Now.AddMinutes(60)) return false;
+            if (session.DateTime < DateTime.Now.AddMinutes(5)) return false;
 
             foreach (var item in selected_seats)
             {

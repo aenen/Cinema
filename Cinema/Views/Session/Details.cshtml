@@ -65,6 +65,10 @@
             if ($(this).hasClass("place-taken")) {
                 return false;
             }
+            if (tickets.length >= 10) {
+                alert("ти можеш вибрати до 10 квитків");
+                return false;
+            }
 
             var seatRow = $(this).attr("data-row");
             var seatNumber = $(this).attr("data-number");

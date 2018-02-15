@@ -24,7 +24,7 @@ namespace Cinema.Controllers
             return View(cinemaRepository.GetAll().ToList());
         }
 
-        [Route("Cinema/{name}")]
+        [Route("Cinema/Details/{name}")]
         public ActionResult Details(string name)
         {
             if (name == null)

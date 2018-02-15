@@ -250,6 +250,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\UserData\Avatar\d25051d3-6adb-4cc9-a6ca-da5b34b3a0c5.png" />
     <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.svg" />
@@ -371,7 +372,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\UserData\Avatar\" />
     <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
