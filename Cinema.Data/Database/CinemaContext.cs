@@ -292,7 +292,8 @@ namespace Cinema.Data.Database
                 ShowStart = new DateTime(2018, 4, 20),
                 ShowEnd = new DateTime(2018, 5, 17),
                 Starring = "Гугу Мбата‑Роу, Девід Оєлоуо, Елізабет Дебікі, Чжан Цзи",
-                PosterPath = "/Content/Poster/4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg"
+                PosterPath = "/Content/Poster/4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg",
+                BackgroundPath = "/Content/Background/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg",
             });
 
             context.Movies.Add(new Movie
@@ -310,7 +311,9 @@ namespace Cinema.Data.Database
                 ShowStart = new DateTime(2018, 5, 3),
                 ShowEnd = new DateTime(2018, 6, 30),
                 Starring = "Роберт Дауні-молодший, Кріс Претт, Кріс Еванс, Кріс Хемсворт",
-                PosterPath = "/Content/Poster/tgQV4jyb9BgcV6db8uKPjTgSfpD.jpg"
+                PosterPath = "/Content/Poster/tgQV4jyb9BgcV6db8uKPjTgSfpD.jpg",
+                BackgroundPath = "/Content/Background/j3OjLcOpDsGF3j6f8Myyra5Bq62.jpg",
+                TrailerLink = "https://www.youtube.com/watch?v=tdR-lS2UD_M"
             });
 
             context.Movies.Add(new Movie
@@ -327,7 +330,47 @@ namespace Cinema.Data.Database
                 ShowStart = new DateTime(2018, 6, 14),
                 ShowEnd = new DateTime(2018, 8, 5),
                 Starring = "Бред Бйорд, Сем'юель Лерой Джексон, Холлі Хантер, Сара Воуел",
-                PosterPath = "/Content/Poster/bLBsSGIHzkFR3we2JjFzggnOAUO.jpg"
+                PosterPath = "/Content/Poster/bLBsSGIHzkFR3we2JjFzggnOAUO.jpg",
+                BackgroundPath = "/Content/Background/kqoBtMmiycbbhGLXGkKhL8SdaWB.jpg",
+                TrailerLink= "https://www.youtube.com/watch?v=BZJ5ilvAyjo"
+            });
+
+            context.Movies.Add(new Movie
+            {
+                Name = "СУПЕР ПОЛІЦЕЙСЬКІ 2",
+                OriginalName = "SUPER TROOPERS 2",
+                AgeRatingId = 2,
+                Country = "США",
+                Director = "Джей Чандраскехар",
+                Script= "Джей Чандраскехар, Кевін Хефернан, Стів Лемм, Ерік Столанске, Пол Сотер",
+                Duration = new TimeSpan(1, 30, 0),
+                Genres = "Детектив, кримінал, комедія",
+                Language = "Українська",
+                ShowStart = new DateTime(2018, 4, 20),
+                ShowEnd = new DateTime(2018, 5, 25),
+                Starring = "Джей Чандраскехар, Кевін Хефернан, Стів Лемм, Ерік Столанске, Пол Сотер",
+                PosterPath = "/Content/Poster/fcdtVnNpFkMxHvcacJCZthGWS2E.jpg",
+                BackgroundPath = "/Content/Background/k4EOiyltF2zzfRckCUbsG1FDFzP.jpg"
+            });
+
+            context.Movies.Add(new Movie
+            {
+                Name = "Дикі предки",
+                OriginalName = "Early man",
+                AgeRatingId = 2,
+                Country = "Великобританія, Франція",
+                Director = "Нік Парк",
+                Script = "Марк Бертон, Джеймс Хіггінсон",
+                Description= "Кам'яне століття і навіть пізніші цивілізації - все одно дикі предки, але як же вони були схожі на нас! У них теж було надто багато родичів, а чоловіки боролися за улюблену жінку. Вони теж обожнювали коштовності, грали в шкіряний м'яч, і кожен прагнув стати першим.",
+                Duration = new TimeSpan(1, 30, 0),
+                Genres = "Мультфільм, комедія",
+                Language = "Українська",
+                ShowStart = new DateTime(2018, 3, 29),
+                ShowEnd = new DateTime(2018, 4, 25),
+                Starring = "Том Хіддлстон, Мейсиі Уільямс, Едді Редмейн, Річард Айоейд, Марк Вільямс, Тімоті Сполл, Джонні Вегас",
+                PosterPath = "/Content/Poster/ugw07fJIZMVrrIGeN1MO7Xecj5h.jpg",
+                BackgroundPath = "/Content/Background/z30NXJEY4YDBWEL0ICHGtv4Mt26.jpg",
+                TrailerLink= "https://www.youtube.com/watch?v=KMwKWztllkE"
             });
             #endregion
 

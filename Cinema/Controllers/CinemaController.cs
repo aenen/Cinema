@@ -42,7 +42,7 @@ namespace Cinema.Controllers
         }
 
         [HttpPost]
-        [Route("Cinema/GetCinemaJson")]
+        //[Route("Cinema/GetCinemaJson")]
         public JsonResult GetCinemaJson()
         {
             return Json(cinemaRepository.GetAll().Select(x => new { x.Id, x.Name, x.Address, CityName = x.City.Name, x.PhoneNumber }));

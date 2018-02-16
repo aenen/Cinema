@@ -1,4 +1,7 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿html, body {
+    color: white;
+}
+/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -147,20 +150,10 @@ textarea {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* --- SEATS --- */
 .navbar {
-    background-color: #0F0D14;
+    background-color: #0A0813;
+    height: 60px;
     padding: 0 0.25rem;
 }
 
@@ -217,6 +210,60 @@ textarea {
     background-color: lightgrey;
     cursor: default;
 }
+
 .place-choosen {
-    background-color:yellow;
+    background-color: yellow;
 }
+
+
+
+
+
+
+/* --- /movie/index/ --- */
+/* --- /movie/index/ --- */
+/* --- /movie/index/ --- */
+
+.movie-list-container {
+    margin: 0;
+    min-height: 100%;
+    /*background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
+    background-size: cover;*/
+}
+
+.movie-list-item {
+    display: block;
+    height: 350px;
+    background-size: cover !important;
+    border: 1px solid #0F0D14;
+    /*margin:15px 0;*/
+}
+
+    .movie-list-item a {
+        font-weight: bold;
+        font-size: 25px;
+        text-decoration: none;
+        color: white;
+        /*-webkit-text-stroke: 1.5px black;*/
+        text-shadow: 2px 2px 1px #0A0813, -2px -2px 1px #0A0813, 2px -2px 1px #0A0813, -2px 2px 1px #0A0813;
+        position: absolute;
+        bottom: 25px;
+        right: 25px;
+        left: 25px;
+    }
+
+        .movie-list-item a:hover {
+            /*-webkit-text-stroke-width: 0;*/
+            /*text-shadow: none;*/
+            text-shadow: 1px 1px 0 #0A0813, -1px -1px 0 #0A0813, 1px -1px 0 #0A0813, -1px 1px 0 #0A0813;
+            color: #FFF324;
+        }
+
+.bg-movie {
+    background-color: rgb(31, 11, 62);
+    padding: 15px;
+}
+
+    .bg-movie h4 {
+        color: rgba(255, 255, 255, 0.75);
+    }

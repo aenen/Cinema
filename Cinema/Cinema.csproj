@@ -244,12 +244,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Background\2cnUCcNmmj79hGmimvWlUo5P2K8.jpg" />
+    <Content Include="Content\Background\j3OjLcOpDsGF3j6f8Myyra5Bq62.jpg" />
+    <Content Include="Content\Background\k4EOiyltF2zzfRckCUbsG1FDFzP.jpg" />
+    <Content Include="Content\Background\kqoBtMmiycbbhGLXGkKhL8SdaWB.jpg" />
+    <Content Include="Content\Background\z30NXJEY4YDBWEL0ICHGtv4Mt26.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Poster\fcdtVnNpFkMxHvcacJCZthGWS2E.jpg" />
+    <Content Include="Content\Poster\ugw07fJIZMVrrIGeN1MO7Xecj5h.jpg" />
     <Content Include="Content\UserData\Avatar\d25051d3-6adb-4cc9-a6ca-da5b34b3a0c5.png" />
     <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.png" />
