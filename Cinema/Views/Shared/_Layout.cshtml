@@ -5,29 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Cinema</title>
     <link href="~/Content/WebsiteImage/Logo/logo.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/Content/Icon/icomoon/style.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="home-body h-100">
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
-        <a class="navbar-brand" href="/">
-            <img src="~/Content/WebsiteImage/Logo/logo.svg" width="50" height="50" class="d-inline-block align-top" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                @*<li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>*@
-                <li class="nav-item">
-                    <a href="https://github.com/aenen/Cinema" target="_blank" class="nav-link">Github</a>
-                </li>
-            </ul>
-            @Html.Partial("_LoginPartial")
+<body class="">
+    <nav class="navbar main-header navbar-expand-lg sticky-top navbar-dark">
+        <div class="navbar-brand">
+            <a href="/">
+                <img src="~/Content/WebsiteImage/Logo/logo-fat.svg" width="45" height="45" class="d-inline-block align-top" alt="">
+            </a>
         </div>
+
+        <ul class="navbar-nav mr-auto main-header">
+            @*<li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>*@
+            <li class="nav-item">
+                <div class="menu-btn" style="cursor: pointer">
+                    <i class="icon-main-menu menu-img"></i>
+                    @*<img class="menu-img" src="~/Content/Icon/main-menu.svg" height="22" />*@
+                    <img class="menu-full-logo-img" src="~/Content/WebsiteImage/Logo/full_logo.svg" height="22" />
+                </div>
+            </li>
+            @if (ViewContext.RouteData.Values["controller"].ToString() == "Movie")
+            {
+                if (ViewContext.RouteData.Values["action"].ToString() == "Index")
+                {
+                    <li class="nav-item">
+                        <div class="header-title">
+                            <a class="header-item" href="@Url.Action("Index","Movie")">
+                                <div class="icon-chevron-right"></div>
+                                <span>Зараз у кіно</span>
+                            </a>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+        @Html.Partial("_LoginPartial")
     </nav>
 
     <div>

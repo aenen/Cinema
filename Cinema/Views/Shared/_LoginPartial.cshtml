@@ -1,26 +1,41 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+    @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                @Html.ActionLink("Привіт, " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
-            </li>
-            <li class="nav-item"><a class="nav-link" , href="javascript:document.getElementById('logoutForm').submit()">Вийти</a></li>
-        </ul>
-    }
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Привіт, " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+                </li>
+                <li class="nav-item"><a class="nav-link" , href="javascript:document.getElementById('logoutForm').submit()">Вийти</a></li>
+            </ul>
+        }*@
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <div class="profile-nav p-2">
+                <a  href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
+            </div>
+        </li>
+    </ul>
 }
 else
 {
-    <ul class="nav navbar-nav">
+    @*<ul class="nav navbar-nav">
         <li class="nav-item">
             @Html.ActionLink("Реєстрація", "Register", "Account", null, new { @class = "nav-link", id = "registerLink" })
         </li>
         <li class="nav-item">
             @Html.ActionLink("Увійти", "Login", "Account", null, new { @class = "nav-link", id = "loginLink" })
+        </li>
+    </ul>*@
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <div class="profile-nav p-2">
+                <a  href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
+            </div>
         </li>
     </ul>
 }

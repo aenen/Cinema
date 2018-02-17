@@ -11,25 +11,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRAEKTORIA - Мережа кінотеатрів України</title>
     <link href="~/Content/WebsiteImage/Logo/logo.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/Content/Icon/icomoon/style.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="home-body h-100">
     <nav class="home-navbar d-flex flex-row justify-content-between align-items-center text-center p-3 ">
-        <a href="#" class="home-nav-item"></a>
+        <a href="#" class="home-nav-item icon-main-menu">
+        </a>
         <a href="/" class="logo-full d-block"></a>
-        <a href="#" class="home-nav-item"></a>
+        <a href="@Url.Action("Index", "Profile")" class="home-nav-item profile-nav-img icon-profile"></a>
     </nav>
     <div class="home-container d-flex flex-column justify-content-between text-center mx-auto">
         <div class="logo-small"></div>
         <div class="home-main-menu">
             <a href="@Url.Action("Index", "Cinema")" class="home-btn d-block p-2">Обрати кінотеатр</a>
             <a href="@Url.Action("Index", "Movie")" class="home-btn d-block p-2">Обрати фільм</a>
-        </div>        
+        </div>
         <div class="home-additional-menu d-flex justify-content-center m-3">
-            <a class="home-nav-item d-inline-block"></a>
-            <a class="home-nav-item d-inline-block"></a>
-            <a class="home-nav-item d-inline-block"></a>
+            <a href="#" class="home-nav-item d-inline-block icon-facebook"></a>
+            <a href="#" class="home-nav-item d-inline-block icon-instagram"></a>
+            <a href="https://github.com/aenen/Cinema" target="_blank" class="home-nav-item d-inline-block icon-github"></a>
         </div>
     </div>
 

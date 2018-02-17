@@ -255,11 +255,20 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Icon\icomoon\demo-files\demo.css" />
+    <Content Include="Content\Icon\icomoon\demo-files\demo.js" />
+    <Content Include="Content\Icon\icomoon\demo.html" />
+    <Content Include="Content\Icon\icomoon\fonts\icomoon.svg" />
+    <Content Include="Content\Icon\icomoon\Read Me.txt" />
+    <Content Include="Content\Icon\icomoon\style.css" />
+    <Content Include="Content\Icon\main-menu.svg" />
     <Content Include="Content\Poster\fcdtVnNpFkMxHvcacJCZthGWS2E.jpg" />
     <Content Include="Content\Poster\ugw07fJIZMVrrIGeN1MO7Xecj5h.jpg" />
+    <Content Include="Content\profile_icon.png" />
     <Content Include="Content\UserData\Avatar\d25051d3-6adb-4cc9-a6ca-da5b34b3a0c5.png" />
     <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.png" />
+    <Content Include="Content\WebsiteImage\Logo\logo-fat.svg" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.svg" />
     <Content Include="Content\WebsiteImage\Logo\logo.svg" />
     <Content Include="Content\WebsiteImage\Logo\logo.png" />
@@ -294,6 +303,10 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Icon\icomoon\fonts\icomoon.eot" />
+    <Content Include="Content\Icon\icomoon\fonts\icomoon.ttf" />
+    <Content Include="Content\Icon\icomoon\fonts\icomoon.woff" />
+    <Content Include="Content\Icon\icomoon\selection.json" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

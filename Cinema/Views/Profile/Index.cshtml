@@ -6,15 +6,20 @@
 }
 
 <h2>Особистий кабінет</h2>
-@{ 
+@{
     if (Model.PicturePath != null)
     {
-        <img class="img-thumbnail d-block" src="/@Model.PicturePath" style="max-height:100px"/>
+        <img class="img-thumbnail d-block" src="/@Model.PicturePath" style="max-height:100px" />
     }
 }
 <div class="row">
     <a class="p-4" href="@Url.Action("Settings", "Profile")">Налаштування</a>
     @*<a class="p-4" href="@Url.Action("Settings", "Profile")">Квитки</a>*@
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "p-4" }))
+    {
+        @Html.AntiForgeryToken()
+        <a  href="javascript:document.getElementById('logoutForm').submit()">Вийти</a>
+    }
 </div>
 <div>
     <h3>Замовлення:</h3>
@@ -30,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Orders.OrderByDescending(x=>x.PurchaseDate))
+            @foreach (var item in Model.Orders.OrderByDescending(x => x.PurchaseDate))
             {
                 <tr>
                     <th scope="row">@item.Id</th>
