@@ -45,7 +45,23 @@ namespace Cinema.Controllers
         //[Route("Cinema/GetCinemaJson")]
         public JsonResult GetCinemaJson()
         {
-            return Json(cinemaRepository.GetAll().Select(x => new { x.Id, x.Name, x.Address, CityName = x.City.Name, x.PhoneNumber }));
+            return Json(cinemaRepository.GetAll().Select(x => new { x.Id, x.Name, x.Address, x.Keyword, /*CityName = x.City.Name,*/ x.PhoneNumber }));
+        }
+
+        [HttpPost]
+        public ActionResult ChangeCinemaCookie(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Response.Cookies.Remove("SeletedCinemaId");
+            HttpCookie cookieCinema = new HttpCookie("SeletedCinemaId");
+            cookieCinema.Value = id.ToString();
+            Response.SetCookie(cookieCinema);
+
+            return Json("ok");
         }
     }
 }
