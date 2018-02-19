@@ -82,7 +82,7 @@
 
                 @{var cookieValue = Request.Cookies.Get("SeletedCinemaId").Value;}
                 var child = dropItems.children(".dropdown-item[data-id='" + @cookieValue + "']").addClass("active");
-                $(".menu-header-cinema-btn").prepend($("<span/>", { text: child.text() }));
+                $(".menu-header-cinema-btn").prepend($("<span/>", { text: child.text(), id: "menu-header-cinema-selected" }));
 
                 $(".dropdown-item").click(function () {
                     var self = this;

@@ -92,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -332,7 +332,7 @@ namespace Cinema.Data.Database
                 Starring = "Бред Бйорд, Сем'юель Лерой Джексон, Холлі Хантер, Сара Воуел",
                 PosterPath = "/Content/Poster/bLBsSGIHzkFR3we2JjFzggnOAUO.jpg",
                 BackgroundPath = "/Content/Background/kqoBtMmiycbbhGLXGkKhL8SdaWB.jpg",
-                TrailerLink= "https://www.youtube.com/watch?v=BZJ5ilvAyjo"
+                TrailerLink = "https://www.youtube.com/watch?v=BZJ5ilvAyjo"
             });
 
             context.Movies.Add(new Movie
@@ -342,7 +342,7 @@ namespace Cinema.Data.Database
                 AgeRatingId = 2,
                 Country = "США",
                 Director = "Джей Чандраскехар",
-                Script= "Джей Чандраскехар, Кевін Хефернан, Стів Лемм, Ерік Столанске, Пол Сотер",
+                Script = "Джей Чандраскехар, Кевін Хефернан, Стів Лемм, Ерік Столанске, Пол Сотер",
                 Duration = new TimeSpan(1, 30, 0),
                 Genres = "Детектив, кримінал, комедія",
                 Language = "Українська",
@@ -361,7 +361,7 @@ namespace Cinema.Data.Database
                 Country = "Великобританія, Франція",
                 Director = "Нік Парк",
                 Script = "Марк Бертон, Джеймс Хіггінсон",
-                Description= "Кам'яне століття і навіть пізніші цивілізації - все одно дикі предки, але як же вони були схожі на нас! У них теж було надто багато родичів, а чоловіки боролися за улюблену жінку. Вони теж обожнювали коштовності, грали в шкіряний м'яч, і кожен прагнув стати першим.",
+                Description = "Кам'яне століття і навіть пізніші цивілізації - все одно дикі предки, але як же вони були схожі на нас! У них теж було надто багато родичів, а чоловіки боролися за улюблену жінку. Вони теж обожнювали коштовності, грали в шкіряний м'яч, і кожен прагнув стати першим.",
                 Duration = new TimeSpan(1, 30, 0),
                 Genres = "Мультфільм, комедія",
                 Language = "Українська",
@@ -370,17 +370,17 @@ namespace Cinema.Data.Database
                 Starring = "Том Хіддлстон, Мейсиі Уільямс, Едді Редмейн, Річард Айоейд, Марк Вільямс, Тімоті Сполл, Джонні Вегас",
                 PosterPath = "/Content/Poster/ugw07fJIZMVrrIGeN1MO7Xecj5h.jpg",
                 BackgroundPath = "/Content/Background/z30NXJEY4YDBWEL0ICHGtv4Mt26.jpg",
-                TrailerLink= "https://www.youtube.com/watch?v=KMwKWztllkE"
+                TrailerLink = "https://www.youtube.com/watch?v=KMwKWztllkE"
             });
             #endregion
 
             context.SaveChanges();
 
             #region сеанси
-            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 24, 12, 45, 0), CinemaHallId = 1 });
-            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 24, 14, 30, 0), CinemaHallId = 1 });
-            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 25, 10, 15, 0), CinemaHallId = 1 });
-            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 3, 19, 0, 0), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddHours(5), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddHours(2), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(1), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(1), CinemaHallId = 1 });
             foreach (var item in context.CinemaHalls.Find(1).Seats)
             {
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 1 });
@@ -389,13 +389,15 @@ namespace Cinema.Data.Database
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 4 });
             }
 
-            context.Sessions.Add(new Session { MovieId = 1, DateTime = new DateTime(2018, 4, 20, 11, 50, 0), CinemaHallId = 2 });
-            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 3, 20, 30, 0), CinemaHallId = 2 });
-            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 4, 10, 0, 0), CinemaHallId = 2 });
-            context.Sessions.Add(new Session { MovieId = 2, DateTime = new DateTime(2018, 5, 4, 12, 10, 0), CinemaHallId = 2 });
-            context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 6, 13, 10, 0), CinemaHallId = 2 });
-            context.Sessions.Add(new Session { MovieId = 3, DateTime = new DateTime(2018, 5, 8, 15, 5, 0), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(2), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(2.5), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(4), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 2 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddDays(3), CinemaHallId = 2 });
             context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddMinutes(60), CinemaHallId = 2 });
+
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(5), CinemaHallId = 2 });
             foreach (var item in context.CinemaHalls.Find(2).Seats)
             {
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 5 });
@@ -405,10 +407,27 @@ namespace Cinema.Data.Database
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 9 });
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 10 });
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 11 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 12 });
             }
-            #endregion
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(2.5), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(4), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddDays(3), CinemaHallId = 1 });
+            context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddMinutes(60), CinemaHallId = 1 });
+            foreach (var item in context.CinemaHalls.Find(1).Seats)
+            {
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 13 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 14 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 15 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 16 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 17 });
+                context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 18 });
 
-            context.SaveChanges();
+            }
+                #endregion
+
+                context.SaveChanges();
         }
     }
 }

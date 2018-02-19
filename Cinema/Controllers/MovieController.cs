@@ -20,7 +20,7 @@ namespace Cinema.Controllers
         
         public ActionResult Index()
         {
-            return View(repository.GetAll());
+            return View(repository.FindBy(x=>x.Sessions.Where(xx=>xx.DateTime>DateTime.Now).Count()!=0));
         }
 
         [Route("{id:int}")]

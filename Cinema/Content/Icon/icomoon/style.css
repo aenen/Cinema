@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?jgmsy2');
-  src:  url('fonts/icomoon.eot?jgmsy2#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?jgmsy2') format('truetype'),
-    url('fonts/icomoon.woff?jgmsy2') format('woff'),
-    url('fonts/icomoon.svg?jgmsy2#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?ghz3nc');
+  src:  url('fonts/icomoon.eot?ghz3nc#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ghz3nc') format('truetype'),
+    url('fonts/icomoon.woff?ghz3nc') format('woff'),
+    url('fonts/icomoon.svg?ghz3nc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,9 +24,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-more-info:before {
+  content: "\e906";
+}
+.icon-play-trailer:before {
+  content: "\e907";
+}
 .icon-main-menu:before {
   content: "\e903";
-  color: #fff;
 }
 .icon-profile:before {
   content: "\e900";

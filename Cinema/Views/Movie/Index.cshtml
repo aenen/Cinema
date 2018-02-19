@@ -3,32 +3,160 @@
 
 @{
     ViewBag.Title = "Зараз у кіно";
+    if (Request.Cookies["SeletedCinemaId"] == null)
+    {
+        HttpCookie cookieCinema = new HttpCookie("SeletedCinemaId");
+        Response.Cookies.Remove("SeletedCinemaId");
+        cookieCinema.Value = "1";
+        Response.SetCookie(cookieCinema);
+    }
+
+    int cinemaId = Convert.ToInt32(Request.Cookies.Get("SeletedCinemaId").Value);
+
+    List<DateTime> datesOfWeek = new List<DateTime>
+    {
+        DateTime.Now,
+        DateTime.Now.AddDays(1),
+        DateTime.Now.AddDays(2),
+        DateTime.Now.AddDays(3),
+        DateTime.Now.AddDays(4),
+        DateTime.Now.AddDays(5),
+        DateTime.Now.AddDays(6),
+    };
+
+
+    System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("uk-UA");
+    System.Globalization.DateTimeFormatInfo dtfi = ci.DateTimeFormat;
 }
 
 <div class="movie-list-bg"></div>
 
 @*<div class="bg-movie text-center col-12">
-    <h1>Фільми</h1>
-    <h4>Квитки в продажу</h4>
-</div>*@
+        <h1>Фільми</h1>
+        <h4>Квитки в продажу</h4>
+    </div>*@
 
 
 <div class="movie-list-container row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(x => x.Sessions.Where(xx => xx.CinemaHall.CinemaId == cinemaId).Any()))
     {
         //linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 54%,rgba(0,0,0,1) 100%),
-        <div class="movie-list-item text-center col-md-6 col-lg-4" style="background:url(@item.BackgroundPath) no-repeat center">
-            @Html.ActionLink(item.Name, "Details", "Movie", new { id = item.Id }, null)
+        <div class="movie-list-item text-center col-md-6 col-lg-4 position-relative">
+            <div class="position-absolute movie-item-poster" style="background:url(@item.BackgroundPath) no-repeat center;"></div>
+            <div class="movie-item-info">
+                <div class="mii-top row justify-content-around">
+                    @if (!item.TrailerLink.IsEmpty())
+                    {
+                        <a class="float-left" href="@item.TrailerLink">
+                            <i class="icon-play-trailer d-block float-left"></i>
+                            <span>Дивитися<br />трейлер</span>
+                        </a>
+                    }
+                    <a class="float-right" href="@Url.Action("Details", "Movie", new { id = item.Id })">
+                        <i class="icon-more-info d-block float-left"></i>
+                        <span>Детальніше<br />про фільм</span>
+                    </a>
+                </div>
+                <div class="mii-center w-100">
+                    <div class="mii-center-header">
+                        <div class="mii-center-cinema">@item.Sessions.FirstOrDefault(x => x.CinemaHall.CinemaId == cinemaId).CinemaHall.Cinema.Name</div>
+                        <span class="mii-center-day">Сьогодні</span>
+                    </div>
+                    <div class="mii-center-day-selector justify-content-between align-items-center" style="display:none">
+                        @foreach (var dateOfWeek in datesOfWeek)
+                        {
+                            string upperDate = "";
+                            string lowerDate = "";
+                            if (dateOfWeek.Date == DateTime.Now.Date)
+                            {
+                                upperDate = "Сьогодні";
+                                lowerDate = $"{dtfi.GetShortestDayName(dateOfWeek.DayOfWeek)}, {dateOfWeek.ToString("dd'.'MM")}";
+                            }
+                            else if (dateOfWeek.Date == DateTime.Now.AddDays(1).Date)
+                            {
+                                upperDate = "Завтра";
+                                lowerDate = $"{dtfi.GetShortestDayName(dateOfWeek.DayOfWeek)}, {dateOfWeek.ToString("dd'.'MM")}";
+                            }
+                            else
+                            {
+                                upperDate = dtfi.GetShortestDayName(dateOfWeek.DayOfWeek);
+                                lowerDate = dateOfWeek.ToString("dd'.'MM");
+                            }
+                            <div class="p-2 date-of-week @(upperDate == "Сьогодні" ? " selected-day" : "")" data-date="@dateOfWeek.ToShortDateString()">
+                                <div class="dow-header">@upperDate</div>
+                                <div class="dow-date">@lowerDate</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="mii-schedule">
+                    <div class="mii-schedule-header">Розклад сеансів</div>
+                    @{bool isScheduleSelected = false;}
+                    @foreach (var itemSessions in item.Sessions.Where(xx => xx.CinemaHall.CinemaId == cinemaId).GroupBy(x => x.DateTime.Date))
+                    {
+                        DateTime sessionsDate = itemSessions.FirstOrDefault().DateTime;
+                        if (sessionsDate < DateTime.Now.AddDays(7))
+                        {
+                            bool isItToday = sessionsDate.Date == DateTime.Now.Date;
+                            if (isItToday)
+                            {
+                                isScheduleSelected = true;
+                            }
+                            <div class="mii-schedule-content@(isItToday?" schedule-selected":"")" data-date="@sessionsDate.ToShortDateString()" @(!isItToday?"style=display:none":"")>
+                                @foreach (var itemSession in itemSessions.OrderBy(x=>x.DateTime))
+                                {
+                                    <a href="/Session/@itemSession.Id" class="p-2 mii-schedule-session">@itemSession.DateTime.ToShortTimeString()</a>
+                                }
+                            </div>
+                        }
+                    }
+                    <div @(!isScheduleSelected ? "class=no-schedule schedule-selected" : "class=no-schedule style=display:none")>Сеансів цього дня немає. <span class="no-schedule-select">Оберіть інший день</span></div>
+                </div>
+            </div>
+
+            @Html.ActionLink(item.Name, "Details", "Movie", new { id = item.Id }, new { @class = "movie-details" })
         </div>
     }
 </div>
 
+@section scripts{
+    <script>
+        $(function () {
+            //$(".mii-center-cinema").text($("#menu-header-cinema-selected").text())
+            $(".mii-center-day, .no-schedule-select").click(function () {
+                $(this).parents(".movie-item-info").find(".mii-center-header").css("display", "none").siblings(".mii-center-day-selector").css("display", "flex");
+            });
 
-@*<ul class="list-group">
-        @{
-            foreach (var item in Model)
-            {
-                @Html.ActionLink(item.Name, "Details", "Movie", new { id = item.Id }, new { @class = "list-group-item" })
-            }
-        }
-    </ul>*@
+            $(".date-of-week").click(function () {
+                $(this).siblings(".selected-day").removeClass("selected-day");
+                $(this).addClass("selected-day");
+                var day = $(this).find(".dow-header").text();
+                if (day != "Сьогодні" && day != "Завтра") {
+                    day += ", " + $(this).find(".dow-date").text();
+                }
+
+
+                var dataDate = $(this).attr("data-date");
+                $(this).parents(".movie-item-info").find(".mii-schedule").find(".schedule-selected").removeClass("schedule-selected").hide();
+                var miiSchedule = $(this).parents(".movie-item-info").find(".mii-schedule").find(".mii-schedule-content[data-date='" + dataDate + "']");
+                if (miiSchedule.length > 0) {
+                    miiSchedule.addClass("schedule-selected").show();
+                } else {
+                    $(this).parents(".movie-item-info").find(".mii-schedule").find(".no-schedule").addClass("schedule-selected").show();
+                }
+                $(this).parent(".mii-center-day-selector").siblings(".mii-center-header").find(".mii-center-day").text(day);
+                $(this).parent(".mii-center-day-selector").hide().siblings(".mii-center-header").show();
+            })
+
+            $(".movie-list-item").mouseover(function () {
+                $(this).children(".movie-item-poster").css("filter", "blur(15px)");
+                $(this).children(".movie-item-info").show();
+            });
+
+            $(".movie-list-item").mouseout(function () {
+                $(this).children(".movie-item-poster").css("filter", "blur(0)");
+                $(this).children(".movie-item-info").hide();
+            });
+        });
+    </script>
+}

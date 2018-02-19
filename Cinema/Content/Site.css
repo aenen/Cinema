@@ -1,4 +1,10 @@
-﻿
+﻿a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -265,7 +271,7 @@ textarea {
     /*margin:15px 0;*/
 }
 
-    .movie-list-item a {
+    .movie-list-item a.movie-details {
         font-weight: bold;
         font-size: 25px;
         text-decoration: none;
@@ -279,7 +285,7 @@ textarea {
         transition: 200ms;
     }
 
-        .movie-list-item a:hover {
+        .movie-list-item a.movie-details:hover {
             /*-webkit-text-stroke-width: 0;*/
             /*text-shadow: none;*/
             text-shadow: 1px 1px 0 #0A0813, -1px -1px 0 #0A0813, 1px -1px 0 #0A0813, -1px 1px 0 #0A0813;
@@ -378,6 +384,7 @@ div .icon-chevron-right {
     display: inline-block;
     font-size: 20px;
     transform: translateY(5px);
+    color: white;
     transition: 200ms;
 }
 
@@ -474,3 +481,126 @@ div .icon-chevron-right {
         border-left: unset;
     }
 }
+
+.movie-item-poster {
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.movie-item-info {
+    color: white;
+    position: absolute;
+    color: white;
+    right: 0;
+    left: 0;
+    display: none;
+    /*top:0;
+    bottom:0;
+    right:0;
+    left:0;*/
+}
+
+.icon-play-trailer, .icon-more-info {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 25px;
+    border-radius: 50%;
+    background-color: #959595;
+    transition: 200ms;
+    margin-right: 10px;
+    margin-top: -6px;
+    text-shadow: 2px 2px 1px #0A0813;
+}
+
+    .icon-play-trailer:hover, .icon-more-info:hover {
+        background-color: #AEAEAE;
+        color: #FFFF00;
+        text-shadow: 1px 1px 0 #0A0813;
+    }
+
+.mii-top {
+    margin: 25px 0 0 0;
+}
+
+    .mii-top a {
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 500;
+        color: white;
+    }
+
+.mii-center-header {
+    line-height: 1.25;
+    font-weight: 500;
+}
+
+.mii-center-cinema {
+    font-size: 40px;
+}
+
+.mii-center-day {
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFFF00;
+}
+
+.mii-center {
+    min-height: 75px;
+    margin: 25px 0;
+}
+
+.mii-center-day-selector {
+    background-color: #AEAEAE;
+    height: 75px;
+    display: flex;
+    margin: 10px 0;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+    .mii-center-day-selector .date-of-week {
+        color: #484747;
+        cursor: pointer;
+        transition: 200ms;
+    }
+
+        .mii-center-day-selector .date-of-week:hover {
+            color: white;
+        }
+
+        .mii-center-day-selector .date-of-week.selected-day {
+            color: white;
+        }
+
+            .mii-center-day-selector .date-of-week.selected-day .dow-header {
+                color: #FFFF00;
+            }
+
+.mii-schedule {
+    font-size: 15px;
+    font-weight: 500;
+}
+.mii-schedule-header {
+    font-size:17.5px;
+}
+.mii-schedule-content, .no-schedule {
+    margin: 10px 0;
+}
+
+    .mii-schedule-content .mii-schedule-session {
+        color: #FFFF00;
+    }
+
+        .mii-schedule-content .mii-schedule-session:hover {
+            color: white;
+        }
+
+    .no-schedule .no-schedule-select {
+        color: #FFFF00;
+        cursor: pointer;
+    }
