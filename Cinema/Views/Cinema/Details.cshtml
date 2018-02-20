@@ -2,43 +2,107 @@
 
 @{
     ViewBag.Title = Model.Name;
+
+    System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("uk-UA");
+    System.Globalization.DateTimeFormatInfo dtfi = ci.DateTimeFormat;
 }
 
-<div class="container text-center">
-    <h1 class="display-1">@Model.Name</h1>
+<div class="cinema-background-container" style="background:url(@Model.BackgroundPath) no-repeat center;"></div>
+<div class="cinema-info-background-container">
+    <div class="container d-flex flex-column justify-content-center h-100">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            @*<div style="font-size:17.5px">Кінотнатр TRAEKTORIA</div>*@
+            <h1 class="ci-cinema-name display-4">@Model.Name</h1>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+            <div>
+                <div class="ci-main">@Model.Address</div>
+                <div class="ci-muted">@Model.City.Name</div>
+            </div>
+            <div class="text-right">
+                <div class="ci-main">@Model.PhoneNumber</div>
+                <div class="ci-muted">Контакт-центр</div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<dl class="row">
-    <dt class="col-sm-3">Місто</dt>
-    <dd class="col-sm-9">@Model.City.Name</dd>
-
-    <dt class="col-sm-3">Адреса</dt>
-    <dd class="col-sm-9">@Model.Address</dd>
-
-    <dt class="col-sm-3">Номер телефону</dt>
-    <dd class="col-sm-9">@Model.PhoneNumber</dd>
-
-    <dt class="col-sm-3">Опис</dt>
-    <dd class="col-sm-9">@Model.Description</dd>
-</dl>
-
-<h2>Розклад</h2>
-@{
-    foreach (var hall in Model.CinemaHalls)
-    {
-        foreach (var session in hall.Sessions)
-        {
-            <div class="list-group">
-                <a href="@Url.Action("Details", "Session", new { id = session.Id })" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">@session.Movie.Name</h5>
-                        <small>@session.DateTime.ToString()</small>
+<div class="cinema-schedule-days-container">
+    <div class="container">
+        <h2 class="csd-header text-center">Розклад сеансів:</h2>
+        <div class="d-flex justify-content-around csd-select-container">
+            @{ var isFirst = true;}
+            @foreach (var itemSessions in Model.CinemaHalls.SelectMany(x => x.Sessions.Where(xx => xx.DateTime > DateTime.Now)).OrderBy(x => x.DateTime).GroupBy(x => x.DateTime.Date))
+            {
+                var sessionDate = itemSessions.FirstOrDefault().DateTime;
+                <div class="csd-day-container d-flex flex-column align-items-center @(isFirst?" csd-selected":"")" data-date="@sessionDate.ToShortDateString()">
+                    <div class="text-center">
+                        <div class="csd-date">@sessionDate.ToString("dd MMMM", ci)</div>
+                        <div class="csd-day-of-week text-capitalize">@dtfi.GetDayName(sessionDate.DayOfWeek)</div>
                     </div>
-                    @*<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>*@
-                </a>
-            </div>
+                    <div class="yellow-circle"></div>
+                </div>
+                isFirst = false;
+            }
+        </div>
+    </div>
+</div>
 
+<div class="cinema-schedule-full-container">
+    <div class="container">
+        <div class="col-md-6 csf-movie-container">
+            <a href="#">
+                <div class="csf-movie-poster float-left"></div>
+            </a>
+            <a href="#" class="csf-movie-name d-block">Фердинант</a>
+            <div class="csf-movie-times">
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+                <a href="#">12:20</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container text-center">
+        <h1 class="display-1">@Model.Name</h1>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Місто</dt>
+        <dd class="col-sm-9">@Model.City.Name</dd>
+
+        <dt class="col-sm-3">Адреса</dt>
+        <dd class="col-sm-9">@Model.Address</dd>
+
+        <dt class="col-sm-3">Номер телефону</dt>
+        <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+        <dt class="col-sm-3">Опис</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+    </dl>
+
+    <h2>Розклад</h2>
+    @{
+        foreach (var hall in Model.CinemaHalls)
+        {
+            foreach (var session in hall.Sessions)
+            {
+                <div class="list-group">
+                    <a href="@Url.Action("Details", "Session", new { id = session.Id })" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@session.Movie.Name</h5>
+                            <small>@session.DateTime.ToString()</small>
+                        </div>
+                    </a>
+                </div>
+
+            }
         }
-    }
-}
+    }*@

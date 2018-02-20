@@ -40,6 +40,9 @@ namespace Cinema.Data.Database
         [StringLength(1000)]
         public string Description { get; set; }
 
+        [StringLength(250)]
+        public string BackgroundPath { get; set; }
+
         public virtual City City { get; set; }
 
 

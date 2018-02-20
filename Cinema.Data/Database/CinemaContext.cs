@@ -156,8 +156,8 @@ namespace Cinema.Data.Database
 
         public void PerformAdditionalSetup(CinemaContext context)
         {
-            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword = "Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10" });
-            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword = "Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword = "Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10", BackgroundPath= "/Content/CinemaBackground/342736.png" });
+            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword = "Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134", BackgroundPath = "/Content/CinemaBackground/12342412.jpg" });
 
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 1, Name = "1" });
 
@@ -425,9 +425,9 @@ namespace Cinema.Data.Database
                 context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 18 });
 
             }
-                #endregion
+            #endregion
 
-                context.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

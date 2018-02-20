@@ -47,7 +47,7 @@
                 <div class="mii-top row justify-content-around">
                     @if (!item.TrailerLink.IsEmpty())
                     {
-                        <a class="float-left" href="@item.TrailerLink">
+                        <a class="float-left" target="_blank" href="@item.TrailerLink">
                             <i class="icon-play-trailer d-block float-left"></i>
                             <span>Дивитися<br />трейлер</span>
                         </a>
@@ -92,7 +92,7 @@
                 <div class="mii-schedule">
                     <div class="mii-schedule-header">Розклад сеансів</div>
                     @{bool isScheduleSelected = false;}
-                    @foreach (var itemSessions in item.Sessions.Where(xx => xx.CinemaHall.CinemaId == cinemaId).GroupBy(x => x.DateTime.Date))
+                    @foreach (var itemSessions in item.Sessions.Where(xx => xx.CinemaHall.CinemaId == cinemaId && xx.DateTime>DateTime.Now).OrderBy(x=>x.DateTime).GroupBy(x => x.DateTime.Date))
                     {
                         DateTime sessionsDate = itemSessions.FirstOrDefault().DateTime;
                         if (sessionsDate < DateTime.Now.AddDays(7))
@@ -110,7 +110,7 @@
                             </div>
                         }
                     }
-                    <div @(!isScheduleSelected ? "class=no-schedule schedule-selected" : "class=no-schedule style=display:none")>Сеансів цього дня немає. <span class="no-schedule-select">Оберіть інший день</span></div>
+                    <div class="no-schedule @(!isScheduleSelected ? "schedule-selected" : "")" @(isScheduleSelected ? "style=display:none;" : "")>Сеансів цього дня немає. <span class="no-schedule-select">Оберіть інший день</span></div>
                 </div>
             </div>
 
