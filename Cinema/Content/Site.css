@@ -645,7 +645,7 @@ div .icon-chevron-right {
 
 .csd-header {
     padding: 10px;
-    margin:0;
+    margin: 0;
 }
 
 .csd-select-container {
@@ -676,9 +676,11 @@ div .icon-chevron-right {
     height: 10px;
     border-radius: 50%;
     background-color: #FFF324;
+    transition: 200ms;
 }
 
 .csd-selected .csd-date {
+    transition: 200ms;
     color: #FFF324;
 }
 
@@ -686,9 +688,58 @@ div .icon-chevron-right {
     opacity: 1;
 }
 
+.cinema-schedule-full-container {
+    padding-top: 50px;
+}
+
 .csf-movie-poster {
     width: 142px;
     height: 214px;
-    background: url(Poster/4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg) no-repeat center;
-    background-size:cover;
+    /*background: url(Poster/4Ho2vcwcNK1iqPqxpJdUeskeSqq.jpg) no-repeat center;*/
+    background-size: cover !important;
+    margin-right: 10px;
 }
+
+.csf-movie-container {
+    margin-bottom: 50px;
+}
+
+    .csf-movie-container a {
+        transition: 200ms;
+        color: #323232;
+        font-weight: 500;
+    }
+
+.csf-movie-name {
+    /*margin-left:10px;*/
+    padding: 1px 5px;
+    font-size: 25px;
+}
+
+    .csf-movie-name:hover {
+        background-color: #FFF324;
+    }
+
+.csf-movie-times {
+    /*margin-left:10px;*/
+}
+
+    .csf-movie-times a {
+        letter-spacing: -1.1px;
+        margin-right: 10px;
+        padding: 1px 5px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+        .csf-movie-times a:hover {
+            background-color: #FFF324;
+        }
+
+.csf-data {
+    display: none;
+}
+
+    .csf-data.csf-selected {
+        display: flex;
+    }

@@ -38,7 +38,18 @@
                 <div class="csd-day-container d-flex flex-column align-items-center @(isFirst?" csd-selected":"")" data-date="@sessionDate.ToShortDateString()">
                     <div class="text-center">
                         <div class="csd-date">@sessionDate.ToString("dd MMMM", ci)</div>
-                        <div class="csd-day-of-week text-capitalize">@dtfi.GetDayName(sessionDate.DayOfWeek)</div>
+                        @if (sessionDate.Date == DateTime.Now.Date)
+                        {
+                            <div class="csd-day-of-week">Сьогодні</div>
+                        }
+                        else if (sessionDate.Date == DateTime.Now.AddDays(1).Date)
+                        {
+                            <div class="csd-day-of-week">Завтра</div>
+                        }
+                        else
+                        {
+                            <div class="csd-day-of-week text-capitalize">@dtfi.GetDayName(sessionDate.DayOfWeek)</div>
+                        }
                     </div>
                     <div class="yellow-circle"></div>
                 </div>
@@ -50,59 +61,43 @@
 
 <div class="cinema-schedule-full-container">
     <div class="container">
-        <div class="col-md-6 csf-movie-container">
-            <a href="#">
-                <div class="csf-movie-poster float-left"></div>
-            </a>
-            <a href="#" class="csf-movie-name d-block">Фердинант</a>
-            <div class="csf-movie-times">
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
-                <a href="#">12:20</a>
+        @{ isFirst = true;}
+        @foreach (var itemSessions in Model.CinemaHalls.SelectMany(x => x.Sessions.Where(xx => xx.DateTime > DateTime.Now)).OrderBy(x => x.DateTime).GroupBy(x => x.DateTime.Date))
+        {
+            var sessionDate = itemSessions.FirstOrDefault().DateTime;
+            <div class="row@(isFirst?" csf-selected":"") csf-data" data-date="@sessionDate.ToShortDateString()">
+                @foreach (var itemMovies in itemSessions.Select(x => x.Movie).Distinct())
+                {
+                    <div class="csf-movie-container col-md-6">
+                        <a href="#">
+                            <div class="csf-movie-poster float-left" style="background:url(@itemMovies.PosterPath) no-repeat center;"></div>
+                        </a>
+                        <a href="@Url.Action("Details","Movie",new { id = itemMovies.Id })" class="csf-movie-name">@itemMovies.Name</a>
+                        <div class="csf-movie-times">
+                            @foreach (var itemMovieSession in itemMovies.Sessions.Intersect(itemSessions))
+                            {
+                                <a href="@Url.Action("Details","Session",new { id = itemMovieSession.Id })">@itemMovieSession.DateTime.ToShortTimeString()</a>
+                            }
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
+            isFirst = false;
+        }
     </div>
 </div>
 
-@*<div class="container text-center">
-        <h1 class="display-1">@Model.Name</h1>
-    </div>
+@section scripts{
+    <script>
+        $(".csd-day-container").click(function () {
+            if ($(this).hasClass("csd-selected"))
+                return false;
 
-    <dl class="row">
-        <dt class="col-sm-3">Місто</dt>
-        <dd class="col-sm-9">@Model.City.Name</dd>
+            $(this).siblings(".csd-selected").removeClass("csd-selected");
+            $(this).addClass("csd-selected");
 
-        <dt class="col-sm-3">Адреса</dt>
-        <dd class="col-sm-9">@Model.Address</dd>
-
-        <dt class="col-sm-3">Номер телефону</dt>
-        <dd class="col-sm-9">@Model.PhoneNumber</dd>
-
-        <dt class="col-sm-3">Опис</dt>
-        <dd class="col-sm-9">@Model.Description</dd>
-    </dl>
-
-    <h2>Розклад</h2>
-    @{
-        foreach (var hall in Model.CinemaHalls)
-        {
-            foreach (var session in hall.Sessions)
-            {
-                <div class="list-group">
-                    <a href="@Url.Action("Details", "Session", new { id = session.Id })" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">@session.Movie.Name</h5>
-                            <small>@session.DateTime.ToString()</small>
-                        </div>
-                    </a>
-                </div>
-
-            }
-        }
-    }*@
+            var dataDate = $(this).attr("data-date");
+            $(this).parents(".cinema-schedule-days-container").siblings(".cinema-schedule-full-container").find(".csf-data.csf-selected").removeClass("csf-selected").hide().siblings(".csf-data[data-date='" + dataDate + "']").addClass("csf-selected").show();
+        })
+    </script>
+}
