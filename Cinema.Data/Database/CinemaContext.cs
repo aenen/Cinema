@@ -92,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -156,8 +156,26 @@ namespace Cinema.Data.Database
 
         public void PerformAdditionalSetup(CinemaContext context)
         {
-            context.Cinemas.Add(new CinemaEntity { Name = "Панорама", Keyword = "Panorama", CityId = 1, PhoneNumber = "+380 (97) 345 67 89", Address = "Оболонський проспект, 10", BackgroundPath= "/Content/CinemaBackground/342736.png" });
-            context.Cinemas.Add(new CinemaEntity { Name = "Vision", Keyword = "Vision", CityId = 3, PhoneNumber = "+380 (68) 987 65 43", Address = "Штильова вулиця, 134", BackgroundPath = "/Content/CinemaBackground/12342412.jpg" });
+            context.Cinemas.Add(new CinemaEntity
+            {
+                Name = "Панорама",
+                Keyword = "Panorama",
+                CityId = 1,
+                PhoneNumber = "+380 (97) 345 67 89",
+                Address = "Кловський узвіз, 9/1",
+                Description="Кінотеатр працює з 8:00 до 03:00",
+                BackgroundPath = "/Content/CinemaBackground/342736.png"
+            });
+            context.Cinemas.Add(new CinemaEntity
+            {
+                Name = "Vision",
+                Keyword = "Vision",
+                CityId = 3,
+                PhoneNumber = "+380 (68) 987 65 43",
+                Address = "16 ул. Дерибасовская",
+                Description = "Кінотеатр працює цілодобово (24 години)",
+                BackgroundPath = "/Content/CinemaBackground/12342412.jpg"
+            });
 
             context.CinemaHalls.Add(new CinemaHall { CinemaId = 1, Name = "1" });
 

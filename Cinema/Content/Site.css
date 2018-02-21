@@ -743,3 +743,25 @@ div .icon-chevron-right {
     .csf-data.csf-selected {
         display: flex;
     }
+
+.cimena-map-container {
+    width: 100%;
+    height: 400px;
+}
+
+.cinema-contact-container {
+    padding: 25px 0;
+    background-color: #A2A2A2;
+}
+
+    .cinema-contact-container h2 {
+        color: #212529;
+        margin-bottom: 25px;
+    }
+
+.cinema-contact-description {
+    font-size: 20px;
+    margin-top: 25px;
+    font-weight: 500;
+    color: #454545;
+}
