@@ -601,7 +601,7 @@ namespace Cinema.Data.Database
 
             #region генерую сеанси
             Random random = new Random();
-            int moviesCount = context.Movies.Count()+1;
+            int moviesCount = context.Movies.Count() + 1;
             // сеанси на 7 днів // ні, на 7 не буду. генерація 1 дня зайняла 15хв (30-72 сеанси)
             for (int i = 1; i < 2; i++)
             {
@@ -627,10 +627,10 @@ namespace Cinema.Data.Database
                         {
                             context.TicketPrices.Add(new TicketPrice { Seat = itemSeat, Price = Convert.ToInt32(itemSeat.SeatType.DefaultPrice), Session = currentSession });
                         }
-                        hour += 2+randMin/60;
-                        context.SaveChanges();
+                        hour += 2 + randMin / 60;
                     }
                 }
+                context.SaveChanges();
             }
             #endregion
 
