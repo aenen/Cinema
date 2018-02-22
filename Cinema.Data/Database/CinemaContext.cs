@@ -628,6 +628,7 @@ namespace Cinema.Data.Database
                             context.TicketPrices.Add(new TicketPrice { Seat = itemSeat, Price = Convert.ToInt32(itemSeat.SeatType.DefaultPrice), Session = currentSession });
                         }
                         hour += 2+randMin/60;
+                        context.SaveChanges();
                     }
                 }
             }
