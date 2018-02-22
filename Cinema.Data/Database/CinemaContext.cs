@@ -52,6 +52,7 @@ namespace Cinema.Data.Database
         public CinemaContext() : base("Cinema", throwIfV1Schema: false)
         {
             System.Data.Entity.Database.SetInitializer(new DataBaseInitializer());
+            Database.CommandTimeout = 0;
         }
 
         public static CinemaContext Create()
