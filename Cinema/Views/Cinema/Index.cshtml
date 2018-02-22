@@ -5,12 +5,31 @@
     ViewBag.Title = "Кінотеатри";
 }
 
-<h1>Кінотеатри</h1>
-<ul class="list-group">
-    @{
-        foreach (var item in Model)
-        {
-            @Html.ActionLink(item.Name, "Details", "Cinema", new { name = item.Keyword }, new { @class = "list-group-item" })
-        }
+<div class="cinema-item-body">
+    @foreach (var item in Model)
+    {
+        <div class="cinema-item-container">
+            <div class="cinema-item-image" style="background:url(@item.BackgroundPath) no-repeat center;"></div>
+            <div class="cinema-item-data d-flex flex-column justify-content-center">
+                <div class="container">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <a href="@Url.Action("Details","Cinema",new { name = item.Keyword})">
+                            <h2 class="ci-cinema-name display-4">@item.Name</h2>
+                        </a>
+                        <a href="@Url.Action("Details","Cinema",new { name = item.Keyword})" class="cinema-check-schedule btn">Переглянути розклад</a>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between">
+                        <div>
+                            <div class="ci-main">@item.Address</div>
+                            <div class="ci-muted">@item.City.Name</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="ci-main">@item.PhoneNumber</div>
+                            <div class="ci-muted">Контакт-центр</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
-</ul>
+</div>

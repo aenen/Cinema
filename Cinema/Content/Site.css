@@ -22,7 +22,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 /* --- головні класи ---*/
@@ -267,7 +267,9 @@ textarea {
     display: block;
     height: 350px;
     background-size: cover !important;
-    border: 1px solid #0F0D14;
+    border: 1px solid #0A0813;
+    overflow: hidden;
+    background-color: #0A0813;
     /*margin:15px 0;*/
 }
 
@@ -772,4 +774,43 @@ div .icon-chevron-right {
 .cinema-contact-description {
     font-size: 20px;
     margin-top: 25px;
+}
+
+.cinema-item-image {
+    height: 200px;
+    background-size: cover !important;
+}
+
+.cinema-item-data {
+    padding: 20px;
+    background-color: #0A0813;
+    /*margin-top: -10px;
+    border-radius: 10px 10px;*/
+    color: white;
+}
+
+    .cinema-item-data a {
+        color: white;
+    }
+
+        .cinema-item-data a:hover {
+            color: #FFF324;
+        }
+
+.cinema-check-schedule {
+    border: 1px solid #FFF324;
+}
+
+.cinema-item-container {
+    /*margin-bottom: 25px;*/
+    border-bottom: 5px dashed #FFF324;
+}
+
+    .cinema-item-container:last-child {
+        margin: 0;
+        border: 0;
+    }
+
+.cinema-item-body {
+    background-color: #0A0813;
 }
