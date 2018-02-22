@@ -751,17 +751,25 @@ div .icon-chevron-right {
 
 .cinema-contact-container {
     padding: 25px 0;
-    background-color: #A2A2A2;
+    background: url(WebsiteImage/Background/cinema-info.png) no-repeat center;
+    background-size: cover;
+    color: white;
+    font-weight: 500;
 }
 
+    .cinema-contact-container .ci-main {
+        font-size: 25px;
+    }
+
+    .cinema-contact-container .ci-muted {
+        font-size: 20px;
+    }
+
     .cinema-contact-container h2 {
-        color: #212529;
         margin-bottom: 25px;
     }
 
 .cinema-contact-description {
     font-size: 20px;
     margin-top: 25px;
-    font-weight: 500;
-    color: #454545;
 }

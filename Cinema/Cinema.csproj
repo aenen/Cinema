@@ -283,6 +283,7 @@
     <Content Include="Content\WebsiteImage\Background\cinema-info.png" />
     <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.png" />
+    <Content Include="Content\WebsiteImage\Logo\logo-fat.png" />
     <Content Include="Content\WebsiteImage\Logo\logo-fat.svg" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.svg" />
     <Content Include="Content\WebsiteImage\Logo\logo.svg" />

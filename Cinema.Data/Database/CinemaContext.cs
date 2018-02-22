@@ -92,7 +92,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -600,7 +600,7 @@ namespace Cinema.Data.Database
 
             #region генерую сеанси
             Random random = new Random();
-            int moviesCount = context.Movies.Count();
+            int moviesCount = context.Movies.Count()+1;
             // сеанси на 7 днів // ні, на 7 не буду. генерація 1 дня зайняла 15хв (30-72 сеанси)
             for (int i = 1; i < 3; i++)
             {
@@ -630,55 +630,6 @@ namespace Cinema.Data.Database
                     }
                 }
             }
-
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddHours(5), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddHours(2), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(1), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(1), CinemaHallId = 1 });
-            //foreach (var item in context.CinemaHalls.Find(1).Seats)
-            //{
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 1 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 2 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 3 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 4 });
-            //}
-
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(2), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(2.5), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(4), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddDays(3), CinemaHallId = 2 });
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddMinutes(60), CinemaHallId = 2 });
-
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddDays(5), CinemaHallId = 2 });
-            //foreach (var item in context.CinemaHalls.Find(2).Seats)
-            //{
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 5 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 6 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 7 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 8 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 9 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 10 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 11 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 12 });
-            //}
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddHours(2.5), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 2, DateTime = DateTime.Now.AddDays(4), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddHours(1), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 3, DateTime = DateTime.Now.AddDays(3), CinemaHallId = 1 });
-            //context.Sessions.Add(new Session { MovieId = 1, DateTime = DateTime.Now.AddMinutes(60), CinemaHallId = 1 });
-            //foreach (var item in context.CinemaHalls.Find(1).Seats)
-            //{
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 13 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 14 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 15 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 16 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 17 });
-            //    context.TicketPrices.Add(new TicketPrice { Seat = item, Price = Convert.ToInt32(item.SeatType.DefaultPrice), SessionId = 18 });
-
-            //}
             #endregion
 
             context.SaveChanges();
