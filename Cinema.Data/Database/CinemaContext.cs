@@ -603,14 +603,14 @@ namespace Cinema.Data.Database
             Random random = new Random();
             int moviesCount = context.Movies.Count()+1;
             // сеанси на 7 днів // ні, на 7 не буду. генерація 1 дня зайняла 15хв (30-72 сеанси)
-            for (int i = 1; i < 3; i++)
+            for (int i = 1; i < 2; i++)
             {
                 // у всіх залах
                 foreach (var itemCinemaHall in context.CinemaHalls)
                 {
                     double hour = 2; //+=2
                     // від 5 до 12 сеансів на день
-                    int sessionPerDay = random.Next(5, 10);
+                    int sessionPerDay = 2;// random.Next(5, 10);
                     for (int sessionNumber = 0; sessionNumber < sessionPerDay; sessionNumber++)
                     {
                         int movieId = random.Next(1, moviesCount);
