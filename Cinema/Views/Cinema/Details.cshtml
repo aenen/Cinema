@@ -90,12 +90,26 @@
 <div class="cinema-contact-container">
     <div class="container">
         <h2 class="text-center">Як нас знайти?</h2>
+        <div class="row">
+            <div id="map" class="cimena-map-container col-md-8"></div>
+            <div class="col-md-4 d-flex flex-column justify-content-around">
+                <div class="ci-cinema-name display-4">@Model.Name</div>
+                <div>
+                    <div class="ci-main">@Model.Address</div>
+                    <div class="ci-muted">@Model.City.Name</div>
+                </div>
+                <div>
+                    <div class="ci-main">@Model.PhoneNumber</div>
+                    <div class="ci-muted">Контакт-центр</div>
+                </div>
+            </div>
+        </div>
+
+        @if (!Model.Description.IsEmpty())
+        {
+            <div class="cinema-contact-description text-center">@Model.Description</div>
+        }
     </div>
-    <div id="map" class="cimena-map-container"></div>
-    @if(!Model.Description.IsEmpty())
-    {
-        <div class="cinema-contact-description container text-center">@Model.Description</div>
-    }
 </div>
 
 @section scripts{
