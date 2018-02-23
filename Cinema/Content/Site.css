@@ -304,17 +304,6 @@ textarea {
         color: rgba(255, 255, 255, 0.75);
     }
 
-.movie-list-bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
-    background-size: cover;
-}
-
-
 
 .profile-nav {
     width: 60px;
@@ -855,6 +844,7 @@ div .icon-chevron-right {
 
     .login-container h2 {
         padding: 25px 0;
+        margin:0;
     }
 
     .login-container a {
@@ -874,3 +864,20 @@ div .icon-chevron-right {
     .yellow-btn:hover {
         color: #FFF324;
     }
+
+.icon-error, .icon-error-light {
+    color: #ff2424;
+}
+.icon-mood-bad {
+    color: #ff9324;
+}
+a#loginLink {
+    color: #FFF324;
+}
+a#loginLink:hover {
+    color: white;
+}
+
+.icon-mood-happy {
+    color: #24ff3f;
+}

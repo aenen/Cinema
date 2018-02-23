@@ -1,10 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Confirm Email";
+    ViewBag.Title = "Email підтверджено";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+<div class="bg-100-color"></div>
+<div class="container text-center position-relative text-white">
+    <i class="icon-mood-happy display-3 m-4"></i>
+    <h2>Дякую за підтвердження електронної пошти! Будь ласка, @Html.ActionLink("натисни сюди, щоб увійти.", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</h2>
 </div>
