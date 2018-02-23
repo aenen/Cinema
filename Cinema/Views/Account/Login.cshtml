@@ -1,27 +1,27 @@
 ﻿@using Cinema.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Увійти в особистий кабінет";
+    ViewBag.Title = "Вхід в особистий кабінет";
 }
 
-<div class="container text-center">
-    <h2>Увійти в особистий кабінет.</h2>
+<div class="bg-100-image"></div>
+<div class="container text-center position-relative login-container">
+    <h2 class="display-4">Вхід в особистий кабінет</h2>
     <div class="row justify-content-center align-content-center">
-        <div class="">
             <section id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = " control-label" })
+                        @Html.LabelFor(m => m.Email,"Електронна пошта", new { @class = " control-label" })
                         <div class="">
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = " control-label" })
+                        @Html.LabelFor(m => m.Password,"Пароль", new { @class = " control-label" })
                         <div class="">
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
@@ -31,25 +31,22 @@
                         <div class="">
                             <div class="checkbox">
                                 @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe,"Не виходити")
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="">
-                            <input type="submit" value="Log in" class="btn btn-default" />
+                            <input type="submit" value="Увійти" class="btn yellow-btn" />
                         </div>
                     </div>
-                    <p>
-                        @Html.ActionLink("Зареєструватись", "Register")
-                    </p>
+                    <p>Не маєш аккаунту? @Html.ActionLink("Зареєструйся.", "Register")</p>
                     @* Enable this once you have account confirmation enabled for password reset functionality
                         <p>
                             @Html.ActionLink("Forgot your password?", "ForgotPassword")
                         </p>*@
                 }
             </section>
-        </div>
         @*<div class="col-md-4">
                 <section id="socialLoginForm">
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
