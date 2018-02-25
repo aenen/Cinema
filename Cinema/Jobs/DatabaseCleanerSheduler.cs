@@ -20,7 +20,7 @@ namespace Cinema.Jobs
                             .WithIdentity("trigger1", "group1")     // идентифицируем триггер с именем и группой
                             .StartNow()                            // запуск сразу после начала выполнения
                             .WithSimpleSchedule(x => x            // настраиваем выполнение действия
-                                .WithIntervalInMinutes(30)          // через 1 минуту
+                                .WithIntervalInMinutes(2)          // через 2 минуту
                                 .RepeatForever())                   // бесконечное повторение
                             .Build();                               // создаем триггер
 

@@ -1,94 +1,229 @@
 ﻿@model Cinema.Data.Database.Movie
 @{
     ViewBag.Title = Model.Name;
-}
-<h1>@Model.Name</h1>
-<img src="@Model.PosterPath" style="max-height: 400px; width:auto;" class="rounded" />
 
-<dl class="row">
-    <dt class="col-sm-3">Оригінальна назва</dt>
-    <dd class="col-sm-9">@Model.OriginalName</dd>
-
-    <dt class="col-sm-3">Тривалість</dt>
-    <dd class="col-sm-9">@Model.Duration</dd>
-
-    <dt class="col-sm-3">Жанри</dt>
-    <dd class="col-sm-9">@Model.Genres</dd>
-
-    <dt class="col-sm-3">Опис</dt>
-    <dd class="col-sm-9">@Model.Description</dd>
-</dl>
-
-
-<h2>Сеанси</h2>
-@{
-    foreach (var session in Model.Sessions)
-    {
-        <div class="list-group">
-            <a href="@Url.Action("Details", "Session", new { id = session.Id })" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">@session.CinemaHall.Cinema.Name</h5>
-                    <small>@session.DateTime.ToString()</small>
-                </div>
-            </a>
-        </div>
-    }
+    System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("uk-UA");
+    System.Globalization.DateTimeFormatInfo dtfi = ci.DateTimeFormat;
 }
 
-<h2>Коментарі</h2>
-@if (User.Identity.IsAuthenticated)
-{
-    <div>
-        <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
-            <input type="hidden" name="MovieId" value="@Model.Id" />
-            <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
-        </form>
-        <button id="addComment" type="button" class="btn">Відправити</button>
-    </div>
-}
-else
-{
-    <div class="p-2 m-2 text-muted border">Увійдіть для відправки коментарів</div>
-}
-<div>
-    @foreach (var item in Model.Comments.OrderByDescending(x=>x.Id))
-    {
-        <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
-            @{ 
-                string username="";
+<div class="bg-100-image" style="background: url(@Model.BackgroundPath) no-repeat center center fixed;"></div>
+<div class="bg-100-color" style="background-color:rgba(10,8,19,.9);"></div>
 
-                if (item.User.FirstName == null && item.User.LastName == null)
-                {
-                    username = "Глядач";
-                }
-                else
-                {
-                    username = $"{item.User.LastName} {item.User.FirstName}";
-                }
+<div class="container-fluid text-white position-relative">
+    <div class="row movie-info-container">
+        <div class="col-md-3 text-center">
+            <div style="max-width:300px; margin: 0 auto">
+                <img src="@Model.PosterPath" style="width:100%" />
+            </div>
+            @if (!Model.TrailerLink.IsEmpty())
+            {
+                <a href="@Model.TrailerLink" target="_blank" class="play-trailer-btn" style="max-width:300px; margin: 15px auto">
+                    <div class="icon-play-trailer"></div>
+                    <div>Дивитися трейлер</div>
+                </a>
             }
-            <b class="col-2">@username</b>
-            <div class="col-10">
-                <div>@item.Text</div>
-                @if (item.CommentType != null)
-                {
-                    <div class="text-muted">@item.CommentType.Name</div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4">@Model.Name</h1>
+            <dl class="row" style="padding-top:15px">
+                @{
+                    if (Model.AgeRating != null)
+                    {
+                <dt class="col-md-4">Вік:</dt>
+                <dd class="col-md-8">@Model.AgeRating.Name</dd>
+                    }
+
+                    if (Model.OriginalName != null)
+                    {
+                <dt class="col-md-4">Оригінальна назва:</dt>
+                <dd class="col-md-8">@Model.OriginalName</dd>
+                    }
+
+                    if (Model.Director != null)
+                    {
+                <dt class="col-md-4">Режисер:</dt>
+                <dd class="col-md-8">@Model.Director</dd>
+                    }
+
+                    if (Model.ShowStart != null)
+                    {
+                <dt class="col-md-4">Дата виходу:</dt>
+                <dd class="col-md-8">@Model.ShowStart.Value.ToShortDateString()</dd>
+                    }
+
+                    if (Model.ShowEnd != null)
+                    {
+                <dt class="col-md-4">В прокаті до:</dt>
+                <dd class="col-md-8">@Model.ShowEnd.Value.ToShortDateString()</dd>
+                    }
+
+                    if (Model.Language != null)
+                    {
+                <dt class="col-md-4">Мова:</dt>
+                <dd class="col-md-8">@Model.Language</dd>
+                    }
+
+                    if (Model.Genres != null)
+                    {
+                <dt class="col-md-4">Жанри:</dt>
+                <dd class="col-md-8">@Model.Genres</dd>
+                    }
+
+                    if (Model.Duration != null)
+                    {
+                <dt class="col-md-4">Тривалість:</dt>
+                <dd class="col-md-8">@Model.Duration</dd>
+                    }
+
+                    if (Model.Country != null)
+                    {
+                <dt class="col-md-4">Виробництво:</dt>
+                <dd class="col-md-8">@Model.Country</dd>
+                    }
+
+                    if (Model.Script != null)
+                    {
+                <dt class="col-md-4">Сценарій:</dt>
+                <dd class="col-md-8">@Model.Script</dd>
+                    }
+
+                    if (Model.Starring != null)
+                    {
+                <dt class="col-md-4">В головних ролях:</dt>
+                <dd class="col-md-8">@Model.Starring</dd>
+                    }
+
+                    if (Model.Description != null)
+                    {
+                <dd class="col-md-12" style="padding-top:15px;">@Model.Description</dd>
+                    }
                 }
-                @if (item.Cinema != null)
+            </dl>
+        </div>
+        <div class="col-md-3">
+            <div class="movie-schedule-date">
+                <h2 class="text-center">Розклад сеансів:</h2>
+                <div class="d-flex justify-content-around csd-select-container">
+                    @{ var isFirst = true;}
+                    @foreach (var itemSessions in Model.Sessions.Where(xx => xx.DateTime > DateTime.Now).OrderBy(x => x.DateTime).GroupBy(x => x.DateTime.Date))
+            {
+                var sessionDate = itemSessions.FirstOrDefault().DateTime;
+                        <div class="csd-day-container d-flex flex-column align-items-center @(isFirst?" csd-selected":"")" data-date="@sessionDate.ToShortDateString()">
+                            <div class="text-center">
+                                @if (sessionDate.Date == DateTime.Now.Date)
+                                {
+                                    <div class="csd-date">Сьогодні</div>
+                                    <div class="csd-day-of-week">@($"{dtfi.GetShortestDayName(sessionDate.DayOfWeek)}, {sessionDate.ToString("dd'.'MM", ci)}")</div>
+
+                                }
+                                else if (sessionDate.Date == DateTime.Now.AddDays(1).Date)
+                                {
+                                    <div class="csd-date">Завтра</div>
+                                    <div class="csd-day-of-week">@($"{dtfi.GetShortestDayName(sessionDate.DayOfWeek)}, {sessionDate.ToString("dd'.'MM", ci)}")</div>
+
+                                }
+                                else
+                                {
+                                    <div class="csd-date text-capitalize">@dtfi.GetShortestDayName(sessionDate.DayOfWeek)</div>
+                                    <div class="csd-day-of-week">@($"{sessionDate.ToString("dd'.'MM", ci)}")</div>
+                                }
+                            </div>
+                        </div>
+                        isFirst = false;
+                    }
+                </div>
+            </div>
+            <div class="movie-schedule-full text-white">
+                @{ isFirst = true;}
+                @foreach (var itemSessions in Model.Sessions.Where(xx => xx.DateTime > DateTime.Now).OrderBy(x => x.DateTime).GroupBy(x => x.DateTime.Date))
                 {
-                    <div class="text-muted">@item.Cinema.Name</div>
-                }
-                @if (item.User.UserName == User.Identity.Name)
-                {
-                    <button type="button" class="btn deleteComment">Видалити</button>
+                    var sessionDate = itemSessions.FirstOrDefault().DateTime;
+                    <div class="text-center@(isFirst?" csf-selected":"") csf-data" data-date="@sessionDate.ToShortDateString()">
+                        @foreach (var itemSessionsByCinema in itemSessions.GroupBy(x => x.CinemaHall.Cinema))
+                        {
+                            var cinema = itemSessionsByCinema.FirstOrDefault().CinemaHall.Cinema;
+                            <div class="csf-movie-container">
+                                <a href="@(Url.Action("Details","Cinema", new { name = cinema.Keyword }))" class="d-block h2">@cinema.Name</a>
+                                <div class="csf-movie-times">
+                                    @foreach (var itemSession in itemSessionsByCinema)
+                                    {
+                                        <a href="@Url.Action("Details","Session",new { id = itemSession.Id })">@itemSession.DateTime.ToShortTimeString()</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    isFirst = false;
                 }
             </div>
         </div>
-    }
+    </div>
 </div>
+<div class="container position-relative">
+    <h2>Коментарі</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
+                <input type="hidden" name="MovieId" value="@Model.Id" />
+                <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
+            </form>
+            <button id="addComment" type="button" class="btn">Відправити</button>
+        </div>
+    }
+    else
+    {
+        <div class="p-2 m-2 text-muted border">Увійдіть для відправки коментарів</div>
+    }
+    <div>
+        @foreach (var item in Model.Comments.OrderByDescending(x => x.Id))
+        {
+            <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
+                @{
+                    string username = "";
 
+                    if (item.User.FirstName == null && item.User.LastName == null)
+                    {
+                        username = "Глядач";
+                    }
+                    else
+                    {
+                        username = $"{item.User.LastName} {item.User.FirstName}";
+                    }
+                }
+                <b class="col-2">@username</b>
+                <div class="col-10">
+                    <div>@item.Text</div>
+                    @if (item.CommentType != null)
+                    {
+                        <div class="text-muted">@item.CommentType.Name</div>
+                    }
+                    @if (item.Cinema != null)
+                    {
+                        <div class="text-muted">@item.Cinema.Name</div>
+                    }
+                    @if (item.User.UserName == User.Identity.Name)
+                    {
+                        <button type="button" class="btn deleteComment">Видалити</button>
+                    }
+                </div>
+            </div>
+                    }
+    </div>
+</div>
 @section scripts{
     <script>
         $(function () {
+            $(".csd-day-container").click(function () {
+                if ($(this).hasClass("csd-selected"))
+                    return false;
+
+                $(this).siblings(".csd-selected").removeClass("csd-selected");
+                $(this).addClass("csd-selected");
+
+                var dataDate = $(this).attr("data-date");
+                $(this).parents(".movie-schedule-date").siblings(".movie-schedule-full").find(".csf-data.csf-selected").removeClass("csf-selected").hide().siblings(".csf-data[data-date='" + dataDate + "']").addClass("csf-selected").show();
+            });
 
             if ($("#formComment").length) {
                 $.post("@Url.Action("GetCommentTypeJson", "Comment")", function (data) {

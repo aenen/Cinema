@@ -21,10 +21,11 @@ namespace Cinema.Jobs
                 DateTime dtNow = DateTime.Now.AddMinutes(-15);
                 var deleteTickest = db.Tickets.Where(x => dtNow > x.CreationDateTime && x.StatusId == 3).ToList();
                 db.Tickets.RemoveRange(deleteTickest);
+                db.SaveChanges();
 
                 // видаляю квитки, які були заброньовані, але не викуплені за 30хв до початку сеансу (+ змінюю статус замовлення на "відхилено")
-                dtNow = DateTime.Now.AddMinutes(30);
-                var reservedDidntPayed = db.Sessions.Where(x => dtNow > x.DateTime).SelectMany(x => x.TicketPrices.Where(y => y.Ticket.StatusId == 2).Select(xx => xx.Ticket).ToList()).ToList();
+                DateTime dtNow2 = DateTime.Now.AddMinutes(30);
+                var reservedDidntPayed = db.Sessions.Where(x => dtNow2 > x.DateTime).SelectMany(x => x.TicketPrices.Where(y => y.Ticket.StatusId == 2).Select(xx => xx.Ticket).ToList()).ToList();
                 foreach (var item in reservedDidntPayed)
                 {
                     if (item.OrderItem != null)
@@ -35,13 +36,13 @@ namespace Cinema.Jobs
                     }
                 }
                 db.Tickets.RemoveRange(reservedDidntPayed);
+                db.SaveChanges();
 
                 // видаляю застарілі сеанси (які почались 12 годин тому)
-                dtNow = DateTime.Now.AddHours(-12);
+                DateTime dtNow3 = DateTime.Now.AddHours(-12);
                 //dtNow = DateTime.Now.AddMinutes(-10);
-                var oldSessions=db.Sessions.Where(x => dtNow > x.DateTime).ToList();
+                var oldSessions=db.Sessions.Where(x => dtNow3 > x.DateTime).ToList();
                 db.Sessions.RemoveRange(oldSessions);
-
                 db.SaveChanges();
             }
         }

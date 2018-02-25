@@ -93,7 +93,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -301,7 +301,7 @@ namespace Cinema.Data.Database
 
             #region кінотеатр #2 --- зал #2
             double hallPosY = 0.4; //3.1
-            for (int row = 1; row < 8; row++)
+            for (int row = 1; row < 7; row++)
             {
                 context.Seats.Add(new Seat { CinemaHallId = 3, Row = row, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = hallPosY } });
                 context.Seats.Add(new Seat { CinemaHallId = 3, Row = row, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = hallPosY } });
@@ -326,7 +326,7 @@ namespace Cinema.Data.Database
 
             #region кінотеатр #2 --- зал #3
             hallPosY = 1; //3.5
-            for (int row = 1; row < 7; row++)
+            for (int row = 1; row < 5; row++)
             {
                 context.Seats.Add(new Seat { CinemaHallId = 4, Row = row, Number = 1, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 0, PositionY = hallPosY } });
                 context.Seats.Add(new Seat { CinemaHallId = 4, Row = row, Number = 2, SeatTypeId = 2, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = hallPosY } });
@@ -348,7 +348,7 @@ namespace Cinema.Data.Database
 
             #region кінотеатр #2 --- зал #4
             hallPosY = 1; //4
-            for (int row = 1; row < 6; row++)
+            for (int row = 1; row < 4; row++)
             {
                 double hallPosX = 0; //3
                 for (int number = 1; number < 6; number++)
@@ -363,7 +363,7 @@ namespace Cinema.Data.Database
 
             #region кінотеатр #1 --- зал #2
             hallPosY = 0.5; //3.2
-            for (int row = 1; row < 8; row++)
+            for (int row = 1; row < 6; row++)
             {
                 context.Seats.Add(new Seat { CinemaHallId = 6, Row = row, Number = 1, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 0, PositionY = hallPosY } });
                 context.Seats.Add(new Seat { CinemaHallId = 6, Row = row, Number = 2, SeatTypeId = 1, SeatStyle = new SeatStyle { PositionX = 2.2, PositionY = hallPosY } });
@@ -603,14 +603,14 @@ namespace Cinema.Data.Database
             Random random = new Random();
             int moviesCount = context.Movies.Count() + 1;
             // сеанси на 7 днів // ні, на 7 не буду. генерація 1 дня зайняла 15хв (30-72 сеанси)
-            for (int i = 1; i < 2; i++)
+            for (int i = 2; i < 4; i++)
             {
                 // у всіх залах
                 foreach (var itemCinemaHall in context.CinemaHalls)
                 {
                     double hour = 2; //+=2
                     // від 5 до 12 сеансів на день
-                    int sessionPerDay = 2;// random.Next(5, 10);
+                    int sessionPerDay = 3;// random.Next(5, 10);
                     for (int sessionNumber = 0; sessionNumber < sessionPerDay; sessionNumber++)
                     {
                         int movieId = random.Next(1, moviesCount);

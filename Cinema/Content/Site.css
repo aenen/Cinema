@@ -495,7 +495,7 @@ div .icon-chevron-right {
     left:0;*/
 }
 
-.icon-play-trailer, .icon-more-info {
+.mii-top .icon-play-trailer, .mii-top .icon-more-info {
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -508,7 +508,7 @@ div .icon-chevron-right {
     text-shadow: 2px 2px 1px #0A0813;
 }
 
-    .icon-play-trailer:hover, .icon-more-info:hover {
+    .mii-top .icon-play-trailer:hover, .mii-top .icon-more-info:hover {
         background-color: #AEAEAE;
         color: #FFFF00;
         text-shadow: 1px 1px 0 #0A0813;
@@ -811,7 +811,7 @@ div .icon-chevron-right {
     left: 0;
     top: 0;
     background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
-    background-size: cover;
+    background-size: cover !important;
 }
 
 .bg-100-color {
@@ -821,11 +821,12 @@ div .icon-chevron-right {
     left: 0;
     top: 0;
     background: #0A0813 no-repeat center center fixed;
+    /*background-color:rgba(10,8,19,.8)*/
     background-size: cover;
 }
 
 .login-container {
-    overflow-x:hidden;
+    overflow-x: hidden;
     color: white;
 }
 
@@ -844,7 +845,7 @@ div .icon-chevron-right {
 
     .login-container h2 {
         padding: 25px 0;
-        margin:0;
+        margin: 0;
     }
 
     .login-container a {
@@ -868,16 +869,112 @@ div .icon-chevron-right {
 .icon-error, .icon-error-light {
     color: #ff2424;
 }
+
 .icon-mood-bad {
     color: #ff9324;
 }
+
 a#loginLink {
     color: #FFF324;
 }
-a#loginLink:hover {
-    color: white;
-}
+
+    a#loginLink:hover {
+        color: white;
+    }
 
 .icon-mood-happy {
     color: #24ff3f;
 }
+
+.movie-info-container {
+    padding: 25px 25px;
+}
+
+    .movie-info-container .col-md-6 {
+        font-weight: 500;
+    }
+
+        .movie-info-container .col-md-6 dt {
+            text-decoration: underline;
+        }
+
+.play-trailer-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #555555;
+    border-radius: 10px;
+    color: #959595;
+    background-color: #0A0813;
+    transition: 200ms;
+    font-weight: 500;
+}
+
+    .play-trailer-btn div {
+        display: inline-block;
+    }
+
+    .play-trailer-btn .icon-play-trailer {
+        transition: 200ms;
+        color: #BABABA;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        border-radius: 50%;
+        background-color: #555555;
+        margin-top: -6px;
+        text-shadow: 2px 2px 1px #0A0813;
+    }
+
+    .play-trailer-btn:hover {
+        border-color: #FFFF00;
+        color: #FFFF00;
+    }
+
+        .play-trailer-btn:hover .icon-play-trailer {
+            color: #FFFF00;
+            text-shadow: 1px 1px 0 #0A0813;
+        }
+/*#979799*/
+
+.movie-schedule-date .csd-selected .csd-day-of-week {
+    color: white;
+}
+
+.movie-schedule-date .csd-select-container {
+    border: 1px solid #555555;
+    color: #979799;
+    background-color: #0A0813;
+}
+
+.movie-schedule-date .csd-day-of-week {
+    color: unset;
+}
+.movie-schedule-full {
+    /*padding-left: 25px;*/
+}.movie-schedule-full .csf-data.csf-selected {
+    display: block;
+}
+
+.movie-schedule-full .csf-movie-times a {
+    margin:0;
+}.movie-schedule-full .csf-movie-container {
+    margin-top: 25px;
+}
+
+    .movie-schedule-full .csf-movie-container a {
+        color: white;
+        font-weight: 500;
+    }
+
+    .movie-schedule-full .csf-movie-container .csf-movie-times a {
+        transition: 200ms;
+        color: #FFFF00;
+        font-weight: 500;
+    }
+
+        .movie-schedule-full .csf-movie-container .csf-movie-times a:hover {
+            color: white;
+            background-color: unset;
+        }
