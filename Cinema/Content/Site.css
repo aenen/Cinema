@@ -978,3 +978,35 @@ a#loginLink {
             color: white;
             background-color: unset;
         }
+.movie-comments-container h3{
+    text-decoration:underline;
+}
+.movie-comments-container textarea, .movie-comments-container input, .movie-comments-container select, .movie-comments-container option {
+    background-color: #0A0813;
+    border-color: #BBBBBC;
+    color: white;
+}
+    .movie-comments-container textarea:focus, .movie-comments-container input:focus, .movie-comments-container select:focus, .movie-comments-container option:focus {
+        background-color: #0A0813;
+        border-color: #BBBBBC;
+        color: white;
+    }
+
+.comment-user-img{
+    background-color:white;
+    border:1px solid black;
+    margin:5px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+.comment-textarea{
+    width: calc(100% - 60px);
+}
+#formComment{
+    margin: 25px 0;
+}
+#formSelect > *{
+    max-width:150px;
+    margin:5px 5px;
+}

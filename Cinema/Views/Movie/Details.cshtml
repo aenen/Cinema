@@ -159,23 +159,32 @@
         </div>
     </div>
 </div>
-<div class="container position-relative">
-    <h2>Коментарі</h2>
+
+<div class="container position-relative movie-comments-container text-white">
+    <h3 class="">Коментарі @Model.Comments.Count</h3>
     @if (User.Identity.IsAuthenticated)
     {
         <div>
             <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
                 <input type="hidden" name="MovieId" value="@Model.Id" />
-                <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Твій коментар" style="resize: none"></textarea>
+                <div class="row d-flex flex-row justify-content-around w-100 m-0">
+                    <div class="comment-user-img"></div>
+                    <div class="comment-textarea">
+                        <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Введи текст повідомлення..." style="resize: none"></textarea>
+                    </div>
+                </div>
+                <div id="formSelect" class="row d-flex flex-row justify-content-end w-100 m-0">
+
+            <button id="addComment" type="button" class="btn yellow-btn">Відправити</button>
+                </div>
             </form>
-            <button id="addComment" type="button" class="btn">Відправити</button>
         </div>
     }
     else
     {
-        <div class="p-2 m-2 text-muted border">Увійдіть для відправки коментарів</div>
+        <div class="p-2 text-muted border">Увійди для відправки коментарів</div>
     }
-    <div>
+    <div id="comments">
         @foreach (var item in Model.Comments.OrderByDescending(x => x.Id))
         {
             <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
@@ -232,7 +241,7 @@
                     for (var key in data) {
                         selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
                     }
-                    selectItem.appendTo("#formComment");
+                    selectItem.prependTo("#formSelect");
                 });
                 $.post("@Url.Action("GetCinemaJson", "Cinema")", function (data) {
                     var selectItem = $("<select/>", { class: "form-control", name: "CinemaId" })
@@ -240,7 +249,7 @@
                     for (var key in data) {
                         selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
                     }
-                    selectItem.appendTo("#formComment");
+                    selectItem.prependTo("#formSelect");
                 });
             }
 
