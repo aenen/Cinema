@@ -25,6 +25,8 @@ namespace Cinema.Data.Database
         [Required]
         public string UserId { get; set; }
 
+        public DateTime Datetime { get; set; }
+
         public int? CinemaId { get; set; }
 
         public int? CommentTypeId { get; set; }

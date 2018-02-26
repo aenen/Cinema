@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -95,14 +96,14 @@ namespace Cinema.Controllers
                     System.IO.File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, user.PicturePath));
                 }
 
+                var pictureSm = MakeThumbnail(Image.FromStream(file.InputStream), 100, 100);
+
                 string picture_folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "UserData", "Avatar");
                 string picture_name = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 string picture_folder_name = Path.Combine(picture_folder, picture_name);
-                file.SaveAs(picture_folder_name);
+                pictureSm.Save(picture_folder_name);
+                //file.SaveAs(picture_folder_name);
                 user.PicturePath = Path.Combine("Content", "UserData", "Avatar", picture_name);
-
-                // TODO
-                // зробити прев'ю, коли знатиму необхідні розміри
             }
 
             var result = await userMgr.UpdateAsync(user);
@@ -139,6 +140,26 @@ namespace Cinema.Controllers
             }
 
             return imageOk;
+        }
+
+        public Image MakeThumbnail(Image image, int maxWidth, int maxHeight)
+        {
+            var ratioX = (double)maxWidth / image.Width;
+            var ratioY = (double)maxHeight / image.Height;
+            var ratio = Math.Min(ratioX, ratioY);
+
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+
+            using (var graphics = Graphics.FromImage(newImage))
+            {
+                //graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+            }
+            //return image.GetThumbnailImage(newWidth, newHeight, () => false, IntPtr.Zero);
+            return newImage;
         }
     }
 }

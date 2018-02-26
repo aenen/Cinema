@@ -281,6 +281,7 @@
     <Content Include="Content\Poster\wh1f7peigW0qUXXwynwVAt7axZd.jpg" />
     <Content Include="Content\profile_icon.png" />
     <Content Include="Content\UserData\Avatar\d25051d3-6adb-4cc9-a6ca-da5b34b3a0c5.png" />
+    <Content Include="Content\UserData\default-user.png" />
     <Content Include="Content\WebsiteImage\Background\cinema-info.png" />
     <Content Include="Content\WebsiteImage\Background\page_home_background.png" />
     <Content Include="Content\WebsiteImage\Logo\full_logo.png" />

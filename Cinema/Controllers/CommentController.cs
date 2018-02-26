@@ -42,16 +42,21 @@ namespace Cinema.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = await userMgr.FindByNameAsync(User.Identity.Name);
-            user.Comments.Add(new Comment
+            var comment = new Comment
             {
                 Text = model.Text,
+                Datetime = DateTime.Now,
                 CommentType = commentTypeRepository.Get(model.CommentTypeId),
                 Cinema = cinemaRepository.Get(model.CinemaId),
                 Movie = movieRepository.Get(model.MovieId)
-            });
+            };
+            user.Comments.Add(comment);
             var result = await userMgr.UpdateAsync(user);
             if (result.Succeeded)
-                return Json("ok");
+            {
+                var commentDatetime = comment.Datetime.ToString();
+                return Json(new { comment.Id, commentDatetime, model.Text, model.CommentTypeId, model.CinemaId, model.MovieId});
+            }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }

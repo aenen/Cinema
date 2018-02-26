@@ -1,9 +1,18 @@
-﻿@model Cinema.Data.Database.Movie
+﻿@using Cinema.Data.Database
+@using Cinema.Data.Identity
+@model Cinema.Data.Database.Movie
+
 @{
     ViewBag.Title = Model.Name;
 
     System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("uk-UA");
     System.Globalization.DateTimeFormatInfo dtfi = ci.DateTimeFormat;
+
+    ApplicationUser currentUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        currentUser = User.Identity.GetApplicationUser();
+    }
 }
 
 <div class="bg-100-image" style="background: url(@Model.BackgroundPath) no-repeat center center fixed;"></div>
@@ -29,73 +38,73 @@
                 @{
                     if (Model.AgeRating != null)
                     {
-                <dt class="col-md-4">Вік:</dt>
-                <dd class="col-md-8">@Model.AgeRating.Name</dd>
+                        <dt class="col-md-4">Вік:</dt>
+                        <dd class="col-md-8">@Model.AgeRating.Name</dd>
                     }
 
                     if (Model.OriginalName != null)
                     {
-                <dt class="col-md-4">Оригінальна назва:</dt>
-                <dd class="col-md-8">@Model.OriginalName</dd>
+                        <dt class="col-md-4">Оригінальна назва:</dt>
+                        <dd class="col-md-8">@Model.OriginalName</dd>
                     }
 
                     if (Model.Director != null)
                     {
-                <dt class="col-md-4">Режисер:</dt>
-                <dd class="col-md-8">@Model.Director</dd>
+                        <dt class="col-md-4">Режисер:</dt>
+                        <dd class="col-md-8">@Model.Director</dd>
                     }
 
                     if (Model.ShowStart != null)
                     {
-                <dt class="col-md-4">Дата виходу:</dt>
-                <dd class="col-md-8">@Model.ShowStart.Value.ToShortDateString()</dd>
+                        <dt class="col-md-4">Дата виходу:</dt>
+                        <dd class="col-md-8">@Model.ShowStart.Value.ToShortDateString()</dd>
                     }
 
                     if (Model.ShowEnd != null)
                     {
-                <dt class="col-md-4">В прокаті до:</dt>
-                <dd class="col-md-8">@Model.ShowEnd.Value.ToShortDateString()</dd>
+                        <dt class="col-md-4">В прокаті до:</dt>
+                        <dd class="col-md-8">@Model.ShowEnd.Value.ToShortDateString()</dd>
                     }
 
                     if (Model.Language != null)
                     {
-                <dt class="col-md-4">Мова:</dt>
-                <dd class="col-md-8">@Model.Language</dd>
+                        <dt class="col-md-4">Мова:</dt>
+                        <dd class="col-md-8">@Model.Language</dd>
                     }
 
                     if (Model.Genres != null)
                     {
-                <dt class="col-md-4">Жанри:</dt>
-                <dd class="col-md-8">@Model.Genres</dd>
+                        <dt class="col-md-4">Жанри:</dt>
+                        <dd class="col-md-8">@Model.Genres</dd>
                     }
 
                     if (Model.Duration != null)
                     {
-                <dt class="col-md-4">Тривалість:</dt>
-                <dd class="col-md-8">@Model.Duration</dd>
+                        <dt class="col-md-4">Тривалість:</dt>
+                        <dd class="col-md-8">@Model.Duration</dd>
                     }
 
                     if (Model.Country != null)
                     {
-                <dt class="col-md-4">Виробництво:</dt>
-                <dd class="col-md-8">@Model.Country</dd>
+                        <dt class="col-md-4">Виробництво:</dt>
+                        <dd class="col-md-8">@Model.Country</dd>
                     }
 
                     if (Model.Script != null)
                     {
-                <dt class="col-md-4">Сценарій:</dt>
-                <dd class="col-md-8">@Model.Script</dd>
+                        <dt class="col-md-4">Сценарій:</dt>
+                        <dd class="col-md-8">@Model.Script</dd>
                     }
 
                     if (Model.Starring != null)
                     {
-                <dt class="col-md-4">В головних ролях:</dt>
-                <dd class="col-md-8">@Model.Starring</dd>
+                        <dt class="col-md-4">В головних ролях:</dt>
+                        <dd class="col-md-8">@Model.Starring</dd>
                     }
 
                     if (Model.Description != null)
                     {
-                <dd class="col-md-12" style="padding-top:15px;">@Model.Description</dd>
+                        <dd class="col-md-12" style="padding-top:15px;">@Model.Description</dd>
                     }
                 }
             </dl>
@@ -161,65 +170,86 @@
 </div>
 
 <div class="container position-relative movie-comments-container text-white">
-    <h3 class="">Коментарі @Model.Comments.Count</h3>
+    <h3 class="">Коментарі <span id="commentsCounter">@Model.Comments.Count</span></h3>
     @if (User.Identity.IsAuthenticated)
     {
         <div>
             <form id="formComment" action="@Url.Action("UserCommentCreate", "Comment")" method="post">
                 <input type="hidden" name="MovieId" value="@Model.Id" />
                 <div class="row d-flex flex-row justify-content-around w-100 m-0">
-                    <div class="comment-user-img"></div>
+                    <div class="comment-user-img"@(currentUser.PicturePath.IsEmpty() ? new HtmlString("") : new HtmlString($" style=\"background: url(/{currentUser.PicturePath.Replace('\\','/')}) no-repeat center;\""))></div>
                     <div class="comment-textarea">
-                        <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="Введи текст повідомлення..." style="resize: none"></textarea>
+                        <textarea rows="2" class="form-control" maxlength="1000" name="Text" placeholder="" style="resize: none"></textarea>
                     </div>
                 </div>
                 <div id="formSelect" class="row d-flex flex-row justify-content-end w-100 m-0">
 
-            <button id="addComment" type="button" class="btn yellow-btn">Відправити</button>
+                    <button id="addComment" type="button" class="btn yellow-btn">Відправити</button>
                 </div>
             </form>
         </div>
     }
     else
     {
-        <div class="p-2 text-muted border">Увійди для відправки коментарів</div>
+        <div class="p-2 text-muted border text-center"><a href="@Url.Action("Login","Account")" class="yellow-link">Увійди</a> для відправки коментарів</div>
     }
     <div id="comments">
-        @foreach (var item in Model.Comments.OrderByDescending(x => x.Id))
-        {
-            <div class="comment-container p-2 m-2 border-dark row" data-id="@item.Id">
-                @{
-                    string username = "";
-
-                    if (item.User.FirstName == null && item.User.LastName == null)
-                    {
-                        username = "Глядач";
-                    }
-                    else
-                    {
-                        username = $"{item.User.LastName} {item.User.FirstName}";
-                    }
-                }
-                <b class="col-2">@username</b>
-                <div class="col-10">
-                    <div>@item.Text</div>
-                    @if (item.CommentType != null)
-                    {
-                        <div class="text-muted">@item.CommentType.Name</div>
-                    }
-                    @if (item.Cinema != null)
-                    {
-                        <div class="text-muted">@item.Cinema.Name</div>
-                    }
-                    @if (item.User.UserName == User.Identity.Name)
-                    {
-                        <button type="button" class="btn deleteComment">Видалити</button>
-                    }
+        <div id="comment-template" class="comment d-flex flex-row justify-content-start" data-id="">
+            <div class="comment-user-img"></div>
+            <div>
+                <div>
+                    <span class="comment-username"></span>
+                    <span class="comment-date" title=""></span>
+                    <a class="comment-delete text-danger icon-trashcan"></a>
+                </div>
+                <div class="comment-text"></div>
+                <div class="comment-additional">
+                    @*<span class="text-success icon-storage"></span>
+                        <span class="text-primary icon-film"></span>*@
                 </div>
             </div>
-                    }
+        </div>
+
+        @foreach (var item in Model.Comments.OrderByDescending(x => x.Datetime))
+        {
+            string username = "";
+
+            if (item.User.FirstName == null)
+            {
+                username = "Глядач";
+            }
+            else
+            {
+                username = $"{item.User.FirstName}";
+            }
+            <div class="comment d-flex flex-row justify-content-start" data-id="@item.Id">
+                <div class="comment-user-img" @(item.User.PicturePath.IsEmpty() ? new HtmlString("") : new HtmlString($" style=\"background: url(/{item.User.PicturePath.Replace('\\','/')}) no-repeat center;\""))></div>
+                <div class="w-100">
+                    <div>
+                        <span class="comment-username">@username</span>
+                        <span class="comment-date" title="@item.Datetime.ToString()">@item.Datetime.ToShortDateString()</span>
+                        @if (item.User.UserName == User.Identity.Name)
+                        {
+                            <a class="comment-delete text-danger icon-trashcan"></a>
+                        }
+                    </div>
+                    <div class="comment-text">@item.Text</div>
+                    <div class="comment-additional">
+                        @if (item.CommentType != null)
+                        {
+                            <span class="text-success icon-storage">@item.CommentType.Name</span>
+                        }
+                        @if (item.Cinema != null)
+                        {
+                            <span class="text-primary icon-film">@item.Cinema.Name</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
+
 @section scripts{
     <script>
         $(function () {
@@ -237,7 +267,7 @@
             if ($("#formComment").length) {
                 $.post("@Url.Action("GetCommentTypeJson", "Comment")", function (data) {
                     var selectItem = $("<select/>", { class: "form-control", name: "CommentTypeId" })
-                        .append($("<option/>", { value: 0, text: "Не вибрано" }));
+                        .append($("<option/>", { value: 0, text: "Категорія" }));
                     for (var key in data) {
                         selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
                     }
@@ -245,7 +275,7 @@
                 });
                 $.post("@Url.Action("GetCinemaJson", "Cinema")", function (data) {
                     var selectItem = $("<select/>", { class: "form-control", name: "CinemaId" })
-                        .append($("<option/>", { value: 0, text: "Не вибрано" }));
+                        .append($("<option/>", { value: 0, text: "Кінотеатр" }));
                     for (var key in data) {
                         selectItem.append($("<option/>", { value: data[key].Id, text:data[key].Name }));
                     }
@@ -253,32 +283,81 @@
                 });
             }
 
-            $("#addComment").click(function (e) {
-                var frm = $("#formComment");
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (data) {
-                        alert("Коментар відправлений")
-                        console.log('Submission was successful.');
-                        console.log(data);
-                    },
-                    error: function (data) {
-                        alert("Помилка")
-                        console.log('An error occurred.');
-                        console.log(data);
-                    },
+            @if (currentUser!=null)
+            {
+            <text>
+                function onClickDelete()
+                {
+                    var commentEl = $(this).closest(".comment");
+                    var commentId = $(this).closest(".comment").attr("data-id");
+                    $.post("@(Url.Action("UserCommentDelete", "Comment"))", {
+                        id: commentId
+                    }, function () {
+                        commentEl.remove();
+                        $("#commentsCounter").text(+$("#commentsCounter").text() - 1);
+                        //alert("Коментар видалений");
+                    })
+                }
+
+                $("#addComment").click(function (e) {
+                    var frm = $("#formComment");
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (data) {
+                            //<div id="comment-template" class="comment d-flex flex-row justify-content-start" data-id="">
+                            //    <div class="comment-user-img"></div>
+                            //    <div>
+                            //        <div>
+                            //            <span class="comment-username"></span>
+                            //            <span class="comment-date" title=""></span>
+                            //            <a href="#" class="comment-delete text-danger icon-trashcan"></a>
+                            //        </div>
+                            //        <div class="comment-text"></div>
+                            //        <div class="comment-additional">
+                            //            <span class="text-success icon-storage"></span>
+                            //            <span class="text-primary icon-film"></span>
+                            //        </div>
+                            //    </div>
+                            //</div>
+                            var newComment = $("#comment-template").clone().removeAttr("id");
+
+                            newComment.find(".comment-user-img").css("background", "@(currentUser.PicturePath.IsEmpty() ? "" : $"url(/{currentUser.PicturePath.Replace('\\','/')}) no-repeat center")")
+
+                            newComment.attr("data-id", data["Id"])
+                                .find(".comment-username").text("@(currentUser.FirstName.IsEmpty() ? "Глядач" : currentUser.FirstName)")
+                                .siblings(".comment-date").text(data["commentDatetime"].split(" ")[0]).attr("title", data["commentDatetime"]);
+                                            newComment.find(".comment-text").text(data["Text"]);
+                                            newComment.find(".comment-delete").on("click", onClickDelete);
+
+                                            if (+data["CommentTypeId"]) {
+                                                var cinemaName = $("#formComment").find("select[name='CommentTypeId']").children("option[value='" + data["CommentTypeId"] + "']").text();
+                                                newComment.find(".comment-additional").append($("<span/>", { class: "text-success icon-storage", text: cinemaName }));
+                            }
+                            if (+data["CinemaId"]) {
+                                var cinemaName=$("#formComment").find("select[name='CinemaId']").children("option[value='" + data["CinemaId"] + "']").text();
+                                newComment.find(".comment-additional").append($("<span/>", { class: "text-primary icon-film", text: cinemaName }));
+                            }
+
+                            newComment.prependTo("#comments");
+
+                            $("#formComment").find("textarea").val("");
+                            $("#commentsCounter").text(+$("#commentsCounter").text() + 1);
+                            //console.log('Submission was successful.');
+                            //console.log(data);
+                        },
+                        error: function (data) {
+                            //alert("Помилка")
+                            //console.log('An error occurred.');
+                            //console.log(data);
+                        },
+                    });
                 });
-            });
-            $(".deleteComment").click(function (e) {
-                var commentId = $(this).closest(".comment-container").attr("data-id");
-                $.post("@(Url.Action("UserCommentDelete","Comment"))", {
-                    id: commentId
-                }, function () {
-                    alert("Коментар видалений");
-                })
-            });
+
+                $(".comment-delete").on("click",onClickDelete);
+            </text>
+            }
         });
     </script>
 }
