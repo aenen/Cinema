@@ -230,6 +230,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -412,6 +413,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Ticket\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -13,11 +13,14 @@ namespace Cinema.Data.Database
 
         public int StatusId { get; set; }
 
+
         public bool IsUsed { get; set; }
 
         public DateTime CreationDateTime { get; set; }
 
-        public Seat Seat { get; set; }
+        public DateTime SessionDateTime { get; set; }
+
+        public virtual Seat Seat { get; set; }
 
         public virtual TicketStatus Status { get; set; }
         

@@ -49,3 +49,15 @@
         </tbody>
     </table>
 </div>
+
+@{ 
+    var orders = Model.Orders.SelectMany(x => x.OrderItems);
+    var tickets = orders.Select(x => x.Ticket).Where(x => x != null&& x.StatusId == 1);
+    //var ticketsWhere = tickets.Where(x => x.StatusId == 1);
+    foreach (var item in tickets)
+    {
+    <img src="@Url.Content($"~/Ticket/DrawTicket/?id={item.Id}")" height="300" />
+
+
+}
+}

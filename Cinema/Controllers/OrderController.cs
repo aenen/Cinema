@@ -86,6 +86,7 @@ namespace Cinema.Controllers
                     Price = ticketPrice.Price,
                     Ticket = new Ticket
                     {
+                        SessionDateTime=session.DateTime,
                         CreationDateTime=DateTime.Now,
                         TicketPrice = ticketPrice,
                         Seat=ticketPrice.Seat,
@@ -149,6 +150,7 @@ namespace Cinema.Controllers
                     Price = ticketPrice.Price,
                     Ticket = new Ticket
                     {
+                        SessionDateTime = session.DateTime,
                         CreationDateTime = DateTime.Now,
                         TicketPrice = ticketPrice,
                         Seat = ticketPrice.Seat,

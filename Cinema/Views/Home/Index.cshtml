@@ -4,23 +4,4 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>Кінотеатри:</h2>
-<ul class="list-group">
-    @{
-        foreach (var item in Model.Cinemas.ToList())
-        {
-            @Html.ActionLink(item.Name, "Details", "Cinema", new { name = item.Keyword }, new { @class = "list-group-item" })
-        }
-    }
-</ul>
-
-
-<h2>Фільми</h2>
-<ul class="list-group">
-    @{
-        foreach (var item in Model.Movies.ToList())
-        {
-            @Html.ActionLink(item.Name, "Details", "Movie", new { id = item.Id }, new { @class = "list-group-item" })
-        }
-    }
-</ul>
+<img src="@Url.Content("~/Home/Generate")" height="300" />
