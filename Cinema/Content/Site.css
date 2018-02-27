@@ -135,6 +135,12 @@ textarea {
         .home-container .home-btn {
             margin: 1rem 10%;
         }
+    .sum-seat-container {
+        font-size: 3vw !important;
+    }
+    .session-container{
+        overflow:auto;
+    }
 }
 
 @media only screen and (min-width:1600px) {
@@ -189,17 +195,22 @@ textarea {
     padding-left: 0.3125rem;
 }
 
+.session-container {
+    background-color: #0A0813;
+    border:1px solid #ffff00;
+}
 .sum-seat-container {
     padding: 10px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     min-width: 35em;
-    font-size: 2vw;
+    font-size: 1.75vw;
 }
+
 
 .seat-screen {
     height: 1.5em;
-    background-color: azure;
-    color: cadetblue;
+    background-color: #3B3942;
+    color: #C6C6C6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,7 +255,7 @@ textarea {
 }
 
 .place-choosen {
-    background-color: yellow;
+    background-color: #ffff00;
 }
 
 
@@ -1064,4 +1075,8 @@ textarea:focus, input:focus, select:focus, option:focus, button:focus {
 
 .yellow-link:hover {
     color: white;
+}
+
+.table th, .table td{
+    border-color:#ffff00 !important;
 }
