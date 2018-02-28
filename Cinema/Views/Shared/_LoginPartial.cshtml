@@ -1,17 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Cinema.Data.Identity
 @if (Request.IsAuthenticated)
 {
     <li class="nav-item">
         <div class="profile-nav" style="padding:13px">
-            <a href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
+            @{
+                var currentUser = User.Identity.GetApplicationUser();
+                if (currentUser != null && !currentUser.PicturePath.IsEmpty())
+                {
+                    <a href="@Url.Action("Index", "Profile")" class="profile-nav-img" style="background: url(/@currentUser.PicturePath.Replace('\\','/')) no-repeat center"></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
+                }
+            }
         </div>
     </li>
-}
-else
-{
-    <li class="nav-item">
-        <div class="profile-nav" style="padding:13px">
-            <a href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
-        </div>
-    </li>
-}
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <div class="profile-nav" style="padding:13px">
+                            <a href="@Url.Action("Index", "Profile")" class="profile-nav-img icon-profile"></a>
+                        </div>
+                    </li>
+                }

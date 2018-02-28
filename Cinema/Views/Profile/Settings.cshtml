@@ -3,67 +3,66 @@
 @{
     ViewBag.Title = "Налаштування";
 }
+<div class="bg-100-image"></div>
+<div class="settings-container position-relative text-white">
+    <div class="container text-center">
+        <div class="row justify-content-center align-content-center">
+            @using (Html.BeginForm("Settings", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
 
-<h2>Налаштування</h2>
-
-@using (Html.BeginForm("Settings","Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.Label("Аватар", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input name="file" type="file" accept=".jpg, .png, .jpeg" class="form-control-file" />
-                @Html.ValidationMessage("File", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(model => model.FirstName, "Ім'я", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.LastName, "Прізвище", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Birthday, "Дата народження", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-                @Html.LabelFor(model => model.CityId, "Місто", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Аватар", htmlAttributes: new { @class = "control-label" })
+                    <div class="">
+                        <input name="file" type="file" accept=".jpg, .png, .jpeg" class="form-control-file" />
+                        @Html.ValidationMessage("File", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, "Ім'я", htmlAttributes: new { @class = "control-label" })
+                        <div class="">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group row">
-                @Html.LabelFor(model => model.FavoriteCinemaId, "Улюблений кінотеатр", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("FavoriteCinemaId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.FavoriteCinemaId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, "Прізвище", htmlAttributes: new { @class = "control-label" })
+                        <div class="">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+                    <div class="form-group">
+                        <label class="control-label " for="Birthday">Дата народження</label>
+                        <div class="">
+                            <input class="form-control text-box single-line" data-val="true" data-val-date="The field Birthday must be a date." data-val-required="The Birthday field is required." id="Birthday" name="Birthday" type="date" value="@Model.Birthday.ToString("yyyy'-'MM'-'dd")">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Birthday" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CityId, "Місто", htmlAttributes: new { @class = "control-label " })
+                        <div class="">
+                            @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FavoriteCinemaId, "Улюблений кінотеатр", htmlAttributes: new { @class = "control-label" })
+                        <div class="">
+                            @Html.DropDownList("FavoriteCinemaId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FavoriteCinemaId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                            <input type="submit" value="Зберегти зміни" class="btn yellow-btn" />
+                    </div>
+            }
         </div>
     </div>
-}
+</div>

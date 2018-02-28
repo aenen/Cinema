@@ -10,7 +10,56 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.sidenav {
+    margin-left: -3px;
+    border-right: 3px dashed #ffff00;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0A0813;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
 
+    .sidenav a {
+        margin: 8px 8px 8px 70px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: block;
+        transition: 0.2s;
+    }
+
+        .sidenav a:hover {
+            color: #ffff00;
+        }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+.home-body .sidenav {
+    padding-top: 100px;
+    background-color: #0E0C13;
+}
+.home-body .sidenav a {
+    margin-left:32px;
+}
+
+@media screen and (max-height: 450px) {
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -45,18 +94,21 @@ textarea {
     background: url(WebsiteImage/Background/page_home_background.png) no-repeat center center fixed;
     background-size: cover;
 }
-
-/* - /home/index/ menu -*/
-.home-nav-item {
-    min-width: 50px;
-    min-height: 50px;
-    display: block;
-    border-radius: 50%;
-    background-color: #3C3A41;
-    line-height: 50px;
-    color: #C6C6C6;
-    transition: 200ms;
-}
+    .home-body .profile-nav-img {
+        width:unset;
+        height:unset;
+    }
+    /* - /home/index/ menu -*/
+    .home-nav-item {
+        min-width: 50px;
+        min-height: 50px;
+        display: block;
+        border-radius: 50%;
+        background-color: #3C3A41;
+        line-height: 50px;
+        color: #C6C6C6;
+        transition: 200ms;
+    }
 
     .home-nav-item:hover {
         text-decoration: none;
@@ -67,6 +119,8 @@ textarea {
 .home-navbar {
     background: linear-gradient(#020107, #0F0D14);
     height: 100px;
+    padding:0 25px;
+    z-index:2;
 }
 
 
@@ -75,10 +129,12 @@ textarea {
         height: 75%;
         flex: 1;
     }
-
-
+.home-container .img-logo-small{
+    /*margin-top:50px;*/
+}
 /* - /home/index/ content -*/
 .home-container {
+    padding:25px 0;
     min-width: 30rem;
     width: 50%;
     min-height: calc(100% - 100px);
@@ -116,20 +172,26 @@ textarea {
         font-size: 12.5px;
     }*/
 
-    .home-navbar .logo-full {
+    .home-navbar .img-logo-full {
+        content: url(WebsiteImage/Logo/logo.svg);
+        height:75px;        
+    }
+
+    /*.home-navbar .logo-full {
         max-width: 100px;
         height: 100%;
         background-image: url(WebsiteImage/Logo/logo.svg);
-    }
+    }*/
 
     .home-container {
         min-width: initial;
+        padding-top:50px;
         width: 100%;
     }
 
-        .home-container .logo-small {
-            background-image: url(WebsiteImage/Logo/full_logo.svg);
-            min-height: 2.5rem;
+        .home-container .img-logo-small {
+            content: url(WebsiteImage/Logo/full_logo.svg);
+            width:300px;
         }
 
         .home-container .home-btn {
@@ -148,23 +210,41 @@ textarea {
         font-size: 25px;
     }*/
 
+    .home-body .sidenav {
+        padding-top: 150px;
+        background-color: #0E0C13;
+    }
     .home-container {
-        min-height: calc(100% - 200px);
+        min-height: calc(100% - 150px);
+        padding:50px 0;
     }
 
     .home-navbar {
-        height: 200px;
+        height: 150px;
+        padding: 0 50px;
     }
-
-        .home-navbar .logo-full {
-            max-width: 750px;
-            height: 50%;
+        .home-navbar .img-logo-full {
+            height: 75px;
+        }
+        .home-container .img-logo-small {
+            width: 200px;
         }
 
-    /*.home-nav-item {
-        min-width: 100px;
-        min-height: 100px;        
-    }*/
+        /*.home-navbar .logo-full {
+            max-width: 750px;
+            height: 50%;
+        }*/
+
+    .home-container .home-btn {
+        padding: 10px;
+        font-size: 35px;
+    }
+    .home-nav-item {
+        min-width: 75px;
+        min-height: 75px;
+        line-height: 75px !important;
+        font-size: 30px !important;
+    }
 
     .home-container .home-btn {
         margin: 1rem 10%;
@@ -335,8 +415,8 @@ textarea {
     color: #C6C6C6;
     /*border: 1px solid black;*/
     border-radius: 50%;
-    /*background: url(profile_icon.png) no-repeat center;
-    background-size: cover;*/
+    /*background: url(profile_icon.png) no-repeat center;*/
+    background-size: cover !important;
     transition: 200ms;
 }
 
@@ -1105,4 +1185,10 @@ textarea:focus, input:focus, select:focus, option:focus, button:focus {
     margin-bottom: 20px;
 }
 
-/*session-wrapper*/
+.settings-container .control-label{
+    font-size:20px;
+}
+
+.settings-container .form-control {
+    font-size: 17.5px;
+}

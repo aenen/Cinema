@@ -5,59 +5,81 @@
     ViewBag.Title = "Особистий кабінет";
 }
 
-<h2>Особистий кабінет</h2>
-@{
-    if (Model.PicturePath != null)
-    {
-        <img class="img-thumbnail d-block" src="/@Model.PicturePath" style="max-height:100px" />
-    }
-}
-<div class="row">
-    <a class="p-4" href="@Url.Action("Settings", "Profile")">Налаштування</a>
-    @*<a class="p-4" href="@Url.Action("Settings", "Profile")">Квитки</a>*@
-    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "p-4" }))
-    {
-        @Html.AntiForgeryToken()
-        <a  href="javascript:document.getElementById('logoutForm').submit()">Вийти</a>
-    }
-</div>
-<div>
-    <h3>Замовлення:</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>№</th>
-                <th>Фільм</th>
-                <th>Квитки</th>
-                <th>Статус</th>
-                <th>Дата</th>
-                <th>Ціна</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Orders.OrderByDescending(x => x.PurchaseDate))
-            {
+<div class="bg-100-color"></div>
+<div class="profile-container text-white position-relative container">
+    @*@{
+        if (Model.PicturePath != null)
+        {
+            <img class="img-thumbnail d-block" src="/@Model.PicturePath" style="max-height:100px" />
+        }
+    }*@
+    <div class="row justify-content-between p-3">
+        <a class=" btn yellow-btn" href="@Url.Action("Settings", "Profile")">Налаштування</a>
+        @*<a class="p-4" href="@Url.Action("Settings", "Profile")">Квитки</a>*@
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn yellow-btn">Вийти</a>
+        }
+    </div>
+    <div class="text-center">
+        <h3>Замовлення:</h3>
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row">@item.Id</th>
-                    <td>@item.OrderItems.FirstOrDefault().Movie.Name</td>
-                    <td>@item.OrderItems.Count</td>
-                    <td>@item.OrderStatus.Name </td>
-                    <td>@item.PurchaseDate</td>
-                    <td>@(item.TotalPrice / 100)</td>
+                    <th>№</th>
+                    <th>Фільм</th>
+                    <th>Квитки</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th>Ціна</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Orders.OrderByDescending(x => x.PurchaseDate))
+                {
+                    if (item.OrderStatus.Id == 1)
+                    {
+                        <tr  style="cursor: pointer;color: #ffff00;" data-toggle="collapse" data-target="#@item.Id" class="accordion-toggle">
+                            <th scope="row">@item.Id</th>
+                            <td>@item.OrderItems.FirstOrDefault().Movie.Name</td>
+                            <td>@item.OrderItems.Count</td>
+                            <td>@item.OrderStatus.Name</td>
+                            <td>@item.PurchaseDate</td>
+                            <td>@(item.TotalPrice / 100) грн</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="hiddenRow p-0">
+                                <div class="accordian-body collapse container" id="@item.Id">
+                                    <div class="row">
+                                        @foreach (var ticket in item.OrderItems.Select(x => x.Ticket).Where(x => x != null))
+                                        {
+
+                                            <div class="col-md-4">
+                                                <a target="_blank" class="d-block" href="@Url.Content($"~/Ticket/DrawTicket/{ticket.Id}")">
+                                                    <img src="@Url.Content($"~/Ticket/DrawTicket/{ticket.Id}")" height="300" />
+                                                </a>
+                                                <a class="btn btn-outline-success m-2" href="@Url.Content($"~/Ticket/DrawTicket/{ticket.Id}")" download="@(ticket.OrderItem.Movie.Name) - квиток">Завантажити квиток</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.OrderItems.FirstOrDefault().Movie.Name</td>
+                            <td>@item.OrderItems.Count</td>
+                            <td>@item.OrderStatus.Name </td>
+                            <td>@item.PurchaseDate</td>
+                            <td>@(item.TotalPrice / 100) грн</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-@{ 
-    var orders = Model.Orders.SelectMany(x => x.OrderItems);
-    var tickets = orders.Select(x => x.Ticket).Where(x => x != null&& x.StatusId == 1);
-    //var ticketsWhere = tickets.Where(x => x.StatusId == 1);
-    foreach (var item in tickets)
-    {
-    <img src="@Url.Content($"~/Ticket/DrawTicket/?id={item.Id}")" height="300" />
-
-
-}
-}
