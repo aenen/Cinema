@@ -88,7 +88,7 @@ namespace Cinema.Controllers
                         if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                         {
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                            ViewBag.Message = "You must have a confirmed email to log on.";
+                            ViewBag.Message = "Необхідно спочатку підтвердити електронну пошту.";
                             return View("ShowMsg");
                         }
                     }
@@ -178,7 +178,7 @@ namespace Cinema.Controllers
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    ViewBag.Message = "Please confirm the email was sent to you.";
+                    ViewBag.Message = "На вказану електронну пошту було надіслано повідомлення. Будь ласка, перейди по посиланню в ньому, щоб підтвердити свій аккаунт.";
                     return View("ShowMsg");
 
 
@@ -210,7 +210,7 @@ namespace Cinema.Controllers
             // Send an email with this link:
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userID, code = code }, protocol: Request.Url.Scheme);
-            await UserManager.SendEmailAsync(userID, subject, "Please confirm your account by <a href=\"" + callbackUrl + "\">clicking here</a>");
+            await UserManager.SendEmailAsync(userID, subject, "Будь ласка, підтвердіть свій аккаунт <a href=\"" + callbackUrl + "\">натиснувши сюди</a>");
 
 
             return callbackUrl;

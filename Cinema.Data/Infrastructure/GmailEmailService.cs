@@ -10,13 +10,11 @@ namespace Cinema.Data.Infrastructure
 {
     public class GmailEmailService : SmtpClient
     {
-        // Gmail user-name
         public string UserName { get; set; }
 
         public GmailEmailService() :
             base(ConfigurationManager.AppSettings["GmailHost"], Int32.Parse(ConfigurationManager.AppSettings["GmailPort"]))
         {
-            //Get values from web.config file:
             this.UserName = ConfigurationManager.AppSettings["GmailUserName"];
             this.EnableSsl = Boolean.Parse(ConfigurationManager.AppSettings["GmailSsl"]);
             this.UseDefaultCredentials = false;
