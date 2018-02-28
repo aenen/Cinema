@@ -1,0 +1,34 @@
+﻿@model Cinema.Data.Database.Order
+
+@{
+    ViewBag.Title = "Твої квитки";
+}
+
+<div class="bg-100-image"></div>
+<div class="container text-center position-relative text-white">
+    <div>
+        <i class="icon-mood-happy display-3"></i>
+        <h2 class="display-4">Оплата пройшла успішно!</h2>
+    </div>    
+</div>
+<div class="p-3 text-center position-relative" style="background-color:white; margin-top:25px">    
+    <h3>Твої квитки:</h3>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.OrderItems.Select(x => x.Ticket))
+            {
+                <div class="col-md-4">
+                        <a target="_blank" class="d-block" href="@Url.Content($"~/Ticket/DrawTicket/?id={item.Id}")">
+                            <img src="@Url.Content($"~/Ticket/DrawTicket/?id={item.Id}")" height="300" />
+                        </a>
+                        <a class="btn btn-outline-success m-2" href="@Url.Content($"~/Ticket/DrawTicket/?id={item.Id}")" download="@(item.OrderItem.Movie.Name) - квиток">Завантажити квиток</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container text-center text-white position-relative p-3">
+    <div class="m-2">Також ти можеш завантажити квитки в особистому кабінеті</div>
+    <a href="@Url.Action("Index","Profile")" class="btn yellow-btn" style="font-size:20px">Особистий кабінет</a>
+</div>

@@ -39,6 +39,7 @@ namespace Cinema.Payment.LiqPay
                 description = "Оплата замовлення",
                 order_id = order.TestIdForLiqpay,
                 sandbox = 1,
+                expired_date=DateTime.Now.ToUniversalTime().AddMinutes(10).ToString("yyyy'-'MM'-'dd hh':'mm':'ss"),
 
                 result_url = result_url,
 

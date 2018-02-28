@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cinema.Data.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,8 @@ namespace Cinema.Models
         public string CinemaHallName { get; set; }
 
         public string MovieName { get; set; }
+
+        public Session Session { get; set; }
     }
     
     public class OrderItemViewModel

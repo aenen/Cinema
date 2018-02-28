@@ -5,7 +5,8 @@
     ViewBag.Title = "Придбати квитки";
 }
 
-<h2>Будь ласка, зачекайте...</h2>
+<div class="bg-100-image"></div>
+<h2 class="position-relative text-white text-center display-4">Будь ласка, зачекайте...</h2>
 
 <form id="liqpayForm" method="POST" accept-charset="utf-8" action="https://www.liqpay.ua/api/3/checkout">
     <input type="hidden" name="data" value="@Model.Data" />

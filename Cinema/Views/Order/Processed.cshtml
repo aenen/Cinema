@@ -5,54 +5,80 @@
     ViewBag.Title = $"Оформлення замовлення.";
 }
 
-<h2>@Model.MovieName в @Model.SessionDate</h2>
 
-<form id="form-buy" action="***" method="post" class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>№</th>
-                <th>Ряд</th>
-                <th>Місце</th>
-                <th>Ціна</th>
-            </tr>
-        </thead>
-        <tbody id="tickets-cart">
-            @{
-                int count = 1;
-                foreach (var item in Model.OrderItems)
-                {
-                    <tr class="ticket-item">
-                        <th scope="row">@count</th>
-                        <td>
-                            <div>@item.SeatRow</div>
-                            <input type="hidden" name="selected_seats[].row" value="@item.SeatRow" />
-                        </td>
-                        <td>
-                            <div class="col-md-4">@item.SeatNumber</div>
-                            <input type="hidden" name="selected_seats[].number" value="@item.SeatNumber" />
-                        </td>
-                        <td>@(item.Price/100)</td>
+<div class="bg-100-image" style="background: url(@Model.Session.Movie.BackgroundPath) no-repeat center center fixed;"></div>
+<div class="bg-100-color" style="background-color:rgba(10,8,19,.9);"></div>
+
+<div class="processed-container position-relative">
+    <div class="cinema-info-background-container ">
+        <div class="container d-flex flex-column justify-content-center h-100">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                @*<div style="font-size:17.5px">Кінотнатр TRAEKTORIA</div>*@
+                <h1 class="ci-cinema-name display-4">@Model.MovieName</h1>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="text-right">
+                    <div class="ci-main">Зал @Model.CinemaHallName</div>
+                    <div class="ci-muted">@Model.CinemaName</div>
+                </div>
+                <div>
+                    <div class="ci-main">@Model.SessionDate.ToShortTimeString()</div>
+                    <div class="ci-muted">@Model.SessionDate.ToShortDateString()</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container  text-white">
+        <h3 class="text-center">Обрані місця:</h3>
+        <form id="form-buy" action="***" method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Ряд</th>
+                        <th>Місце</th>
+                        <th>Ціна</th>
                     </tr>
-                    count++;
-                }
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>@(Model.SumPrice / 100) грн</th>
-            </tr>
-        </tfoot>
-    </table>
-    <input type="hidden" name="session_id" value="@Model.SessionId" />
-</form>
-<div class="container">
-    <div class="row">
-        <button id="buy" class="btn">Оплатити</button>
-        <button id="reserve" class="btn">Забронювати</button>
+                </thead>
+                <tbody id="tickets-cart">
+                    @{
+                        int count = 1;
+                        foreach (var item in Model.OrderItems)
+                        {
+                            <tr class="ticket-item">
+                                <th scope="row">@count</th>
+                                <td>
+                                    <div>@item.SeatRow</div>
+                                    <input type="hidden" name="selected_seats[].row" value="@item.SeatRow" />
+                                </td>
+                                <td>
+                                    <div class="col-md-4">@item.SeatNumber</div>
+                                    <input type="hidden" name="selected_seats[].number" value="@item.SeatNumber" />
+                                </td>
+                                <td>@(item.Price / 100) грн</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>@(Model.SumPrice / 100) грн</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <input type="hidden" name="session_id" value="@Model.SessionId" />
+        </form>
+        <div class="container">
+            <div class="row justify-content-end">
+                <button id="reserve" class="btn grey-btn">Забронювати</button>
+                <button id="buy" class="btn yellow-btn" style="margin-left:10px">Оплатити</button>
+            </div>
+        </div>
     </div>
 </div>
 

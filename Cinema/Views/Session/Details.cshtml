@@ -13,86 +13,91 @@
 
 <div class="bg-100-image" style="background: url(@Model.Movie.BackgroundPath) no-repeat center center fixed;"></div>
 <div class="bg-100-color" style="background-color:rgba(10,8,19,.9);"></div>
-<div class="container-fluid text-white position-relative">
-    <div class="d-flex flex-column flex-md-row w-100 justify-content-between p-md-2">
-        <div>
-            <h2 style="color:#ffff00" class="d-inline-block">
-                <span class="icon-film"></span> @Model.Movie.Name
-            </h2>
-            <span>(кінотеатр @Model.CinemaHall.Cinema.Name | зал "@Model.CinemaHall.Name")</span>
-        </div>
-        <span style="font-size:25px">@Model.DateTime.ToShortDateString() <span class="font-weight-bold" style="color:#ffff00">@Model.DateTime.ToShortTimeString()</span></span>
-    </div>
-    <div class="row m-md-2">
-        <div class="col-md-8 m-0 p-0">
-            <div class="session-container">
-                <div id="session" class="sum-seat-container" data-session-id="@Model.Id">
-                    <div class="seat-screen">Е К Р А Н</div>
-                    <div class="seat-container" style="width: @(seatContainerWidth); height: @(seatContainerHeight)">
-                        @{
-                            foreach (var ticketPrice in Model.TicketPrices)
-                            {
-                                string seatLeft = ticketPrice.Seat.SeatStyle.PositionX.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                                string seatTop = ticketPrice.Seat.SeatStyle.PositionY.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                                string isFree = (ticketPrice.Ticket == null) ? "place-free" : "place-taken";
-
-                                <div class="seat @ticketPrice.Seat.SeatType.Keyword @isFree"
-                                     data-row="@ticketPrice.Seat.Row"
-                                     data-number="@ticketPrice.Seat.Number"
-                                     data-price="@ticketPrice.Price"
-                                     style="left: @(seatLeft)em; top: @(seatTop)em"></div>
-                            }
-                        }
-                    </div>
+<div class="session-wrapper position-relative">
+    <div class="cinema-info-background-container ">
+        <div class="container d-flex flex-column justify-content-center h-100">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                @*<div style="font-size:17.5px">Кінотнатр TRAEKTORIA</div>*@
+                <h1 class="ci-cinema-name display-4">@Model.Movie.Name</h1>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="text-right">
+                    <div class="ci-main">Зал @Model.CinemaHall.Name</div>
+                    <div class="ci-muted">@Model.CinemaHall.Cinema.Name</div>
+                </div>
+                <div>
+                    <div class="ci-main">@Model.DateTime.ToShortTimeString()</div>
+                    <div class="ci-muted">@Model.DateTime.ToShortDateString()</div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 text-center">
-            <form id="form-buy" method="post" action="@Url.Action("Processed","Order")">
-                <div id="cart">
-                    <h3>Обрані місця</h3>
+    </div>
+    <div class="container-fluid text-white">
+        <div class="row m-md-2">
+            <div class="col-md-8 m-0 p-0">
+                <div class="session-container">
+                    <div id="session" class="sum-seat-container" data-session-id="@Model.Id">
+                        <div class="seat-screen">Е К Р А Н</div>
+                        <div class="seat-container" style="width: @(seatContainerWidth); height: @(seatContainerHeight)">
+                            @{
+                                foreach (var ticketPrice in Model.TicketPrices)
+                                {
+                                    string seatLeft = ticketPrice.Seat.SeatStyle.PositionX.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                    string seatTop = ticketPrice.Seat.SeatStyle.PositionY.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                    string isFree = (ticketPrice.Ticket == null) ? "place-free" : "place-taken";
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Ряд</th>
-                                <th>Місце</th>
-                                <th>Ціна</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tickets-cart"></tbody>
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th id="cart-price">0 грн</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    @*<div id="tickets-cart" class="container">
-                        </div>*@
-                    @*<div id="cart-count"></div>*@
+                                    <div class="seat @ticketPrice.Seat.SeatType.Keyword @isFree"
+                                         data-row="@ticketPrice.Seat.Row"
+                                         data-number="@ticketPrice.Seat.Number"
+                                         data-price="@ticketPrice.Price"
+                                         style="left: @(seatLeft)em; top: @(seatTop)em"></div>
+                                }
+                            }
+                        </div>
+                    </div>
                 </div>
-                <input type="hidden" name="session_id" value="@Model.Id" />
-                @*<div id="cart-price"></div>*@
-                <button type="button" id="buy" class="btn yellow-btn">Далі</button>
-            </form>
+            </div>
+            <div class="col-md-4 text-center">
+                <form id="form-buy" method="post" action="@Url.Action("Processed","Order")">
+                    <div id="cart">
+                        <h3>Обрані місця</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ряд</th>
+                                    <th>Місце</th>
+                                    <th>Ціна</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-cart"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th id="cart-price">0 грн</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        @*<div id="tickets-cart" class="container">
+                            </div>*@
+                        @*<div id="cart-count"></div>*@
+                    </div>
+                    <input type="hidden" name="session_id" value="@Model.Id" />
+                    @*<div id="cart-price"></div>*@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button type="button" id="buy" class="btn yellow-btn">Далі</button>
+                    }
+                    else
+                    {
+                        <a href="@(User.Identity.IsAuthenticated ? "#" : Url.Action("Login", "Account", new { returnUrl = Url.Action("Details", "Session", new { id = Model.Id }) }))" id="buy" class="btn yellow-btn">Далі</a>
+                    }
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-@*<div class="ticket-item" data-row="1" data-number="1" style="border-bottom:1px solid black">
-        <div class="ti-row">Ряд:     1</div>
-        <input type="hidden" name="selected_seats[].row" value="1"/>
-        <div class="ti-number">Місце:   1</div>
-        <input type="hidden" name="selected_seats[].number" value="1"/>
-    </div>
-    <div class="ticket-item" data-row="2" data-number="4" style="border-bottom:1px solid black">
-        <div class="ti-row">Ряд:     2</div>
-        <input type="hidden" name="selected_seats[].row" value="2"/>
-        <div class="ti-number">Місце:   4</div>
-        <input type="hidden" name="selected_seats[].number" value="4"/>
-    </div>*@
 
 @section scripts
 {
@@ -128,7 +133,7 @@
                         .append($("<div/>", { class: "ti-number", text: seatNumber }))
                         .append($("<input/>", { type: "hidden", name: "selected_seats[].number", value: seatNumber }))
                     )
-                    .append($("<td/>", { text: +seatPrice / 100 }))
+                    .append($("<td/>", { text: +seatPrice / 100 + " грн" }))
                     .appendTo("#tickets-cart");
 
                 tickets.push({ row: seatRow, number: seatNumber, price: seatPrice });

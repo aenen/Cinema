@@ -58,7 +58,8 @@ namespace Cinema.Controllers
                 SessionDate = session.DateTime,
                 CinemaHallName = session.CinemaHall.Name,
                 CinemaName = session.CinemaHall.Cinema.Name,
-                MovieName = session.Movie.Name
+                MovieName = session.Movie.Name,
+                Session=session
             };
 
             return View(model);
@@ -191,11 +192,14 @@ namespace Cinema.Controllers
 
             // --- Якщо сигнатура серевера не співпадає з сигнатурою відповіді LiqPay - щось пішло не так
             if (mySignature != request_dictionary["signature"])
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("PurchaseError");
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             string order_id = request_data_dictionary["order_id"];
             Order order = orderRepository.FindBy(x => x.TestIdForLiqpay == order_id).FirstOrDefault();
-            if (order == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (order == null)
+                return View("PurchaseError");
+            //new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             // --- Якщо статус відповіді "Тест" або "Успіх" - все добре
             if (request_data_dictionary["status"] == "sandbox" || request_data_dictionary["status"] == "success")
             {
@@ -209,7 +213,7 @@ namespace Cinema.Controllers
                 orderRepository.AddOrUpdate(order);
                 orderRepository.Save();
 
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                return View("PurchaseSuccess",order);
             }
 
             // delete tickets
@@ -220,7 +224,7 @@ namespace Cinema.Controllers
             }
             ticketRepository.Save();
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            return View("PurchaseError");
         }
 
         /// <summary>

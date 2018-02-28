@@ -409,6 +409,8 @@
     <Content Include="Views\Account\ShowMsg.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Order\PurchaseSuccess.cshtml" />
+    <Content Include="Views\Order\PurchaseError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

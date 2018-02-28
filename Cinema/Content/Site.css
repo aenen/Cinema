@@ -1080,3 +1080,29 @@ textarea:focus, input:focus, select:focus, option:focus, button:focus {
 .table th, .table td{
     border-color:#ffff00 !important;
 }
+
+
+.grey-btn {
+    border: 1px solid #C6C6C6;
+    background-color: transparent;
+    color: white;
+}
+
+    .grey-btn:hover {
+        color: #C6C6C6;
+    }
+
+.processed-container .yellow-btn, .processed-container .grey-btn{
+    font-size: 20px;
+    padding: 5px 15px;
+    border-width: 2px;
+}
+
+.processed-container .cinema-info-background-container, .session-wrapper .cinema-info-background-container {
+    background: rgb(10,8,19);
+    border-top: 2px dashed #ffff00;
+    border-bottom: 2px dashed #ffff00;
+    margin-bottom: 20px;
+}
+
+/*session-wrapper*/
