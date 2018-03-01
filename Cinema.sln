@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema", "Cinema\Cinema.csproj", "{C24E86E6-1348-4632-83DD-99EF7CDD693E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Tests", "Cinema.Tests\Cinema.Tests.csproj", "{414BE698-5927-40D8-847C-D6CC6ED122EF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{484B8F6D-096B-4526-94A6-0AF367BC8F16}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -26,10 +24,6 @@ Global
 		{C24E86E6-1348-4632-83DD-99EF7CDD693E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24E86E6-1348-4632-83DD-99EF7CDD693E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24E86E6-1348-4632-83DD-99EF7CDD693E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{414BE698-5927-40D8-847C-D6CC6ED122EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{414BE698-5927-40D8-847C-D6CC6ED122EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{414BE698-5927-40D8-847C-D6CC6ED122EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{414BE698-5927-40D8-847C-D6CC6ED122EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68CEC8BC-054F-400A-BFE6-7372EA237ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68CEC8BC-054F-400A-BFE6-7372EA237ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68CEC8BC-054F-400A-BFE6-7372EA237ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU

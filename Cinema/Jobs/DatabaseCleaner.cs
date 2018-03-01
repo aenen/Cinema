@@ -6,6 +6,7 @@ using System.Web;
 using System.Threading.Tasks;
 using Cinema.Data.Database;
 using System.Data.Entity.Migrations;
+using Cinema.Models;
 
 namespace Cinema.Jobs
 {
@@ -22,6 +23,8 @@ namespace Cinema.Jobs
                 var deleteTickest = db.Tickets.Where(x => dtNow > x.CreationDateTime && x.StatusId == 3).ToList();
                 db.Tickets.RemoveRange(deleteTickest);
                 db.SaveChanges();
+                if(deleteTickest!=null && deleteTickest.Count>0)
+                    TicketHub.NotifyToAllClients();
 
                 // видаляю квитки, які були заброньовані, але не викуплені за 30хв до початку сеансу (+ змінюю статус замовлення на "відхилено")
                 DateTime dtNow2 = DateTime.Now.AddMinutes(30);
@@ -37,6 +40,8 @@ namespace Cinema.Jobs
                 }
                 db.Tickets.RemoveRange(reservedDidntPayed);
                 db.SaveChanges();
+                if (reservedDidntPayed != null && reservedDidntPayed.Count>0)
+                    TicketHub.NotifyToAllClients();
 
                 // видаляю застарілі сеанси (які почались 12 годин тому)
                 DateTime dtNow3 = DateTime.Now.AddHours(-12);

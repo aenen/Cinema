@@ -108,6 +108,7 @@ namespace Cinema.Controllers
             };
             orderRepository.AddOrUpdate(order);
             orderRepository.Save();
+            TicketHub.NotifyToAllClients();
 
             // на основі створенго замовлення збираю необхідні для liqpay api дані та відправляю їх на в'ю
             LiqPayHelper liqPayHelper = new LiqPayHelper(ConfigurationManager.AppSettings["LiqPayPrivateKey"], ConfigurationManager.AppSettings["LiqPayPublicKey"]);
@@ -170,6 +171,7 @@ namespace Cinema.Controllers
             };
             orderRepository.AddOrUpdate(order);
             orderRepository.Save();
+            TicketHub.NotifyToAllClients();
 
             return View();
         }
@@ -223,6 +225,7 @@ namespace Cinema.Controllers
                     ticketRepository.Delete(item.Ticket);
             }
             ticketRepository.Save();
+            TicketHub.NotifyToAllClients();
 
             return View("PurchaseError");
         }

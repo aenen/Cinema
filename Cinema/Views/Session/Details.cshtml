@@ -79,9 +79,6 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        @*<div id="tickets-cart" class="container">
-                            </div>*@
-                        @*<div id="cart-count"></div>*@
                     </div>
                     <input type="hidden" name="session_id" value="@Model.Id" />
                     @*<div id="cart-price"></div>*@
@@ -101,7 +98,78 @@
 
 @section scripts
 {
+    @*<script src="~/Scripts/jquery-2.2.2.min.js"></script>*@
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="/signalr/hubs"></script>
     <script>
+        $(function () {
+            function FetchTickets() {
+            $.ajax({
+                url: '/Ticket/GetTicketsBySession/',
+                //contentType: 'application/json',
+                type: 'POST',
+                //dataType: 'json',
+                data:{id:@Model.Id},
+                success: function (result) {
+                    // перевіряю, чи звільнились зайняті місця
+                    $(".seat.place-taken").each(function () {
+                        var thisRow = $(this).attr("data-row");
+                        var thisNumber = $(this).attr("data-number");
+
+                        var resultgrep = $.grep(result, function (e) { return e.Row == thisRow && e.Number == thisNumber; });
+                        //console.log(resultgrep);
+                        if (!resultgrep.length) {
+                            $(this).removeClass("place-taken").addClass("place-free")
+                        }
+                    });
+                    // перевіряю, чи зайняли вільні місця
+                    $.each(result, function () {
+                        var resultRow = this["Row"];
+                        var resultNumber = this["Number"];
+
+                        var choosenPlace = $(".seat.place-choosen[data-row='" + resultRow + "'][data-number='" + resultNumber + "']");
+                        // якщо місце вже вибране
+                        if (choosenPlace.length) {
+                            tickets = tickets.filter(function (el) {
+                                return el.row != resultRow || el.number != resultNumber;
+                            });
+                            $(".ticket-item[data-row='" + resultRow + "'][data-number='" + resultNumber + "']").remove();
+                            $(choosenPlace).removeClass("place-choosen").addClass("place-taken");
+                        }
+                        $(".seat[data-row='" + resultRow + "'][data-number='" + resultNumber + "']").removeClass("place-free").addClass("place-taken");
+                    });
+
+                    
+                    var cartPrice = 0;
+                    $.each(tickets, function () {
+                        cartPrice += parseInt(this.price);
+                    });
+                    $("#cart-price").text(cartPrice / 100 + " грн");
+                    //console.log(result);
+                },
+                fail: function (data) {
+                    console.log(data)
+                }
+            });
+            };
+            // Create a proxy to signalr hub on web server. It reference the hub.
+            var notificationFromHub = $.connection.ticketHub;
+
+            // Connect to signalr hub
+            $.connection.hub.start().done(function () {
+                //alert("connection started")
+                FetchTickets();
+            }).fail(function (e) {
+                alert(e);
+            });
+
+            // Notify to client with the recent updates
+            notificationFromHub.client.updatedClients = function () {
+                FetchTickets();
+            };
+        });
+            //var model = $('#dataTable');
+
         var tickets = [];
         $(".seat").click(function (e) {
             if ($(this).hasClass("place-taken")) {
@@ -139,8 +207,7 @@
                 tickets.push({ row: seatRow, number: seatNumber, price: seatPrice });
                 $(this).removeClass("place-free").addClass("place-choosen");
             }
-
-            $("#cart-count").text(tickets.length);
+            
             var cartPrice = 0;
             $.each(tickets, function () {
                 cartPrice += parseInt(this.price);

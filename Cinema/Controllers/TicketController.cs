@@ -21,11 +21,30 @@ namespace Cinema.Controllers
 
         DbContext context;
         ApplicationUserManager userMgr;
+        SessionRepository sessionRepository;
 
-        public TicketController(DbContext context)
+        public TicketController(DbContext context, SessionRepository sessionRepository)
         {
             this.context = context;
+            this.sessionRepository = sessionRepository;
             userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+        }
+
+        [HttpPost]
+        public ActionResult GetTicketsBySession(int id)
+        {
+            var session = sessionRepository.Get(id);
+            if (session == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //var t1 = session.TicketPrices.Select(x => x.Ticket);
+            //var t2 = t1.Where(x => x != null);
+            //var t3 = t2.Select(x => new { x.Id});
+            ////var t3 = t2.Select(x => new { x.Seat.Row, x.Seat.Number, x.Status.Name });
+            //var result = Json(t3);
+            var tickets = session.TicketPrices.Select(x => x.Ticket).Where(x => x != null).Select(x => new { x.Seat.Row, x.Seat.Number });
+            return Json(tickets);
         }
 
         // GET: Ticket
@@ -36,10 +55,10 @@ namespace Cinema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var user = userMgr.FindByName(User.Identity.Name);
-            var ticket = user.Orders.SelectMany(x => x.OrderItems).Select(x => x.Ticket).Where(x=>x!=null).FirstOrDefault(x => x.Id == id);
-            if (ticket==null||ticket.StatusId!=1)
+            var ticket = user.Orders.SelectMany(x => x.OrderItems).Select(x => x.Ticket).Where(x => x != null).FirstOrDefault(x => x.Id == id);
+            if (ticket == null || ticket.StatusId != 1)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -125,7 +144,7 @@ namespace Cinema.Controllers
 
                         // ціна
                         gfx.FillRectangle(brush, paddingLR, textY, width / 2 - (paddingLR + margin), 50);
-                        gfx.DrawString((ticket.OrderItem.Price/100).ToString(), textFont, Brushes.White, paddingLR, textY + 10);
+                        gfx.DrawString((ticket.OrderItem.Price / 100).ToString(), textFont, Brushes.White, paddingLR, textY + 10);
                         // Квиток
                         gfx.FillRectangle(brush, width / 2 + margin, textY, width / 2 - (paddingLR + margin), 50);
                         gfx.DrawString(ticket.Id.ToString(), textFont, Brushes.White, width / 2 + margin, textY + 10);

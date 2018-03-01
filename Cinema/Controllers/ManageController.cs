@@ -11,7 +11,7 @@ using Cinema.Data.Identity;
 
 namespace Cinema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
