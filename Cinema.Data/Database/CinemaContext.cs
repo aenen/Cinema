@@ -67,10 +67,15 @@ namespace Cinema.Data.Database
                .WithOptionalPrincipal(x => x.OrderItem)
                .Map(a => a.MapKey("OrderItemId"));
 
-            modelBuilder.Entity<TicketPrice>()
-               .HasOptional(x => x.Ticket)
-               .WithOptionalPrincipal(x => x.TicketPrice)
-               .Map(a => a.MapKey("TicketPriceId"));
+            //modelBuilder.Entity<TicketPrice>()
+            //   .HasOptional(x => x.Ticket)
+            //   .WithOptionalPrincipal(x => x.TicketPrice);
+               //.Map(a => a.MapKey("TicketPriceId"));
+
+            modelBuilder.Entity<Ticket>()
+               .HasOptional(x => x.TicketPrice)
+               .WithOptionalPrincipal(x => x.Ticket);
+               //.Map(a => a.MapKey("TicketId"));
             base.OnModelCreating(modelBuilder);
         }
 
@@ -93,7 +98,7 @@ namespace Cinema.Data.Database
         public virtual DbSet<SeatStyle> SeatStyles { get; set; }
     }
 
-    public class DataBaseInitializer : CreateDatabaseIfNotExists<CinemaContext>
+    public class DataBaseInitializer : DropCreateDatabaseAlways<CinemaContext>
     {
         protected override void Seed(CinemaContext context)
         {
@@ -610,7 +615,7 @@ namespace Cinema.Data.Database
                 {
                     double hour = 2; //+=2
                     // від 5 до 12 сеансів на день
-                    int sessionPerDay = 2;// random.Next(5, 10);
+                    int sessionPerDay = 1;// random.Next(5, 10);
                     for (int sessionNumber = 0; sessionNumber < sessionPerDay; sessionNumber++)
                     {
                         int movieId = random.Next(1, moviesCount);

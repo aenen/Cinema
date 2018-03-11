@@ -1,4 +1,5 @@
-﻿using Cinema.Jobs;
+﻿using Cinema.Data.Database;
+using Cinema.Jobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Cinema
 
             // Quartz
             DatabaseCleanerSheduler.Start();
+
         }
     }
 }
