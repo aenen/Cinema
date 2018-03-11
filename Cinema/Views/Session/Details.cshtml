@@ -50,7 +50,13 @@
                                          data-row="@ticketPrice.Seat.Row"
                                          data-number="@ticketPrice.Seat.Number"
                                          data-price="@ticketPrice.Price"
-                                         style="left: @(seatLeft)em; top: @(seatTop)em"></div>
+                                         style="left: @(seatLeft)em; top: @(seatTop)em">
+                                        <div class="text-center d-flex flex-column justify-content-center" style="font-size:.75em">
+                                            <span style="font-size:.75em">@ticketPrice.Seat.Row</span>
+                                            <hr style="margin:.1em 0" />
+                                            <span style="font-weight:500;font-size:1.5em">@ticketPrice.Seat.Number</span>
+                                        </div>
+                                    </div>
                                 }
                             }
                         </div>
