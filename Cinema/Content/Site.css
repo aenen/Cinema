@@ -1137,6 +1137,10 @@ textarea:focus, input:focus, select:focus, option:focus, button:focus {
         color: #979799;
     }
 
+    #comments .comment .comment-text {
+        white-space:pre-line;
+    }
+
     #comments .comment .comment-delete {
         cursor:pointer;
         font-size: 17.5px;
