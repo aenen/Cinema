@@ -181,10 +181,6 @@
             if ($(this).hasClass("place-taken")) {
                 return false;
             }
-            if (tickets.length >= 10) {
-                alert("ти можеш вибрати до 10 квитків");
-                return false;
-            }
 
             var seatRow = $(this).attr("data-row");
             var seatNumber = $(this).attr("data-number");
@@ -197,6 +193,11 @@
                 $(".ticket-item[data-row='" + seatRow + "'][data-number='" + seatNumber + "']").remove();
                 $(this).removeClass("place-choosen").addClass("place-free");
             } else {
+                if (tickets.length >= 10) {
+                    alert("ти можеш обрати до 10 місць");
+                    return false;
+                }
+
                 // ticket container:
                 $("<tr/>", { class: "ticket-item", 'data-row': seatRow, 'data-number': seatNumber, style: "border-color:#ffff00" })
                     .append($("<td/>")

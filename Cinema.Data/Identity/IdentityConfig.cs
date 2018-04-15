@@ -25,14 +25,10 @@ namespace Cinema.Data.Identity
 
             email.Subject = message.Subject;
             email.Body = message.Body;
-
             email.IsBodyHtml = true;
 
             using (var mailClient = new GmailEmailService())
             {
-                //In order to use the original from email address, uncomment this line:
-                //email.From = new MailAddress(mailClient.UserName, "(do not reply)");
-
                 await mailClient.SendMailAsync(email);
             }
         }
@@ -69,7 +65,6 @@ namespace Cinema.Data.Identity
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                //RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
